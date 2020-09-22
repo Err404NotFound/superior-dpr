@@ -10,11 +10,16 @@ public class WebController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String endpoints() {
-		return String.format("There are other pages at: /hello and /serena");
+		return String.format("There are other pages at: /hello and /serena and /world");
 	}
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
 	}
+
+  @RequestMapping(value = "/world", method = RequestMethod.GET)
+  public String world() {
+    return String.format("Matthew Graca wuz here x2");
+  }
 }
