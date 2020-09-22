@@ -12,4 +12,9 @@ public class HelloController {
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
 	}
+	
+	@RequestMapping(value = "/serena", method = RequestMethod.GET)
+	public String serena(@RequestParam(value = "something", defaultValue = "serena") String name) {
+		return String.format("%s is very tired!", name);
+	}
 }
