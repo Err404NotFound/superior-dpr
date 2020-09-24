@@ -52,33 +52,4 @@ public class HelloController {
 	        return String.format("Text in the area:%s", text);
 	    }
 
-	//		//Creating PDF document object   
-//		String fileName="sample.pdf";
-//		PDDocument document = null;
-//        try {
-//        	document=PDDocument.load(new File(fileName));
-//        	PDFTextStripper stripper = new PDFTextStripper();
-//        	String pdfText = stripper.getText(document).toString();
-//        	System.out.println("Text in the area:"+pdfText);
-//			//PDDocument doc = new PDDocument();      
-//	    
-//	        ////Saving the document  
-//	        //doc.save("/eclipse-workspace/blank.pdf");  
-//	        
-//	        //System.out.println("PDF created");    
-//	    
-//	        //Closing the document    
-//	        // doc.close(); 
-//	        //return String.format("Created a pdf");
-//        }
-//        finally {
-//        	if(document !=null) {
-//        		document.close();
-//        	}
-//        }
-//        return String.format("Created a pdf");
-//        //catch(Exception e) {
-//        //	return String.format("Error occurred, please try again");
-//        //}		
-//	}
 }
