@@ -11,13 +11,16 @@ import java.io.File;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
+import java.util.Random;
+
+import com.google.common.math.IntMath;
 
 @RestController
 public class WebController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String endpoints() {
-		return String.format("There are other pages at: /hello and /serena and /world");
+		return String.format("There are other pages at: /hello and /serena and /world and /guava");
 	}
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
@@ -59,5 +62,44 @@ public class WebController {
   @RequestMapping(value = "/world", method = RequestMethod.GET)
   public String world() {
     return String.format("Matthew Graca wuz here x2");
+  }
+
+  @RequestMapping(value = "/guava", method = RequestMethod.GET)
+  public String guavaTest(){
+    // store 10 random ints into an array
+    int[] n = new int[10];
+    Random rng = new Random();
+    String msg = "integers in the array: ";
+    for (int i = 0; i < n.length; i++)
+    {
+      n[i] = rng.nextInt(10000);
+      msg = msg + " " + n[i];
+    }
+
+    // find a prime number in that array
+    int i = 0;
+    boolean primeNotFound = true;
+    int firstPrime = 0;
+    while(i < n.length && primeNotFound)
+    {
+      if (IntMath.isPrime(n[i]))
+      {
+        firstPrime = n[i];
+        primeNotFound = false;
+      }
+      i++;
+    }
+
+    // create message for if a prime number was found
+    if (primeNotFound)
+    {
+      msg = msg + ": A prime number was not found :(";
+    }
+    else
+    {
+      msg = msg + String.format(": Prime number found! The first prime number is " + firstPrime);
+    }
+
+    return msg + ". Refresh for a new set of values!";
   }
 }
