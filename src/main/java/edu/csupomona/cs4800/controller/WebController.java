@@ -13,8 +13,13 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 @RestController
-public class HelloController {
+public class WebController {
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String endpoints() {
+		return String.format("There are other pages at: /hello and /serena and /world");
+	}
+	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
@@ -29,7 +34,6 @@ public class HelloController {
 
 		public String pdfbox(@RequestParam(value = "something", defaultValue = "pdfbox") String name)  throws IOException
 	    {
-	        //String fileName = "C:\\Users\\singi\\Desktop\\cs4800a3\\ihatemylife\\demo-web-project\\visitor\\src\\main\\java\\edu\\csupomona\\cs356\\sample.pdf"; // provide the path to pdf file
 	        String fileName=".\\sample.pdf";
 	    	
 	    	PDDocument document = null;
@@ -52,4 +56,8 @@ public class HelloController {
 	        return String.format("Text in the area:%s", text);
 	    }
 
+  @RequestMapping(value = "/world", method = RequestMethod.GET)
+  public String world() {
+    return String.format("Matthew Graca wuz here x2");
+  }
 }
