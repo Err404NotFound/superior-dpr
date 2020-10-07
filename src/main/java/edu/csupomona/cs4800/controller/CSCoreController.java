@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.csupomona.cs4800.courses.ComputerScienceMajorRequiredCore;
+import edu.csupomona.cs4800.courses.Course;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 
 @RestController
@@ -20,12 +20,22 @@ public class CSCoreController {
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	
 	@GetMapping
-	public List<ComputerScienceMajorRequiredCore> getAll() {
+	public List<Course> getAll() {
 		return csCoreRepository.findAll();
 	}
 	
+	@GetMapping(value = "/list")
+	public String listString() {
+		String coreClasses = "";
+		List<Course> courses = csCoreRepository.findAll();
+		for(Course c: courses) {
+			coreClasses += String.format("%s<br>", c.toString());
+		}
+		return coreClasses;
+	}
+	
 	@GetMapping(value = "/{id}")
-	public ComputerScienceMajorRequiredCore getOne(@PathVariable String id) {
+	public Course getOne(@PathVariable String id) {
 		return csCoreRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException());
 	}

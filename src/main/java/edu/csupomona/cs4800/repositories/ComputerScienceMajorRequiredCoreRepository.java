@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import edu.csupomona.cs4800.courses.ComputerScienceMajorRequiredCore;
+import edu.csupomona.cs4800.courses.Course;
 
-public interface ComputerScienceMajorRequiredCoreRepository extends MongoRepository<ComputerScienceMajorRequiredCore, String> {
+public interface ComputerScienceMajorRequiredCoreRepository extends MongoRepository<Course, String> {
 
-	List<ComputerScienceMajorRequiredCore> findByCompletionStatus(String status);
+	List<Course> findByCompletionStatus(String status);
 }

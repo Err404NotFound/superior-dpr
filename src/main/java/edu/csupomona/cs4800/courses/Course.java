@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="majorrequiredcorecourses")
-public class ComputerScienceMajorRequiredCore {
+public class Course {
 
 	@Id
 	private String id;
@@ -15,9 +15,9 @@ public class ComputerScienceMajorRequiredCore {
 	public static final String INPROGRESS = "IN PROGRESS";
 	public static final String COMPLETED = "COMPLETED";
 	
-	public ComputerScienceMajorRequiredCore() {}
+	public Course() {}
 	
-	public ComputerScienceMajorRequiredCore(String cNum, String cName, int u, String comp, String pre, String co, String ge) {
+	public Course(String cNum, String cName, int u, String comp, String pre, String co, String ge) {
 		course_number = cNum;
 		course_name = cName;
 		units = u;
@@ -29,7 +29,7 @@ public class ComputerScienceMajorRequiredCore {
 	
 	@Override
 	public String toString() {
-		return String.format("CS Required Core[id=%s, Course Number=%s, Course Name=%s, Units=%f, Completion Status=%s, "
+		return String.format("CS Required Core[id=%s, Course Number=%s, Course Name=%s, Units=%d, Completion Status=%s, "
 				+ "Prereq Courses=%s, Coreq Courses=%s, GE Area=%s]",
 				id, course_number, course_name, units, completion_status, prereq_course_number, coreq_course_number, ge_area);
 	}
