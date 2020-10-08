@@ -35,6 +35,7 @@ public class CourseTest {
 	public void testSetCompletionStatusInProgress() {
 		//Change status to IN PROGRESS
 		//Act
+		System.out.println("SettingCompletionStatusInProgress");
 		c.setCompletionStatus(Course.INPROGRESS);
 		//Assert
 		Assert.assertEquals(c.getCompletionStatus(), Course.INPROGRESS);
@@ -59,6 +60,7 @@ public class CourseTest {
 	public void testSetCompletionStatusToDo() {
 		//Change status to TO DO
 		//Act
+		
 		c.setCompletionStatus(Course.TODO);
 		//Assert
 		Assert.assertEquals(c.getCompletionStatus(), Course.TODO);

@@ -1,12 +1,12 @@
 package edu.csupomona.cs4800.dpr;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class DprApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 
