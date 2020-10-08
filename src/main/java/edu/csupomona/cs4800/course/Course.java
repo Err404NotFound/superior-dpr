@@ -1,4 +1,4 @@
-package edu.csupomona.cs4800.courses;
+package edu.csupomona.cs4800.course;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -42,6 +42,10 @@ public class Course {
 	
 	public String getCourseName() {
 		return course_name;
+	}
+	
+	public String getCompletionStatus() {
+		return completion_status;
 	}
 	
 	//Setter Methods
