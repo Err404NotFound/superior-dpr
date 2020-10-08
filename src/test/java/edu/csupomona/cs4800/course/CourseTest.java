@@ -63,4 +63,12 @@ public class CourseTest {
 		//Assert
 		Assert.assertEquals(c.getCompletionStatus(), Course.TODO);
 	}
+
+  @Test
+  public void testSetCourseNumber() {
+    //Change course number to CS 1001
+    c.setCourseNumber("CS 1001");
+    //Assert
+    Assert.assertEquals(c.getCourseNumber(), "CS 1001");
+  }
 }
