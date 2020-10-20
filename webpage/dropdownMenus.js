@@ -65,6 +65,20 @@ var majorElectivesNoMoreThan4 =
     "MAT 4860 - Introduction to Mathematical Modeling II (3)"
   ];
 
+  //want to replace this with calls to mongoDB api later... probably need a Promise
+  var areaAOral=[
+  "COM 1100 - Public Speaking (3)",
+  "COM 2204 - Advocacy and Argument (3)"
+  ];
+  var areaAWritten=[
+    "ENG 1101 - Stretch Composition II (3)",
+    "ENG 1103 - First Year Composition (3)"
+    ];
+
+    var areaACritical=[
+      "PHL 2020 - Critical Thinking (3)",
+      "ENG 2105 - Written Reasoning (3)"
+      ];
 /* for dropdown menu style 1
 // toggles dropdown menu 
 function toggleMenu() {
@@ -106,12 +120,16 @@ for(var i = 0; i < options.length; i++)
   select.appendChild(el);
 }
 
+
 // i want this to be used for all dropdowns so i don't need to write 20 diff ones...
 // need to figure out how to stuff the arrays in a diff file and connect it with this one
 // also need to integrate this with the search function
-function populateDropdownMenu(options)
+function populateDropdownMenu(stringID)
 {
-  var select = document.getElementById("list");
+  var options=majorElectivesNoMoreThan3;
+  
+  //document.getElementById("test1").innerHTML="\""+stringID+"\"";
+  var select = document.getElementById("list1");
   for(var i = 0; i < options.length; i++) 
   {
     var opt = options[i];
@@ -120,4 +138,42 @@ function populateDropdownMenu(options)
     el.value = opt;
     select.appendChild(el);
   }
+  
 }
+
+function populateDropdownMenuDynamic(stringID, optionsList)
+{
+  var options=optionsList;
+  //var options=majorElectivesNoMoreThan4;
+  //document.querySelector works better than with getElementById for some reason... no idea why
+  var select = document.querySelector("#"+stringID);
+  for(var i = 0; i < options.length; i++) 
+  {
+    var opt = options[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+  }
+  
+}
+
+function testing(stringID)
+{ 
+  document.getElementById("test1").innerHTML=stringID;
+}
+
+function test(){
+  document.getElementById("test").innerHTML="HelloWorld";
+  populateDropdownMenuDynamic("list1", majorElectivesAtLeast12);
+  populateDropdownMenuDynamic("list2", majorElectivesNoMoreThan3);
+  populateDropdownMenuDynamic("list3", majorElectivesNoMoreThan4);
+  populateDropdownMenuDynamic("areaAOral", areaAOral);
+  populateDropdownMenuDynamic("areaAWritten", areaAWritten);
+  populateDropdownMenuDynamic("areaACritical", areaACritical);
+  testing("\"test1\"");
+  testing("test2");
+  testing("\"test3\"");
+}
+
+window.onload=test;

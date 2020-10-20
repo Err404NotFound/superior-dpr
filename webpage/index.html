@@ -2,8 +2,11 @@
 <html lang="en-US">
   <head>
     <title>Superior DPR</title>
+    <div id="test">Oop</div>
+    <div id="test1">yikes</div>
   </head>
   <body>
+    
     <h2>Major Required Courses<h2>
       <select id="list">
         <option>Choose a class</option>
@@ -12,15 +15,21 @@
     
     <h2>Major Electives: 19 Units</h2>
     <h3>At least 12 units from:</h3>
-      <select id="list">
+      <select id="list1">
         <option>Choose a class</option>
       </select>
     <hr>
     <h3>No more than 3 units from:</h3>
+    <select id="list2">
+      <option>Choose a class</option>
+    </select>
     <pre>
     </pre>
     <hr>
     <h3>No more than 4 units from:</h3>
+    <select id="list3">
+      <option>Choose a class</option>
+    </select>
     <pre>
     </pre>
     
@@ -28,18 +37,30 @@
 
     <h2>General Education Requirements: 48 units</h2>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
+      <div class="topnav">
+        <input type="text" placeholder="Search...">
+      </div>
       <h4>Oral Communication</h4>
+      <select id="areaAOral">
+        <option>Choose a class</option>
+      </select>
         <pre>
           COM 1100 - Public Speaking (3)
           COM 2204 - Advocacy and Argument (3)
         </pre>
       <h4>Written Communication</h4>
-        <pre>
+      <select id="areaAWritten">
+        <option>Choose a class</option>
+      </select>  
+      <pre>
           ENG 1101 - Stretch Composition II (3)
           ENG 1103 - First Year Composition (3)
         </pre>
       <h4>Critical Thinking</h4>
-        <pre>
+      <select id="areaACritical">
+        <option>Choose a class</option>
+      </select>  
+      <pre>
           PHL 2020 - Critical Thinking (3)
           ENG 2105 - Written Reasoning (3)
         </pre>
@@ -625,5 +646,6 @@ PLS 2010 - Introduction to American Government (3)
     <h2>Graduation Writing Test</h2>
       <p>All persons who receive undergraduate degrees from Cal Poly Pomona must pass the Graduation Writing Test (GWT).  The test must be taken by the semester following completion of 60 units for undergraduates.</p>
     <script src="dropdownMenus.js"></script>
+    <script src="geDropDown.js"></script>
   </body>
 </html>
