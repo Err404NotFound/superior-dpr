@@ -1,0 +1,64 @@
+<p>course-list works!</p>
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by courseName"
+          [(ngModel)]="courseName"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchTitle()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Course List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let course of courses; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveCourse(course, i)"
+        >
+          {{ course.courseName }}
+        </li>
+      </ul>
+  
+      <!--button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+        Remove All
+      </button-->
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentCourse">
+        <h4>Course</h4>
+        <div>
+          <label><strong>CourseTitle:</strong></label> {{ currentCourse.courseName }}
+        </div>
+        <div>
+          <label><strong>Completion Status:</strong></label>
+          {{ currentCourse.competionStatus }}
+        </div>
+        <!--div>
+          <label><strong>Status:</strong></label>
+          {{ currentCourse.published ? "Published" : "Pending" }}
+        </div-->
+  
+        <a class="badge badge-warning" routerLink="/courses/{{ currentCourse.id }}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentCourse">
+        <br />
+        <p>Please click on a Course...</p>
+      </div>
+    </div>
+  </div>
