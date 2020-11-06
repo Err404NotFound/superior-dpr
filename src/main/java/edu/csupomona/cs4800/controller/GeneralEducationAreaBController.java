@@ -1,4 +1,8 @@
-/*package edu.csupomona.cs4800.controller;
+package edu.csupomona.cs4800.controller;
+
+//public class GeneralEducationController {
+
+//}
 
 import java.util.List;
 
@@ -11,25 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.csupomona.cs4800.course.Course;
-import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
+import edu.csupomona.cs4800.repositories.GeneralEducationAreaBRepository;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cscore")
-public class CSCoreController {
+@RequestMapping("/ge/b")
+public class GeneralEducationAreaBController {
 
 	@Autowired
-	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
+	private GeneralEducationAreaBRepository geRepository;
 	
-	@GetMapping
+	@GetMapping(value="/all")
 	public List<Course> getAll() {
-		return csCoreRepository.findAll();
+		return geRepository.findAll();
 	}
 	
 	@GetMapping(value = "/list")
 	public String listString() {
 		String coreClasses = "";
-		List<Course> courses = csCoreRepository.findAll();
+		List<Course> courses = geRepository.findAll();
 		for(Course c: courses) {
 			coreClasses += String.format("%s<br>", c.toString());
 		}
@@ -38,8 +42,17 @@ public class CSCoreController {
 	
 	@GetMapping(value = "/{id}")
 	public Course getOne(@PathVariable String id) {
-		return csCoreRepository.findById(id)
+		return geRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException());
 	}
+	/*
+	@PostMapping("/addCourse")
+	public ResponseEntity<Course> createCourse(@RequestBody Course course) {
+	  try {
+	    Course _course = GeneralEducationAreaARepository.save(new Course(course.getCourseNumber(), Course.getCourseName(), false));
+	    return new ResponseEntity<>(_course, HttpStatus.CREATED);
+	  } catch (Exception e) {
+	    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	}*/
 }
-*/
