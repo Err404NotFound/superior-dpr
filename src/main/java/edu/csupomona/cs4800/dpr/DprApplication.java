@@ -9,7 +9,7 @@ import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreReposit
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"edu.csupomona.cs4800"})
-@EnableMongoRepositories(basePackageClasses = ComputerScienceMajorRequiredCoreRepository.class)
+@EnableMongoRepositories(basePackages = "edu.csupomona.cs4800")
 public class DprApplication {
 
 	public static void main(String[] args) {

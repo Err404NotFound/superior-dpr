@@ -1,6 +1,10 @@
 package edu.csupomona.cs4800.user;
 
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import edu.csupomona.cs4800.course.Course;
@@ -10,51 +14,92 @@ public class User {
 
 	@Id
 	private String id;
-	private String firstName, lastName;
-	private Course[] toDo, inProgress, completed;
+	private String fullName, username, password;
+	private boolean enabled;
+	@DBRef
+	private List<Course> toDoCore, inProgressCore, completedCore, toDoElectives1, inProgressElectives1, completedElectives1,
+		toDoElectives2, inProgressElectives2, completedElectives2, toDoElectives3, inProgressElectives3, completedElectives3;
 	
 	public User() {}
 	
-	public User(String first, String last, Course[] todo, Course[] inProg, Course[] comp) {
-		firstName = first;
-		lastName = last;
-		toDo = todo.clone();
-		inProgress = inProg.clone();
-		completed = comp.clone();
+	public User(String user, String pass, String full, boolean enable, List<Course> todoCore, List<Course> inProgCore, List<Course> compCore) {
+		username = user;
+		password = pass;
+		fullName = full;
+		enabled = enable;
+		toDoCore = todoCore;
+		inProgressCore = inProgCore;
+		completedCore = compCore;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("CS Student[id=%s, Full Name= %s %s]", id, firstName, lastName);
+		return String.format("CS Student[id=%s, Full Name = %s, Username = %s]", id, fullName, username);
 	}
 	
 	//Getter Methods
-	public String getFirstName() {
-		return firstName;
+	public String getId() {
+		return id;
 	}
 	
-	public String getLastName() {
-		return lastName;
+	public String getUsername() {
+		return username;
 	}
 	
-	public Course[] getToDo() {
-		return toDo;
+	public String getPassword() {
+		return password;
 	}
 	
-	public Course[] getInProgress() {
-		return inProgress;
+	public String getFullName() {
+		return fullName;
 	}
 	
-	public Course[] getCompleted() {
-		return completed;
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public List<Course> getToDoCore() {
+		return toDoCore;
+	}
+	
+	public List<Course> getInProgressCore() {
+		return inProgressCore;
+	}
+	
+	public List<Course> getCompletedCore() {
+		return completedCore;
 	}
 	
 	//Setter Methods
-	public void setFirstName(String first) {
-		firstName = first;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	public void setLastName(String last) {
-		lastName = last;
+	public void setFullName(String full) {
+		fullName = full;
+	}
+	
+	public void setUsername(String user) {
+		username = user;
+	}
+	
+	public void setPassword(String pass) {
+		password = pass;
+	}
+	
+	public void setEnabled(boolean enable) {
+		enabled = enable;
+	}
+	
+	public void setToDoCore(List<Course> todo) {
+		toDoCore = todo;
+	}
+	
+	public void setInProgressCore(List<Course> inProg) {
+		inProgressCore = inProg;
+	}
+	
+	public void setCompletedCore(List<Course> comp) {
+		completedCore = comp;
 	}
 }
