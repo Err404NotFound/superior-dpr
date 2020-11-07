@@ -6,6 +6,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,11 +24,11 @@ import org.apache.pdfbox.text.PDFTextStripper;
 import java.util.Random;
 
 import com.google.common.math.IntMath;
-
+@CrossOrigin
 @RestController
 public class WebController {
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String endpoints() {
 		return String.format("There are other pages at: /hello and /serena and /world and /guava and /jsoup");
 	}
