@@ -4,7 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="majorrequiredcorecourses")
+import lombok.Data;
+
+//@Document (collection="majorrequiredcorecourses")
+@Data
 public class Course {
 
 	@Id

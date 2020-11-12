@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.Course;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 
@@ -24,14 +25,14 @@ public class CSCoreController {
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	
 	@GetMapping
-	public List<Course> getAll() {
+	public List<CSCoreCourse> getAll() {
 		return csCoreRepository.findAll();
 	}
 	
 	@GetMapping(value = "/list")
 	public String listString() {
 		String coreClasses = "";
-		List<Course> courses = csCoreRepository.findAll();
+		List<CSCoreCourse> courses = csCoreRepository.findAll();
 		for(Course c: courses) {
 			coreClasses += String.format("%s<br>", c.toString());
 		}

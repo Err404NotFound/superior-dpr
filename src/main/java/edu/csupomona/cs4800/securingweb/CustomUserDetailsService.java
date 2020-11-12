@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import edu.csupomona.cs4800.course.Course;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 import edu.csupomona.cs4800.repositories.ComputerScienceStudentRepository;
 import edu.csupomona.cs4800.user.User;
@@ -26,6 +29,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	@Autowired
+	private ComputerScienceMajorElectivesGroup1Repository csElectives1Repository;
+	@Autowired
+	private ComputerScienceMajorElectivesGroup2Repository csElectives2Repository;
+	@Autowired
+	private ComputerScienceMajorElectivesGroup3Repository csElectives3Repository;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	public User findUserByUsername(String username) {
@@ -35,8 +44,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
-		List<Course> toDoCourses = csCoreRepository.findByCompletionStatus(Course.TODO);
-		user.setToDoCore(toDoCourses);
+		List<Course> toDoCoreCourses = csCoreRepository.findByCompletionStatus(Course.TODO);
+		user.setToDoCore(toDoCoreCourses);
+		List<Course> toDoElectives1Courses = csElectives1Repository.findByCompletionStatus(Course.TODO);
+		user.setToDoElectives1(toDoElectives1Courses);
+		List<Course> toDoElectives2Courses = csElectives2Repository.findByCompletionStatus(Course.TODO);
+		user.setToDoElectives2(toDoElectives2Courses);
+		List<Course> toDoElectives3Courses = csElectives3Repository.findByCompletionStatus(Course.TODO);
+		user.setToDoElectives3(toDoElectives3Courses);
 		csStudentRepository.save(user);
 	}
 	

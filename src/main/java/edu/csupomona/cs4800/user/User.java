@@ -102,4 +102,40 @@ public class User {
 	public void setCompletedCore(List<Course> comp) {
 		completedCore = comp;
 	}
+	
+	public void setToDoElectives1(List<Course> todo) {
+		toDoElectives1 = todo;
+	}
+	
+	public void setInProgressElectives1(List<Course> inProg) {
+		inProgressElectives1 = inProg;
+	}
+	
+	public void setCompletedElectives1(List<Course> comp) {
+		completedElectives1 = comp;
+	}
+	
+	public void setToDoElectives2(List<Course> todo) {
+		toDoElectives2 = todo;
+	}
+	
+	public void setInProgressElectives2(List<Course> inProg) {
+		inProgressElectives2 = inProg;
+	}
+	
+	public void setCompletedElectives2(List<Course> comp) {
+		completedElectives2 = comp;
+	}
+	
+	public void setToDoElectives3(List<Course> todo) {
+		toDoElectives3 = todo;
+	}
+	
+	public void setInProgressElectives3(List<Course> inProg) {
+		inProgressElectives3 = inProg;
+	}
+	
+	public void setCompletedElectives3(List<Course> comp) {
+		completedElectives3 = comp;
+	}
 }
