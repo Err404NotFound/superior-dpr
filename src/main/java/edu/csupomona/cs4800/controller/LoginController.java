@@ -28,7 +28,7 @@ public class LoginController {
 	@GetMapping(value = "/signup")
 	public ModelAndView signup() {
 		ModelAndView modelAndView = new ModelAndView();
-		User user = new User(); //might not be the right user
+		User user = new User();
 		modelAndView.addObject("user", user);
 		modelAndView.setViewName("signup");
 		return modelAndView;
