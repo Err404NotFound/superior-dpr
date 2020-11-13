@@ -11,8 +11,8 @@ import edu.csupomona.cs4800.repositories.GeneralEducationAreaBRepository;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"edu.csupomona.cs4800"})
-@EnableMongoRepositories(basePackageClasses = GeneralEducationAreaBRepository.class)
 
+@EnableMongoRepositories(basePackages = "edu.csupomona.cs4800")
 public class DprApplication {
 
 //	@Bean

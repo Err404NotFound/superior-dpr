@@ -4,7 +4,11 @@
     <title>Superior DPR</title>
   </head>
   <body>
-    <h2>Major Required Courses<h2>
+    <h2>Major Required Courses</h2>
+    	<!-- Add the next 3 lines to allow user to logout -->
+    	<form class="form-logout" th:action="@{/logout}" method="get">
+   			<button class="btn btn-md btn-success btn-block" type="Submit">Sign out</button>
+    	</form>
       <select id="list">
         <option>Choose a class</option>
       </select>
