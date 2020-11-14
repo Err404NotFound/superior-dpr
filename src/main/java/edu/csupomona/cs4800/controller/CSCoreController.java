@@ -1,4 +1,4 @@
-/*package edu.csupomona.cs4800.controller;
+package edu.csupomona.cs4800.controller;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.Course;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/cscore")
 public class CSCoreController {
@@ -47,4 +47,3 @@ public class CSCoreController {
 				.orElseThrow(() -> new ResourceNotFoundException());
 	}
 }
-*/
