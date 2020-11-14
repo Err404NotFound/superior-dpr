@@ -1,15 +1,10 @@
 package edu.csupomona.cs4800.securingweb;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,14 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mongodb.client.result.UpdateResult;
-
 import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.CSElectives2Course;
 import edu.csupomona.cs4800.course.CSElectives3Course;
 import edu.csupomona.cs4800.course.Course;
-import edu.csupomona.cs4800.provider.ComputerScienceStudentRepositoryImpl;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
@@ -36,9 +28,6 @@ import edu.csupomona.cs4800.user.User;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-	//@Autowired
-	//MongoTemplate mongoTemplate;
-	//private ComputerScienceStudentRepositoryImpl csStudentRepositoryImpl;
 	@Autowired
 	private ComputerScienceStudentRepository csStudentRepository;
 	@Autowired
