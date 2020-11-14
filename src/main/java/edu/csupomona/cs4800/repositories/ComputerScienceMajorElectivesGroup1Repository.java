@@ -9,5 +9,5 @@ import edu.csupomona.cs4800.course.Course;
 
 public interface ComputerScienceMajorElectivesGroup1Repository extends MongoRepository<CSElectives1Course, String> {
 
-	List<Course> findByCompletionStatus(String status);
+	List<CSElectives1Course> findByCompletionStatus(String status);
 }

@@ -11,7 +11,7 @@ public class Course {
 
 	@Id
 	private String id;
-	private String course_number, course_name, completionStatus, prereq_course_number, coreq_course_number, ge_area;
+	private String courseNumber, courseName, completionStatus, prereqCourseNumber, coreqCourseNumber, geArea;
 	private int units;
 	
 	public static final String TODO = "TO DO";
@@ -22,30 +22,30 @@ public class Course {
 	public Course() {}
 	
 	public Course(String cNum, String cName, int u, String comp, String pre, String co, String ge) {
-		course_number = cNum;
-		course_name = cName;
+		courseNumber = cNum;
+		courseName = cName;
 		units = u;
 		completionStatus = comp;
-		prereq_course_number = pre;
-		coreq_course_number = co;
-		ge_area = ge;
+		prereqCourseNumber = pre;
+		coreqCourseNumber = co;
+		geArea = ge;
 	}
 	
 	@Override
 	public String toString() {
 		return String.format("CS Required Core[id=%s, Course Number=%s, Course Name=%s, Units=%d, Completion Status=%s, "
 				+ "Prereq Courses=%s, Coreq Courses=%s, GE Area=%s]",
-				id, course_number, course_name, units, completionStatus, prereq_course_number, coreq_course_number, ge_area);
+				id, courseNumber, courseName, units, completionStatus, prereqCourseNumber, coreqCourseNumber, geArea);
 	}
 	
 	
 	//Getter Methods
 	public String getCourseNumber() {
-		return course_number;
+		return courseNumber;
 	}
 	
 	public String getCourseName() {
-		return course_name;
+		return courseName;
 	}
 	
 	public String getCompletionStatus() {
@@ -54,7 +54,7 @@ public class Course {
 	
 	//Setter Methods
 	public void setCourseNumber(String cNum) {
-		course_number = cNum;
+		courseNumber = cNum;
 	}
 	
 	public void setCompletionStatus(String updatedStatus) {
@@ -72,5 +72,49 @@ public class Course {
 				return;
 		}
 		
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPrereqCourseNumber() {
+		return prereqCourseNumber;
+	}
+
+	public void setPrereqCourseNumber(String prereqCourseNumber) {
+		this.prereqCourseNumber = prereqCourseNumber;
+	}
+
+	public String getCoreqCourseNumber() {
+		return coreqCourseNumber;
+	}
+
+	public void setCoreqCourseNumber(String coreqCourseNumber) {
+		this.coreqCourseNumber = coreqCourseNumber;
+	}
+
+	public String getGeArea() {
+		return geArea;
+	}
+
+	public void setGeArea(String geArea) {
+		this.geArea = geArea;
+	}
+
+	public int getUnits() {
+		return units;
+	}
+
+	public void setUnits(int units) {
+		this.units = units;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 }

@@ -1,10 +1,15 @@
 package edu.csupomona.cs4800.securingweb;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +18,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.client.result.UpdateResult;
+
+import edu.csupomona.cs4800.course.CSCoreCourse;
+import edu.csupomona.cs4800.course.CSElectives1Course;
+import edu.csupomona.cs4800.course.CSElectives2Course;
+import edu.csupomona.cs4800.course.CSElectives3Course;
 import edu.csupomona.cs4800.course.Course;
+import edu.csupomona.cs4800.provider.ComputerScienceStudentRepositoryImpl;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
@@ -24,6 +36,9 @@ import edu.csupomona.cs4800.user.User;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+	//@Autowired
+	//MongoTemplate mongoTemplate;
+	//private ComputerScienceStudentRepositoryImpl csStudentRepositoryImpl;
 	@Autowired
 	private ComputerScienceStudentRepository csStudentRepository;
 	@Autowired
@@ -44,15 +59,36 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
-		List<Course> toDoCoreCourses = csCoreRepository.findByCompletionStatus(Course.TODO);
+		List<CSCoreCourse> toDoCoreCourses = csCoreRepository.findByCompletionStatus(Course.TODO);
 		user.setToDoCore(toDoCoreCourses);
-		List<Course> toDoElectives1Courses = csElectives1Repository.findByCompletionStatus(Course.TODO);
+		user.setInProgressCore(csCoreRepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedCore(csCoreRepository.findByCompletionStatus(Course.COMPLETED));
+		List<CSElectives1Course> toDoElectives1Courses = csElectives1Repository.findByCompletionStatus(Course.TODO);
 		user.setToDoElectives1(toDoElectives1Courses);
-		List<Course> toDoElectives2Courses = csElectives2Repository.findByCompletionStatus(Course.TODO);
+		user.setInProgressElectives1(csElectives1Repository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedElectives1(csElectives1Repository.findByCompletionStatus(Course.COMPLETED));
+		List<CSElectives2Course> toDoElectives2Courses = csElectives2Repository.findByCompletionStatus(Course.TODO);
 		user.setToDoElectives2(toDoElectives2Courses);
-		List<Course> toDoElectives3Courses = csElectives3Repository.findByCompletionStatus(Course.TODO);
+		user.setInProgressElectives2(csElectives2Repository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedElectives2(csElectives2Repository.findByCompletionStatus(Course.COMPLETED));
+		List<CSElectives3Course> toDoElectives3Courses = csElectives3Repository.findByCompletionStatus(Course.TODO);
 		user.setToDoElectives3(toDoElectives3Courses);
+		user.setInProgressElectives3(csElectives3Repository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedElectives3(csElectives3Repository.findByCompletionStatus(Course.COMPLETED));
 		csStudentRepository.save(user);
+	}
+	
+	public void updateUser(User user) {
+		Optional<CSCoreCourse> optional = csCoreRepository.findById("5f6cd6533cab4d677974fa57");
+		optional.ifPresent(course -> {
+			List<CSCoreCourse> todo = user.getToDoCore();
+			todo.removeIf(c -> (c.getId().equals(course.getId())));
+			course.setCompletionStatus(Course.COMPLETED);
+			List<CSCoreCourse> completed = user.getCompletedCore();
+			completed.add(course);
+			user.setCompletedCore(completed);
+			csStudentRepository.save(user);
+		});
 	}
 	
 	@Override
