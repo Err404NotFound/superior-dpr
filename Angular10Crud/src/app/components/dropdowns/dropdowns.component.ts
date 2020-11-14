@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
+//import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { ValueTransformer } from '@angular/compiler/src/util';
 
 
 var majorRequiredCoreClasses = 
@@ -29,21 +31,21 @@ var majorRequiredCoreClasses =
   ];
 var majorElectivesAtLeast12 =
   [
-    "CS 3010 - Numerical Methods (3)",
-    "CS 3520 - Symbolic Programming (3)",
-    "CS 3560 - Object-Oriented Design and Programming (3)",
-    "CS 3700 - Parallel Processing (3)",
-    "CS 3800 - Computer Networks (3)",
-    "CS 4110 - Compilers and Interpreters (3)",
-    "CS 4200 - Artificial Intelligence (3)",
-    "CS 4350 - Database Systems (3)",
-    "CS 4450 - Computer Graphics (3)",
-    "CS 4500 - Computability (3)",
-    "CS 4600 - Cryptography and Information Security (3)",
-    "CS 4650 - Big Data Analytics and Cloud Computing (3)",
-    "CS 4700 - Game Development (3)",
-    "CS 4810 - Software Engineering Practice (3)",
-    "CS 4990 - Special Topics for Upper Division Students (1-3)"
+    {name: "CS 3010 - Numerical Methods (3)", value: "3010"},
+    {name: "CS 3520 - Symbolic Programming (3)", value: "3520"},
+    {name: "CS 3560 - Object-Oriented Design and Programming (3)", value: "3560"},
+    {name: "CS 3700 - Parallel Processing (3)", value: "3700"},
+    {name: "CS 3800 - Computer Networks (3)", value: "3800"},
+    {name: "CS 4110 - Compilers and Interpreters (3)", value: "4110"},
+    {name: "CS 4200 - Artificial Intelligence (3)", value: "4200"},
+    {name: "CS 4350 - Database Systems (3)", value: "4350"},
+    {name: "CS 4450 - Computer Graphics (3)", value: "4450"},
+    {name: "CS 4500 - Computability (3)", value: "4500"},
+    {name: "CS 4600 - Cryptography and Information Security (3)", value: "4600"},
+    {name: "CS 4650 - Big Data Analytics and Cloud Computing (3)", value: "4650"},
+    {name: "CS 4700 - Game Development (3)", value: "4700"},
+    {name: "CS 4810 - Software Engineering Practice (3)", value: "4800"},
+    {name: "CS 4990 - Special Topics for Upper Division Students (1-3)", value: "4990"}
   ];
 var majorElectivesNoMoreThan3 =
   [
@@ -98,23 +100,8 @@ function filterFunction() {
 }
 */
 
-// populates dropdown menu
-// var select = document.getElementById("list");
-// var options = majorRequiredCoreClasses;
-// for(var i = 0; i < options.length; i++) 
-// {
-//   var opt = options[i];
-//   var el = document.createElement("option");
-//   el.textContent = opt;
-//   el.value = opt;
-//   select.appendChild(el);
-// }
-
-
-
-
-
-@Component({
+// handles dropdown menus
+/*@Component({
   selector: 'app-dropdowns',
   templateUrl: './dropdowns.component.html',
   styleUrls: ['./dropdowns.component.css']
@@ -125,11 +112,9 @@ export class DropdownsComponent implements OnInit {
 
   ngOnInit(): void {
     this.populateDropdownMenu(majorRequiredCoreClasses);
-  }
+    }
 
-  // i want this to be used for all dropdowns so i don't need to write 20 diff ones...
-// need to figure out how to stuff the arrays in a diff file and connect it with this one
-// also need to integrate this with the search function
+
 populateDropdownMenu(options)
 {
   var select = document.getElementById("list");
@@ -142,5 +127,52 @@ populateDropdownMenu(options)
     select.appendChild(el);
   }
 }
+
+}*/
+
+// handles checkboxes
+@Component({
+  selector: 'app-root',
+  templateUrl: './dropdowns.component.html',
+  styleUrls: ['./dropdowns.component.css']
+})
+export class DropdownsComponent {
+
+  form: FormGroup;
+  Data: Array<any> = majorElectivesAtLeast12;
+ /* [
+    { name: 'Pear', value: 'pear' },
+    { name: 'Plum', value: 'plum' },
+    { name: 'Kiwi', value: 'kiwi' },
+    { name: 'Apple', value: 'apple' },
+    { name: 'Lime', value: 'lime' }
+    ];*/
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      checkArray: this.fb.array([], [Validators.required])
+    })
+  }
+
+  onCheckboxChange(e) {
+    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  submitForm() {
+    console.log(this.form.value)
+  }
 
 }
