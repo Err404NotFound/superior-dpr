@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
+import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.Course;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,9 +28,18 @@ public class CSCoreController {
 	@Autowired
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	
-	@GetMapping
+
+	@Autowired
+	private ComputerScienceMajorElectivesGroup1Repository csElectives1Repository;
+	
+	@GetMapping 
 	public List<CSCoreCourse> getAll() {
 		return csCoreRepository.findAll();
+	}
+	
+	@GetMapping (value="/elective1/list")
+	public List<CSElectives1Course> getAllElectives1() {
+		return csElectives1Repository.findAll();
 	}
 	
 	@GetMapping(value = "/list")

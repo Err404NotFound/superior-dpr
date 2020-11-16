@@ -3,6 +3,8 @@
   <head>
     <title>Superior DPR</title>
   </head>
+  
+  
   <body>
     <h2>Major Required Courses</h2>
       <select id="list">
@@ -40,16 +42,21 @@
     <h2>General Education Requirements: 48 units</h2>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
       <h4>Oral Communication</h4>
-        <pre>
+        <geForm [courses]='a1courses'></geForm>  
+      <pre>
+          
           COM 1100 - Public Speaking (3)
           COM 2204 - Advocacy and Argument (3)
         </pre>
       <h4>Written Communication</h4>
-        <pre>
+        <geForm [courses]='a2courses'></geForm>  
+      <pre>
           ENG 1101 - Stretch Composition II (3)
           ENG 1103 - First Year Composition (3)
         </pre>
       <h4>Critical Thinking</h4>
+      <geForm [courses]='a3courses'></geForm>
+
         <pre>
           PHL 2020 - Critical Thinking (3)
           ENG 2105 - Written Reasoning (3)
@@ -57,7 +64,10 @@
       <hr>
     <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
       <h4>Physical Sciences</h4>
-        <pre>
+      
+        <geForm [courses]='b1courses'></geForm>
+        
+      <pre>
           AST 1010 - Stars, Galaxies, and the Universe (3)
  
 
@@ -120,7 +130,9 @@
           PHY 2120L - Physics for Elementary Educators Laboratory (1)
         </pre>
       <h4>Life Sciences</h4>
-        <pre>
+      <geForm [courses]='b2courses'></geForm>
+     
+      <pre>
           ANT 1010 - Introduction to Biological Anthropology (3)
           BIO 1020 - Plagues, Pandemics and Bioterrorism (3)
           BIO 1040 - What is Evolution? (3)
@@ -151,6 +163,9 @@
         Activity courses, which are marked with an "A" following the course number, do not fulfill the GE Sub-area B3 requirement.
         </p>
       <h4>Mathematics/Quantitative Reasoning</h4>
+      
+      <geForm [courses]='b4courses'></geForm>
+     
         <pre>
           CS 2180 - Logic and Computing (3)
           MAT 1050 - College Algebra (3)
@@ -169,6 +184,7 @@
           STA 1300 - Biostatistics (3)
         </pre>
       <h4>Science and Technology Synthesis</h4>
+      <geForm [courses]='b5courses'></geForm>
         <pre>
           Students must complete all GE lower-division requirements in Areas A and B before they take any GE B5 Synthesis course. Select at least 3 units of coursework from the following list:
 
@@ -235,6 +251,9 @@
       <hr>
     <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
       <h4>Visual and Performing Arts</h4>
+      <geForm [courses]='c1courses'></geForm>
+      
+
         <pre>
           AH 2301 - World Art: Prehistory through Medieval Europe (3)
           AH 2302 - World Art: Renaissance through Modern Europe and the United States (3)
@@ -267,6 +286,8 @@
           VCD 1330A - Foundations in Ceramics Activity (3)
         </pre>
       <h4>Literature, Modern Languages, Philosophy and Civilization</h4>
+      <geForm [courses]='c2courses'></geForm>
+      
         <pre>
           ANT 1040 - Introduction to Linguistic Anthropology (3)
           ANT 1120 - World Cultures via the Internet (3)
@@ -325,6 +346,8 @@
           STS 2010 - Introduction to Science, Technology, and Society (3)
         </pre>
       <h4>Arts and Humanities Synthesis</h4>
+      <geForm [courses]='c3courses'></geForm>
+    
         <pre>
           Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
 
@@ -384,15 +407,21 @@
       <hr>
     <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
       <h4>U.S. History and American Ideals</h4>
-        <pre>
+      
+      <geForm [courses]='d1acourses'></geForm>
+      <pre>
           HST 2201 - United States History to 1877 (3)
           HST 2202 - United States History, 1877-Present (3)
         </pre>
       <h4>U.S. Constitution and California Government</h4>
+      
+      <geForm [courses]='d1bcourses'></geForm> 
         <pre>
 PLS 2010 - Introduction to American Government (3)
         </pre>
       <h4>Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
+      
+      <geForm [courses]='d2courses'></geForm>
         <pre>
           AG 1010 - Agriculture & The Modern World (3)
           AG 2010 - Global Resources for Food (3)
@@ -428,6 +457,8 @@ PLS 2010 - Introduction to American Government (3)
           URP 1050 - Social Justice in Planning (3)
         </pre>
       <h4>Social Science Synthesis</h4>
+      
+      <geForm [courses]='d4courses'></geForm>
         <pre>
           Students must complete all GE lower-division requirements in Areas A and D before they take any GE D4 Synthesis course. Select one course from the following list:
 
@@ -521,6 +552,8 @@ PLS 2010 - Introduction to American Government (3)
         </pre>     
       <hr>
     <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
+    
+    <geForm [courses]='ecourses'></geForm>  
       <p>For an alternative and interdisciplinary way to complete some of their GE requirements, students may choose the Interdisciplinary General Education program, see below.</p> 
       <pre>
         AMM 2480 - Focus on the Future: Leadership Skills for the 21st Century (3)
