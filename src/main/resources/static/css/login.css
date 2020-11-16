@@ -57,7 +57,6 @@ a:hover {
   	flex-direction: column;
   	min-height: 100vh;
 }
-
 #layoutAuthentication #layoutAuthentication_content {
   	min-width: 0;
   	flex-grow: 1;
@@ -68,8 +67,8 @@ a:hover {
 
 .container {
 	width: 100%;
-  	padding-right: 0.75rem;
-  	padding-left: 0.75rem;
+  	padding-right: 1.5rem;
+  	padding-left: 1.5rem;
   	margin-right: auto;
   	margin-left: auto;
 }
@@ -130,7 +129,7 @@ a:hover {
 
 .form-control {
   	display: block;
-  	width: 100%;
+  	width: 96%;
   	height: calc(1.5em + 0.75rem + 2px);
   	padding: 0.375rem 0.75rem;
   	font-size: 1rem;
@@ -255,6 +254,10 @@ a:hover {
 	justify-content: space-between;
 }
 
+.justify-content-center {
+	justify-content: center;
+}
+
 .mb-0 {
 	margin-bottom: 0;
 }
@@ -275,6 +278,10 @@ a:hover {
 	margin-top: 3rem;
 }
 
+.pb-3 {
+	padding-bottom: 1rem;
+} 
+
 .py-4 {
 	padding-top: 1.5rem;
 }
@@ -293,4 +300,25 @@ a:hover {
 
 .text-muted {
 	color: #6c757d;
+}
+
+@media (min-width: 576px) {
+  	.container {
+    	max-width: 540px;
+  	}
+}
+@media (min-width: 768px) {
+  	.container {
+    	max-width: 720px;
+  	}
+}
+@media (min-width: 992px) {
+  	.container {
+    	max-width: 960px;
+  	}
+}
+@media (min-width: 1200px) {
+  	.container {
+    	max-width: 1140px;
+  	}
 }
