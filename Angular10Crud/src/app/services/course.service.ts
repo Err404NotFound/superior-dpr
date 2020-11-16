@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = '/api/cscore';
+const elective2Url = '/api/cscore/elective2/list';
+const elective3Url = '/api/cscore/elective3/list';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,14 @@ export class CourseService {
   
   getAll(): Observable<any>{
     return this.http.get(`${baseUrl}`);
+  }
+
+  getElective2All(): Observable<any>{
+    return this.http.get(`${elective2Url}`);
+  }
+
+  getElective3All(): Observable<any>{
+    return this.http.get(`${elective3Url}`);
   }
 
   get(id): Observable<any>{

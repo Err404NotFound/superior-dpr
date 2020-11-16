@@ -42,12 +42,40 @@
       </form> 
     <hr>
     <h3>No more than 3 units from:</h3>
+    <form [formGroup]="form2" (ngSubmit)="submitForm()" novalidate>
+
+      <div *ngFor="let data of elective2Courses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data.value" (change)="onElective2CheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form2.controls['checkArray2'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>
+
     <pre>
     </pre>
     <hr>
     <h3>No more than 4 units from:</h3>
-    <pre>
-    </pre>
+    <form [formGroup]="form3" (ngSubmit)="submitForm()" novalidate>
+
+      <div *ngFor="let data of elective3Courses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data.value" (change)="onElective3CheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form3.controls['checkArray3'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>
+    
     
     <hr>
 

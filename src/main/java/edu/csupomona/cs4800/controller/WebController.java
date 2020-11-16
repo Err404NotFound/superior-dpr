@@ -28,6 +28,12 @@ import com.google.common.math.IntMath;
 @RestController
 public class WebController {
 
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String angular() {
+		return "index";
+	}
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String endpoints() {
 		return String.format("There are other pages at: /hello and /serena and /world and /guava and /jsoup");

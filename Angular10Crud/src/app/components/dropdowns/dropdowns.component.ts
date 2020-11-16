@@ -157,6 +157,9 @@ export class DropdownsComponent {
   form: FormGroup;
   
   coreCourses: Array<any>;
+  elective2Courses: Array<any>;
+  elective3Courses: Array<any>;
+
   Data: Array<any> = majorElectivesAtLeast12;
   a1courses=[
     "COM 1100 - Public Speaking (3)",
@@ -604,6 +607,8 @@ export class DropdownsComponent {
     geForm10: GenEdFormComponent;
 
     form1: FormGroup;
+    form2: FormGroup;
+    form3: FormGroup;
 
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form = this.fb.group({
@@ -613,10 +618,20 @@ export class DropdownsComponent {
     this.form1 = this.fb.group({
       checkArray1: this.fb.array([], [Validators.required])
     })
+
+    this.form2 = this.fb.group({
+      checkArray2: this.fb.array([], [Validators.required])
+    })
+
+    this.form3 = this.fb.group({
+      checkArray3: this.fb.array([], [Validators.required])
+    })
   }
 
   ngOnInit(): void {
     this.retrieveCourses();
+    this.retrieveElective2Courses();
+    this.retrieveElective3Courses();
   }
 
   retrieveCourses(): void{
@@ -629,6 +644,64 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
         });
+  }
+
+  retrieveElective2Courses(): void{
+    this.courseService.getElective2All()
+      .subscribe(
+        data=>{
+          this.elective2Courses=data;
+          console.log(data);
+        },
+        error =>{
+          console.log(error);
+        });
+  }
+
+  retrieveElective3Courses(): void{
+    this.courseService.getElective3All()
+      .subscribe(
+        data=>{
+          this.elective3Courses=data;
+          console.log(data);
+        },
+        error =>{
+          console.log(error);
+        });
+  }
+
+  onElective2CheckboxChange(e) {
+    const checkArray2: FormArray = this.form2.get('checkArray2') as FormArray;
+
+    if (e.target.checked) {
+      checkArray2.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray2.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray2.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  onElective3CheckboxChange(e) {
+    const checkArray3: FormArray = this.form1.get('checkArray3') as FormArray;
+
+    if (e.target.checked) {
+      checkArray3.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray3.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray3.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   onCoreCheckboxChange(e) {
