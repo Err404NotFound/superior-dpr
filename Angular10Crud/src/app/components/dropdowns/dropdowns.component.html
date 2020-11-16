@@ -7,12 +7,24 @@
   
   <body>
     <h2>Major Required Courses</h2>
-      <select id="list">
-        <option>Choose a class</option>
-      </select>
-    <hr>
+    <form [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+
+      <div *ngFor="let data of coreCourses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data.value" (change)="onCoreCheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form1.controls['checkArray1'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>   
     
     <h2>Major Electives: 19 Units</h2>
+    
+
     <h3>At least 12 units from:</h3>
       <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
 
@@ -24,7 +36,7 @@
         </div>
 
         <p class="error" *ngIf="this.form.controls['checkArray'].errors?.required">
-          Checkbox is required, select atleast one value.
+          Checkbox is required, select at least one value.
         </p>
         <input type="submit" value="Submit">
       </form> 

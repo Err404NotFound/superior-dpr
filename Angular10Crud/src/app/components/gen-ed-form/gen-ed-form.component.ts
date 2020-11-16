@@ -23,15 +23,15 @@ export class GenEdFormComponent implements OnInit {
   
 
   myForm = this.fb.group({
-    fruits: ['', [Validators.required]]
+    course: ['', [Validators.required]]
   })
 
-  get fruits() {
-    return this.myForm.get('fruits');
+  get course() {
+    return this.myForm.get('course');
   }
 
-  changeFruit(e) {
-    this.fruits.setValue(e.target.value, {
+  changeCourse(e) {
+    this.course.setValue(e.target.value, {
       onlySelf: true
     })
   }

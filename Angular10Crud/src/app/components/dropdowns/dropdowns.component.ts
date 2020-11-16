@@ -3,6 +3,7 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 
 import { Component, OnInit } from '@angular/core';
 import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
+import {CourseService} from '../../services/course.service';
 
 var majorRequiredCoreClasses = 
   [   
@@ -154,6 +155,8 @@ populateDropdownMenu(options)
 export class DropdownsComponent {
 
   form: FormGroup;
+  
+  coreCourses: Array<any>;
   Data: Array<any> = majorElectivesAtLeast12;
   a1courses=[
     "COM 1100 - Public Speaking (3)",
@@ -600,10 +603,49 @@ export class DropdownsComponent {
     geForm9: GenEdFormComponent;
     geForm10: GenEdFormComponent;
 
-  constructor(private fb: FormBuilder) {
+    form1: FormGroup;
+
+  constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     })
+
+    this.form1 = this.fb.group({
+      checkArray1: this.fb.array([], [Validators.required])
+    })
+  }
+
+  ngOnInit(): void {
+    this.retrieveCourses();
+  }
+
+  retrieveCourses(): void{
+    this.courseService.getAll()
+      .subscribe(
+        data=>{
+          this.coreCourses=data;
+          console.log(data);
+        },
+        error =>{
+          console.log(error);
+        });
+  }
+
+  onCoreCheckboxChange(e) {
+    const checkArray1: FormArray = this.form1.get('checkArray1') as FormArray;
+
+    if (e.target.checked) {
+      checkArray1.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray1.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray1.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   onCheckboxChange(e) {
