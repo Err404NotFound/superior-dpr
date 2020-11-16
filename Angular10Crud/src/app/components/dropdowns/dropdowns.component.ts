@@ -84,6 +84,7 @@ export class DropdownsComponent {
   form: FormGroup;
   
   coreCourses: Array<any>;
+  elective1Courses: Array<any>;
   elective2Courses: Array<any>;
   elective3Courses: Array<any>;
 
@@ -595,6 +596,7 @@ export class DropdownsComponent {
 
   ngOnInit(): void {
     this.retrieveCourses();
+    this.retrieveElective1Courses();
     this.retrieveElective2Courses();
     this.retrieveElective3Courses();
   }
@@ -604,6 +606,18 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.coreCourses=data;
+          console.log(data);
+        },
+        error =>{
+          console.log(error);
+        });
+  }
+
+  retrieveElective1Courses(): void{
+    this.courseService.getAll()
+      .subscribe(
+        data=>{
+          this.Data=data;
           console.log(data);
         },
         error =>{

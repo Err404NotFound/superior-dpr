@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = '/api/cscore';
+const elective1Url = '/api/cscore/elective2/list';
 const elective2Url = '/api/cscore/elective2/list';
 const elective3Url = '/api/cscore/elective3/list';
 
@@ -15,6 +16,10 @@ export class CourseService {
   
   getAll(): Observable<any>{
     return this.http.get(`${baseUrl}`);
+  }
+
+  getElective1All(): Observable<any>{
+    return this.http.get(`${elective1Url}`);
   }
 
   getElective2All(): Observable<any>{
