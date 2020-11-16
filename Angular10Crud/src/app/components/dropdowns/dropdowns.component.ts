@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
 
+
 var majorRequiredCoreClasses = 
   [   
     "BIO 1110 - Life Science (2) (B2)",
@@ -72,81 +73,7 @@ var majorElectivesNoMoreThan4 =
     "MAT 4860 - Introduction to Mathematical Modeling II (3)"
   ];
 
-/* for dropdown menu style 1
-// toggles dropdown menu 
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("show");
-}
 
-// filters through text; used for search bar
-function filterFunction() {
-  var input, filter, a, i;
-  input = document.getElementById("userInput"); // looks for input with userInput 
-  filter = input.value.toUpperCase();           // casts inputs to uppercase
-  div = document.getElementById("menu");        // looks for div with menu 
-  a = div.getElementsByTagName("a");            // finds the a tag in div
-
-  // searches through the text content in the a tags w/in div
-  for (i = 0; i < a.length; i++) {
-    txtValue = a[i].textContent || a[i].innerText;    // grab text from a
-    if (txtValue.toUpperCase().indexOf(filter) > -1)  // if the input is found in a... 
-    {
-      a[i].style.display = "";
-    } 
-    else 
-    {
-      a[i].style.display = "none";
-    }
-  }
-}
-*/
-
-// handles dropdown menus
-/*@Component({
-  selector: 'app-dropdowns',
-  templateUrl: './dropdowns.component.html',
-  styleUrls: ['./dropdowns.component.css']
-})
-export class DropdownsComponent implements OnInit {
-geForm: GenEdFormComponent;
-geForm2:GenEdFormComponent;
-geForm3: GenEdFormComponent;
-geForm4: GenEdFormComponent;
-geForm5: GenEdFormComponent;
-geForm6: GenEdFormComponent;
-geForm7: GenEdFormComponent;
-geForm8: GenEdFormComponent;
-geForm9: GenEdFormComponent;
-geForm10: GenEdFormComponent;
-
-  ngOnInit(): void {
-    this.populateDropdownMenu(majorRequiredCoreClasses);
-    
-  }
-
-  courseName=['CS100', 'CS101', 'CS102'];
-
-
-  // courses:any = ['CS100', 'CS101', 'CS102']
-  // geForm: FormGroup;
-   constructor(private formBuilder: FormBuilder) {  }
-
-populateDropdownMenu(options)
-{
-  var select = document.getElementById("list");
-  for(var i = 0; i < options.length; i++) 
-  {
-    var opt = options[i];
-    var el = document.createElement("option");
-    el.textContent = opt;
-    el.value = opt;
-    select.appendChild(el);
-  }
-}
-
-}*/
-
-// handles checkboxes
 @Component({
   selector: 'app-root',
   templateUrl: './dropdowns.component.html',
@@ -161,6 +88,39 @@ export class DropdownsComponent {
   elective3Courses: Array<any>;
 
   Data: Array<any> = majorElectivesAtLeast12;
+  igeCourses=[
+    {"name":"AG 4010 - Ethical Issues in Food, Agricultural and Apparel Industries (3) (fulfills Area C3 or D4)"},
+    {"name":"ANT 3500 - Environment, Technology and Culture (3) (fulfills Area B5 or D4)"},
+    {"name":"ANT 3600 - Magic, Shamanism, and Religion (3) (fulfills Area C3 or D4)"},
+    {"name":"ANT 4050 - Anthropology of Gender (3) (fulfills Area C3 or D4)"},
+    {"name":"BUS 4820 - International Destinations and the United States: Cross-Cultural Analysis (3) (fulfills Area C3 or D4)"},
+    {"name":"CLS 4100 - Model United Nations (3) (fulfills Area C3 or D4)"},
+    {"name":"CS 3750 - Computers and Society (3) (fulfills Area B5 or D4)"},
+    {"name":"EC 4441 - Industry Studies (3) (fulfills Area B5 or D4)"},
+    {"name":"EWS 4430 - Women, Health, and Body Politics (3) (fulfills Area C3 or D4)"},
+    {"name":"EWS 4500 - Multiracial and Hybrid Identities (3) (fulfills Area C3 or D4)"},
+    {"name":"EWS 4510 - Diaspora Studies (3) (fulfills Area C3 or D4)"},
+    {"name":"GEO 3510 - Geography of California (3) (fulfills Area B5 or D4)"},
+    {"name":"HST 3306 - Modern India (3) (fulfills Area C3 or D4)"},
+    {"name":"HST 4230 - Modern Science in World History (3) (fulfills Area C3 or D4)"},
+    {"name":"HST 4406 - Women in the United States (3) (fulfills Area C3 or D4)"},
+    {"name":"HST 4408 - History of American Science and Technology (3) (fulfills Area C3 or D4)"},
+    {"name":"HST 4433 - Nonviolence in the Modern World (3) (fulfills Area C3 or D4)"},
+    {"name":"IGE 3500 - The Creative Process: Theory and Practice (3) (fulfills Area C3 or D4)"},
+    {"name":"IME 4020 - Ethical Concepts in Technology and Applied Science (3) (fulfills Area B5 or C3)"},
+    {"name":"IME 4030 - Fiscal Implications in Technical Decision Making (3) (fulfills Area B5 or D4)"},
+    {"name":"MU 3100 - History of Technology in Music (3) (fulfills Area B5, C3, or D4)"},
+    {"name":"MU 4240 - Beatlemania (3) (fulfills Area C3 or D4)"},
+    {"name":"PHL 3110 - Philosophical Issues in the Law (3) (fulfills Area C3 or D4)"},
+    {"name":"PHL 3330 - Bioethics (3) (fulfills Area B5 or C3)"},
+    {"name":"PHL 3530 - Cognitive Science (3) (fulfills Area B5 or C3)"},
+    {"name":"PHL 3540 - The Philosophy and Science of Implicit Bias (3) (fulfills Area C3 or D4)"},
+    {"name":"PHL 3810 - Race and Racism (3) (fulfills Area C3 or D4)"},
+    {"name":"PSY 3326 - Health Psychology (3) (fulfills Area B5 or D4)"},
+    {"name":"RS 3030 - Organization for Regenerative Practices (3) (fulfills Area C3 or D4)"},
+    {"name":"RS 4500 - Sustainable Communities (3) (fulfills Area C3 or D4)"}
+  ];
+
   a1courses=[
     "COM 1100 - Public Speaking (3)",
     "COM 2204 - Advocacy and Argument (3)"
@@ -593,7 +553,9 @@ export class DropdownsComponent {
            
   
           "VCD 2370 - Visual Thinking (3)"
-  ]
+  ];
+
+  
 
     geForm: GenEdFormComponent;
     geForm2:GenEdFormComponent;
@@ -609,7 +571,7 @@ export class DropdownsComponent {
     form1: FormGroup;
     form2: FormGroup;
     form3: FormGroup;
-
+    form4: FormGroup;
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
@@ -625,6 +587,9 @@ export class DropdownsComponent {
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
+    })
+    this.form4 = this.fb.group({
+      checkArray4: this.fb.array([], [Validators.required])
     })
   }
 
@@ -714,6 +679,23 @@ export class DropdownsComponent {
       checkArray1.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           checkArray1.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  onIgeCheckboxChange(e) {
+    const checkArray4: FormArray = this.form4.get('checkArray4') as FormArray;
+
+    if (e.target.checked) {
+      checkArray4.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray4.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray4.removeAt(i);
           return;
         }
         i++;
