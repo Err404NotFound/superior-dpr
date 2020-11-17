@@ -79,17 +79,4 @@ public class LoginController {
 		userService.updateUser(user);
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="/updateCoreList", method={RequestMethod.PUT})
-	public ModelAndView updateCoreList() {
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
-		modelAndView.addObject("currentUser", user);
-		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
-		modelAndView.addObject("userMessage", "Content should be visible to all users");
-		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUser(user); //TODO change this to updateUserCoreList method
-		return modelAndView;
-	}
 }

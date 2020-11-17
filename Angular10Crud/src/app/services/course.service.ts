@@ -7,6 +7,8 @@ const elective1Url = '/api/cscore/elective1/list';
 const elective2Url = '/api/cscore/elective2/list';
 const elective3Url = '/api/cscore/elective3/list';
 
+const updateUrl = '/api/updateplaceholder';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +34,10 @@ export class CourseService {
 
   get(id): Observable<any>{
     return this.http.get(`${baseUrl}/${id}`);
+  }
+
+  update(data): Observable<any> {
+    return this.http.put(`${updateUrl}`, data);
   }
 
   /*create(data): Observable<any> {

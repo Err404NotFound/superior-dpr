@@ -741,10 +741,13 @@ export class DropdownsComponent {
 
   submitForm() {
     console.log(this.form.value)
+    
   }
 
   submitFormCore() {
+
     console.log(this.form1.value)
+    this.courseService.update(this.form1.value);
   }
 
   submitFormElective2() {
