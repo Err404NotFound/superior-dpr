@@ -80,6 +80,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 		});
 	}
 	
+	public void updateUserCoreList(User user, CSCoreCourse[] completedCore) {
+		
+		for(CSCoreCourse course : completedCore) {
+			
+		}
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = csStudentRepository.findByUsername(username);
