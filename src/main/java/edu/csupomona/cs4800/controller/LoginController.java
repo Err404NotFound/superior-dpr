@@ -1,18 +1,28 @@
 package edu.csupomona.cs4800.controller;
 
+import java.lang.reflect.Array;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mongodb.util.JSON;
+
+import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.securingweb.CustomUserDetailsService;
 import edu.csupomona.cs4800.user.User;
+import net.minidev.json.JSONArray;
 
 @Controller
 public class LoginController {
@@ -79,4 +89,52 @@ public class LoginController {
 		userService.updateUser(user);
 		return modelAndView;
 	}
+	
+//	@RequestMapping(value="/updateCoreList", method={RequestMethod.PUT})
+//	public ModelAndView updateCoreList() {
+//		ModelAndView modelAndView = new ModelAndView();
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		User user = userService.findUserByUsername(auth.getName());
+//		modelAndView.addObject("currentUser", user);
+//		modelAndView.getModelMap().addAttribute("toDoCore", user.getToDoCore());
+//        modelAndView.getModelMap().addAttribute("completedCore", user.getCompletedCore());
+//		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+//		modelAndView.addObject("userMessage", "Content should be visible to all users");
+//		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+//		userService.updateUserCoreList(user,@RequestBody ); //TODO change this to updateUserCoreList method
+//		return modelAndView;
+//	}
+	
+	@PutMapping("/updateCoreList")
+	  public ModelAndView updateTutorial(@RequestBody CSCoreCourse[] obj) {
+		//JSON cry ={  "id": "5f6cda383cab4d677974fa58", "courseNumber": "BIO1110L", "courseName": "Life Science Laboratory", "completionStatus": "TO DO",  "prereqCourseNumber": "",  "coreqCourseNumber": "",  "geArea": "B3",  "units": 1} ;
+		//System.out.println("help" + obj.toString());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserCoreList(user,obj); //TODO change this to updateUserCoreList method
+		//System.out.println("updateCore" +ihatethis);
+		
+		return modelAndView;
+	}
+	
+//	@PutMapping("/updateCoreList")
+//	public ResponseEntity<CSCoreCourse> updateTutorial(@RequestBody CSCoreCourse course) {
+//	  Optional<CSCoreCourse> cscore = cscorerepo.findById(course.getId());
+//
+//	  if (tutorialData.isPresent()) {
+//	    Tutorial _tutorial = tutorialData.get();
+//	    _tutorial.setTitle(tutorial.getTitle());
+//	    _tutorial.setDescription(tutorial.getDescription());
+//	    _tutorial.setPublished(tutorial.isPublished());
+//	    return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
+//	  } else {
+//	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//	  }
+	  
 }

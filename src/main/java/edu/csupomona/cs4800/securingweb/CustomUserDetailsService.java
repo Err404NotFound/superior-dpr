@@ -80,6 +80,42 @@ public class CustomUserDetailsService implements UserDetailsService {
 		});
 	}
 	
+	public void updateUserCoreList(User user, CSCoreCourse[] completedCore) {
+//works for single cscore class in json format
+		//		Optional<CSCoreCourse> optional = csCoreRepository.findById(completedCore.getId());
+//		optional.ifPresent(course -> {
+//			List<CSCoreCourse> todo = user.getToDoCore();
+//			todo.removeIf(c -> (c.getId().equals(course.getId())));
+//			course.setCompletionStatus(Course.COMPLETED);
+//			List<CSCoreCourse> completed = user.getCompletedCore();
+//			completed.add(course);
+//			user.setCompletedCore(completed);
+//			csStudentRepository.save(user);
+//		});
+		
+				List<CSCoreCourse> todo = user.getToDoCore();
+		List<CSCoreCourse> completed = user.getCompletedCore();
+		List<CSCoreCourse> newComplete = new ArrayList<CSCoreCourse>();
+		for(CSCoreCourse core : completedCore) {
+			//Make sure the course exists
+			Optional<CSCoreCourse> optional = csCoreRepository.findById(core.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		completed.removeAll(newComplete);
+		//Add any unchecked courses
+		todo.addAll(completed);
+		//Update and save user
+		user.setToDoCore(todo);
+		user.setCompletedCore(newComplete);
+		csStudentRepository.save(user);
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = csStudentRepository.findByUsername(username);

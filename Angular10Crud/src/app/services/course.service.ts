@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { KeyValuePipe } from '@angular/common';
 
 const baseUrl = '/api/cscore';
 const elective1Url = '/api/cscore/elective1/list';
 const elective2Url = '/api/cscore/elective2/list';
 const elective3Url = '/api/cscore/elective3/list';
 
-const updateUrl = '/api/updateplaceholder';
+const updateUrl = '/api/updateCoreList';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,33 @@ export class CourseService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  update(data): Observable<any> {
-    return this.http.put(`${updateUrl}`, data);
+  update(data): any {
+  //   data = [{ "id": "5f6cda383cab4d677974fa58", "courseNumber": "BIO1110L", "courseName": "Life Science Laboratory", "completionStatus": "TO DO",  "prereqCourseNumber": "",  "coreqCourseNumber": "",  "geArea": "B3",  "units": 1},
+  //   { "id": "5f6d6b523cab4d677974fa68",  "courseNumber": "PHY1510",  "courseName": "Introduction to Newtonian Mechanics",  "completionStatus": "TO DO", "prereqCourseNumber": "MAT1140|MAT1150","coreqCourseNumber": "PHY1510L","geArea": "B3","units": 3}
+  // ];
+  data=JSON.stringify(data);
+  //data=(JSON.parse(JSON.stringify(data).replace(/\\n/g, '')));
+  //data=JSON.parse(JSON.stringify(data).replace(/\\/g, ''));
+  
+  const coursedata=JSON.parse(data);
+  //data=JSON.stringify(data);
+    console.log('update '+ coursedata + ' data: ' + data);
+    return this.http.put(`${updateUrl}`, coursedata.checkArray1)
+      .subscribe(data => console.log(data), 
+      error => console.log(error));
+    
+//     return this.http.put(`${updateUrl}`, 0: "{↵  "id": "5f6cda383cab4d677974fa58",↵  "courseNumber": "BIO1110L",↵  "courseName": "Life Science Laboratory",↵  "completionStatus": "TO DO",↵  "prereqCourseNumber": "",↵  "coreqCourseNumber": "",↵  "geArea": "B3",↵  "units": 1↵}"
+// 1: "{↵  "id": "5f6d6b523cab4d677974fa68",↵  "courseNumber": "PHY1510",↵  "courseName": "Introduction to Newtonian Mechanics",↵  "completionStatus": "TO DO",↵  "prereqCourseNumber": "MAT1140|MAT1150",↵  "coreqCourseNumber": "PHY1510L",↵  "geArea": "B3",↵  "units": 3↵}"
+// )
+
   }
 
+  // updateTodo(data:): Promise<Todo> {
+  //   return this.http.put(`${updateUrl}`, data)
+  //     .toPromise()
+  //     .then(response => response.json() )
+  //     .catch(this.handleError);
+  // }
   /*create(data): Observable<any> {
     return this.http.post(baseUrl, data);
   }

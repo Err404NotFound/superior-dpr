@@ -4,6 +4,7 @@ import { ValueTransformer } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
+import { JsonPipe } from '@angular/common';
 
 
 var majorRequiredCoreClasses = 
@@ -81,7 +82,7 @@ var majorElectivesNoMoreThan4 =
 })
 export class DropdownsComponent {
 
-  form: FormGroup;
+  
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
@@ -570,7 +571,7 @@ export class DropdownsComponent {
     geForm10: GenEdFormComponent;
     completedGEs: any;
 
-
+    form: FormGroup;
     form1: FormGroup;
     form2: FormGroup;
     form3: FormGroup;
@@ -745,8 +746,13 @@ export class DropdownsComponent {
   }
 
   submitFormCore() {
+    // let jstring;
+     console.log(this.form1.value)
+    // this.form1.value.forEach(element => {
+    //   jstring.append(element.id)
+    // });
+    // console.log(jstring);
 
-    console.log(this.form1.value)
     this.courseService.update(this.form1.value);
   }
 
