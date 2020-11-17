@@ -2,9 +2,9 @@
 
     <form [formGroup]="myForm" (ngSubmit)="submit()">
       <select class="custom-select" formControlName="course" (change)="changeCourse($event)">
-        <option disabled>Choose Value</option>
+        <!--option disabled>Choose Value</option-->
         <option value="">Choose Course</option>
-        <option *ngFor="let course of courses">
+        <option *ngFor="let course of courses" [value]="course|json">
           {{course}}
         </option>
       </select>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,12 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export class GenEdFormComponent implements OnInit {
-  //@Input Fruits:any=[''];
   
   isValidated = false;
 
-  @Input() courses: any = ['Apple', 'Mengo', 'Banana', 'Strawberry'];
-
+  @Input() courses: any = ['Apple', 'Mango', 'Banana', 'Strawberry'];
+  @Output() result = new EventEmitter<any>()
   constructor(public fb: FormBuilder) { }
 
   ngOnInit():void{}
@@ -31,17 +30,35 @@ export class GenEdFormComponent implements OnInit {
   }
 
   changeCourse(e) {
-    this.course.setValue(e.target.value, {
-      onlySelf: true
-    })
+    this.course.setValue(e.target.value)
+    //console.log(e.target.value);
   }
+
+  // onCheckboxChange(e) {
+  //   const checkArray: FormArray = this.form.get('checkArray') as FormArray;
+
+  //   if (e.target.checked) {
+  //     checkArray.push(new FormControl(e.target.value));
+  //   } else {
+  //     let i: number = 0;
+  //     checkArray.controls.forEach((item: FormControl) => {
+  //       if (item.value == e.target.value) {
+  //         checkArray.removeAt(i);
+  //         return;
+  //       }
+  //       i++;
+  //     });
+  //   }
 
   submit() {
     this.isValidated = true;
     if (!this.myForm.valid) {
       return false;
     } else {
-      alert(JSON.stringify(this.myForm.value))
+      //alert(JSON.stringify(this.myForm.value))
+      //this.course.setValue(e.target.value)
+      console.log(JSON.stringify(this.myForm.value));
+      this.result.emit(JSON.stringify(this.myForm.value));
     }
   }
 

@@ -7,11 +7,11 @@
   
   <body>
     <h2>Major Required Courses</h2>
-    <form [formGroup]="form1" (ngSubmit)="submitForm()" novalidate>
+    <form [formGroup]="form1" (ngSubmit)="submitFormCore()" novalidate>
 
       <div *ngFor="let data of coreCourses; let i=index">
         <label>
-          <input type="checkbox" [value]="data.courseName" (change)="onCoreCheckboxChange($event)" />
+          <input type="checkbox" [value]="data |json" (change)="onCoreCheckboxChange($event)" />
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>
@@ -28,9 +28,9 @@
     <h3>At least 12 units from:</h3>
       <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
 
-        <div *ngFor="let data of Data; let i=index">
+        <div *ngFor="let data of elective1Courses; let i=index">
           <label>
-            <input type="checkbox" [value]="data" (change)="onCheckboxChange($event)" />
+            <input type="checkbox" [value]="data |json" (change)="onCheckboxChange($event)" />
             {{data.courseNumber}} {{data.courseName}}
           </label>
         </div>
@@ -42,11 +42,11 @@
       </form> 
     <hr>
     <h3>No more than 3 units from:</h3>
-    <form [formGroup]="form2" (ngSubmit)="submitForm()" novalidate>
+    <form [formGroup]="form2" (ngSubmit)="submitFormElective2()" novalidate>
 
       <div *ngFor="let data of elective2Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data.value" (change)="onElective2CheckboxChange($event)" />
+          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" />
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>
@@ -61,11 +61,11 @@
     </pre>
     <hr>
     <h3>No more than 4 units from:</h3>
-    <form [formGroup]="form3" (ngSubmit)="submitForm()" novalidate>
+    <form [formGroup]="form3" (ngSubmit)="submitFormElective3()" novalidate>
 
       <div *ngFor="let data of elective3Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data.value" (change)="onElective3CheckboxChange($event)" />
+          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" />
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>
@@ -82,7 +82,7 @@
     <h2>General Education Requirements: 48 units</h2>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
       <h4>Oral Communication</h4>
-        <geForm [courses]='a1courses'></geForm>  
+        <geForm [courses]='a1courses' (result)='onGESubmit($event)'></geForm>  
       
       <h4>Written Communication</h4>
         <geForm [courses]='a2courses'></geForm>  

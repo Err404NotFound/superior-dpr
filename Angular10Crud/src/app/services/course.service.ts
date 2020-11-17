@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = '/api/cscore';
-const elective1Url = '/api/cscore/elective2/list';
+const elective1Url = '/api/cscore/elective1/list';
 const elective2Url = '/api/cscore/elective2/list';
 const elective3Url = '/api/cscore/elective3/list';
 

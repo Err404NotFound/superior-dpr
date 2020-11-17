@@ -568,6 +568,8 @@ export class DropdownsComponent {
     geForm8: GenEdFormComponent;
     geForm9: GenEdFormComponent;
     geForm10: GenEdFormComponent;
+    completedGEs: any;
+
 
     form1: FormGroup;
     form2: FormGroup;
@@ -592,6 +594,8 @@ export class DropdownsComponent {
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     })
+    this.geForm= new GenEdFormComponent( fb );
+    
   }
 
   ngOnInit(): void {
@@ -614,10 +618,10 @@ export class DropdownsComponent {
   }
 
   retrieveElective1Courses(): void{
-    this.courseService.getAll()
+    this.courseService.getElective1All()
       .subscribe(
         data=>{
-          this.Data=data;
+          this.elective1Courses=data;
           console.log(data);
         },
         error =>{
@@ -667,10 +671,11 @@ export class DropdownsComponent {
   }
 
   onElective3CheckboxChange(e) {
-    const checkArray3: FormArray = this.form1.get('checkArray3') as FormArray;
+    const checkArray3: FormArray = this.form3.get('checkArray3') as FormArray;
 
     if (e.target.checked) {
       checkArray3.push(new FormControl(e.target.value));
+      console.log(JSON.stringify(e.target.value));
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
@@ -736,6 +741,27 @@ export class DropdownsComponent {
 
   submitForm() {
     console.log(this.form.value)
+  }
+
+  submitFormCore() {
+    console.log(this.form1.value)
+  }
+
+  submitFormElective2() {
+    console.log(this.form2.value)
+  }
+
+  submitFormElective3() {
+    console.log(this.form3.value)
+  }
+
+  onGESubmit(e) {
+    console.log(e);
+  //   const geArray: FormArray = this.geForm.myForm.get('course') as FormArray;
+  //console.log(geArray.value);
+  //console.log(this.geForm.myForm);
+  
+
   }
 
 }
