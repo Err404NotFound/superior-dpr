@@ -124,8 +124,9 @@ public class LoginController {
 			for (String s: jsonObjArr) {
 				//listCourse.add(s); 
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-				listCourse.add(objectMapper.readValue(s, CSCoreCourse.class));
-				//listCourse.add(csCoreRepository.findById(s));
+				listCourse.add(objectMapper.readValue(s,CSCoreCourse.class));
+				//listCourse.add(objectMapper.readValue(s, new TypeReference<List<CSCoreCourse>>(){});
+				//listCourse.add(csCoreRepository.findById(s.getId()));
 			}
 		}
 		catch(Exception e) {

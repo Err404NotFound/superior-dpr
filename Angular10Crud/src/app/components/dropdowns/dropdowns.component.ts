@@ -752,7 +752,7 @@ export class DropdownsComponent {
     //   jstring.append(element.id)
     // });
     // console.log(jstring);
-    var result: String[] =[];
+    //var result: String[] =[];
     console.log(this.form1.value.checkArray1);
    
       // var obj =JSON.parse(this.form1.value.checkArray1);
