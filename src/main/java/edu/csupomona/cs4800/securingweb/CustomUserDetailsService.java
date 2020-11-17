@@ -80,9 +80,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		});
 	}
 	
-	public void updateUserCoreList(User user, CSCoreCourse[] completedCore) {
+	public void updateUserCoreList(User user, List<CSCoreCourse> completedCore) {
 //works for single cscore class in json format
-		//		Optional<CSCoreCourse> optional = csCoreRepository.findById(completedCore.getId());
+//				Optional<CSCoreCourse> optional = csCoreRepository.findById(completedCore.getId());
 //		optional.ifPresent(course -> {
 //			List<CSCoreCourse> todo = user.getToDoCore();
 //			todo.removeIf(c -> (c.getId().equals(course.getId())));

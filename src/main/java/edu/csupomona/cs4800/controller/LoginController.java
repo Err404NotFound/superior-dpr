@@ -1,6 +1,9 @@
 package edu.csupomona.cs4800.controller;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -17,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.util.JSON;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 import edu.csupomona.cs4800.securingweb.CustomUserDetailsService;
 import edu.csupomona.cs4800.user.User;
 import net.minidev.json.JSONArray;
@@ -104,12 +111,26 @@ public class LoginController {
 //		userService.updateUserCoreList(user,@RequestBody ); //TODO change this to updateUserCoreList method
 //		return modelAndView;
 //	}
+	ObjectMapper objectMapper = new ObjectMapper();
+	@Autowired
+	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	
 	@PutMapping("/updateCoreList")
-	  public ModelAndView updateTutorial(@RequestBody CSCoreCourse[] obj) {
+	  public ModelAndView updateTutorial(@RequestBody String[] jsonObjArr) {
 		//JSON cry ={  "id": "5f6cda383cab4d677974fa58", "courseNumber": "BIO1110L", "courseName": "Life Science Laboratory", "completionStatus": "TO DO",  "prereqCourseNumber": "",  "coreqCourseNumber": "",  "geArea": "B3",  "units": 1} ;
 		//System.out.println("help" + obj.toString());
-		
+		List<CSCoreCourse> listCourse = new ArrayList<CSCoreCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				//listCourse.add(s); 
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				listCourse.add(objectMapper.readValue(s, CSCoreCourse.class));
+				//listCourse.add(csCoreRepository.findById(s));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
@@ -117,8 +138,8 @@ public class LoginController {
 		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUserCoreList(user,obj); //TODO change this to updateUserCoreList method
-		//System.out.println("updateCore" +ihatethis);
+		userService.updateUserCoreList(user,listCourse); //TODO change this to updateUserCoreList method
+		
 		
 		return modelAndView;
 	}

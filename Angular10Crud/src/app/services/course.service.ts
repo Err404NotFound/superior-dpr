@@ -41,14 +41,15 @@ export class CourseService {
   //   data = [{ "id": "5f6cda383cab4d677974fa58", "courseNumber": "BIO1110L", "courseName": "Life Science Laboratory", "completionStatus": "TO DO",  "prereqCourseNumber": "",  "coreqCourseNumber": "",  "geArea": "B3",  "units": 1},
   //   { "id": "5f6d6b523cab4d677974fa68",  "courseNumber": "PHY1510",  "courseName": "Introduction to Newtonian Mechanics",  "completionStatus": "TO DO", "prereqCourseNumber": "MAT1140|MAT1150","coreqCourseNumber": "PHY1510L","geArea": "B3","units": 3}
   // ];
-  data=JSON.stringify(data);
+  //data=["5f6cda383cab4d677974fa58","5f6d6b523cab4d677974fa68"];
+  //data=JSON.stringify(data);
   //data=(JSON.parse(JSON.stringify(data).replace(/\\n/g, '')));
   //data=JSON.parse(JSON.stringify(data).replace(/\\/g, ''));
   
   const coursedata=JSON.parse(data);
-  //data=JSON.stringify(data);
+  //data=JSON.stringify(coursedata.checkArray1);
     console.log('update '+ coursedata + ' data: ' + data);
-    return this.http.put(`${updateUrl}`, coursedata.checkArray1)
+    return this.http.put(`${updateUrl}`, coursedata)
       .subscribe(data => console.log(data), 
       error => console.log(error));
     

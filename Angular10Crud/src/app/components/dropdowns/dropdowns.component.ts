@@ -752,8 +752,15 @@ export class DropdownsComponent {
     //   jstring.append(element.id)
     // });
     // console.log(jstring);
-
-    this.courseService.update(this.form1.value);
+    var result: String[] =[];
+    console.log(this.form1.value.checkArray1);
+   
+      // var obj =JSON.parse(this.form1.value.checkArray1);
+      // obj.foreach(element=>{
+      //   result.push(element.id);
+      // });
+    //  console.log(result);
+    this.courseService.update(this.form1.value.checkArray1);
   }
 
   submitFormElective2() {
