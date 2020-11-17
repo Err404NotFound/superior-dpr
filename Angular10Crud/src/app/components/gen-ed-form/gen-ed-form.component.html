@@ -1,0 +1,19 @@
+<div class="container mt-5">
+
+    <form [formGroup]="myForm" (ngSubmit)="submit()">
+      <select class="custom-select" formControlName="course" (change)="changeCourse($event)">
+        <!--option disabled>Choose Value</option-->
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of courses" [value]="course|json">
+          {{course}}
+        </option>
+      </select>
+  
+      <div *ngIf="isValidated && courses.errors?.required" class="alert alert-danger mt-2">
+        Please choose some value
+      </div>
+  
+      <button type="submit" class="btn btn-success mt-3">Submit</button>
+    </form>
+  
+  </div>

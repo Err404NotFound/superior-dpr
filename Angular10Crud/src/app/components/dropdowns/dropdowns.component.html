@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Superior DPR</title>
+  </head>
+  
+  
+  <body>
+    <h2>Major Required Courses</h2>
+    <form [formGroup]="form1" (ngSubmit)="submitFormCore()" novalidate>
+
+      <div *ngFor="let data of coreCourses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data |json" (change)="onCoreCheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form1.controls['checkArray1'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>   
+    
+    <h2>Major Electives: 19 Units</h2>
+    
+
+    <h3>At least 12 units from:</h3>
+      <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+
+        <div *ngFor="let data of elective1Courses; let i=index">
+          <label>
+            <input type="checkbox" [value]="data |json" (change)="onCheckboxChange($event)" />
+            {{data.courseNumber}} {{data.courseName}}
+          </label>
+        </div>
+
+        <p class="error" *ngIf="this.form.controls['checkArray'].errors?.required">
+          Checkbox is required, select at least one value.
+        </p>
+        <input type="submit" value="Submit">
+      </form> 
+    <hr>
+    <h3>No more than 3 units from:</h3>
+    <form [formGroup]="form2" (ngSubmit)="submitFormElective2()" novalidate>
+
+      <div *ngFor="let data of elective2Courses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form2.controls['checkArray2'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>
+
+    <pre>
+    </pre>
+    <hr>
+    <h3>No more than 4 units from:</h3>
+    <form [formGroup]="form3" (ngSubmit)="submitFormElective3()" novalidate>
+
+      <div *ngFor="let data of elective3Courses; let i=index">
+        <label>
+          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" />
+          {{data.courseNumber}} {{data.courseName}}
+        </label>
+      </div>
+
+      <p class="error" *ngIf="this.form3.controls['checkArray3'].errors?.required">
+        Checkbox is required, select at least one value.
+      </p>
+      <input type="submit" value="Submit">
+    </form>
+    
+    
+    <hr>
+
+    <h2>General Education Requirements: 48 units</h2>
+    <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
+      <h4>Oral Communication</h4>
+        <geForm [courses]='a1courses' (result)='onGESubmit($event)'></geForm>  
+      
+      <h4>Written Communication</h4>
+        <geForm [courses]='a2courses'></geForm>  
+      
+      <h4>Critical Thinking</h4>
+      <geForm [courses]='a3courses'></geForm>
+      <hr>
+    <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
+      <h4>Physical Sciences</h4>
+      
+        <geForm [courses]='b1courses'></geForm>
+        
+      <h4>Life Sciences</h4>
+      <geForm [courses]='b2courses'></geForm>
+     
+      <h4>Laboratory Activity</h4>
+        <p>Laboratory courses are marked with an "L" following the course number. 
+        At least one laboratory course from GE Sub-areas B1 or B2 must be taken to fulfill the GE Sub-area B3 requirement. 
+        Activity courses, which are marked with an "A" following the course number, do not fulfill the GE Sub-area B3 requirement.
+        </p>
+      <h4>Mathematics/Quantitative Reasoning</h4>
+      
+      <geForm [courses]='b4courses'></geForm>
+     
+        
+      <h4>Science and Technology Synthesis</h4>
+      <geForm [courses]='b5courses'></geForm>
+        
+    <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
+      <h4>Visual and Performing Arts</h4>
+      <geForm [courses]='c1courses'></geForm>
+      
+
+      <h4>Literature, Modern Languages, Philosophy and Civilization</h4>
+      <geForm [courses]='c2courses'></geForm>
+      
+      <h4>Arts and Humanities Synthesis</h4>
+      <geForm [courses]='c3courses'></geForm>
+    
+        <pre>
+          Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
+
+
+          *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
+
+          **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
+        </pre>
+      <hr>
+    <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
+      <h4>U.S. History and American Ideals</h4>
+      
+      <geForm [courses]='d1acourses'></geForm>
+      
+      <h4>U.S. Constitution and California Government</h4>
+      
+      <geForm [courses]='d1bcourses'></geForm> 
+        
+      <h4>Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
+      
+      <geForm [courses]='d2courses'></geForm>
+        
+      <h4>Social Science Synthesis</h4>
+      
+      <geForm [courses]='d4courses'></geForm>
+        <pre>
+          Students must complete all GE lower-division requirements in Areas A and D before they take any GE D4 Synthesis course. Select one course from the following list:
+
+          *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
+
+          **Course fulfills American Ideals requirement part B (U.S. Constitution and California Government).
+        </pre>     
+      <hr>
+    <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
+    
+    <geForm [courses]='ecourses'></geForm>  
+      <p>For an alternative and interdisciplinary way to complete some of their GE requirements, students may choose the Interdisciplinary General Education program, see below.</p> 
+      <pre>
+       
+
+        Students who completed basic military training, served one year of active-duty service, and passed ENG 1101 or ENG 1103 or a comparable transfer course will be granted 3 units of GE Area E credit. This credit is limited to students with an other than dishonorable discharge or still on active duty.
+      </pre>
+    <hr>
+
+    <h2>Interdisciplinary General Education</h2>
+      <p>An alternate pattern for partial fulfillment of GE Areas A, C, and D available for students is the Interdisciplinary General Education (IGE) program.  Students should see an advisor for specific GE coursework required by their major.</p>
+      <pre>
+        These courses will satisfy the requirement in one of subareas: B5, C4, D4. Students must complete all lower-division courses in Area A and relevant subareas before they take an Interdisciplinary Synthesis course.
+
+        Select one course from the following list:
+</pre>
+<form [formGroup]="form4" (ngSubmit)="submitForm()" novalidate>
+
+  <div *ngFor="let data of igeCourses; let i=index">
+    <label>
+      <input type="checkbox" [value]="data.name" (change)="onIgeCheckboxChange($event)" />
+      {{data.name}}
+    </label>
+  </div>
+
+  <p class="error" *ngIf="this.form4.controls['checkArray4'].errors?.required">
+    Checkbox is required, select at least one value.
+  </p>
+  <input type="submit" value="Submit">
+</form> 
+
+    <hr>
+
+    <h2>American Institutions: 6 units</h2>
+      <p>Courses that satisfy this requirement may also satisfy GE areas D1 and D2.</p>
+    
+    <hr>
+
+    <h2>American Cultural Perspectives Requirement: 3 units</h2>
+      <p>Refer to the University Catalog General Education Program section for a list of courses that satisfy this requirement.  Course may also satisfy major, minor, GE, or unrestricted elective requirements.</p>
+
+    <hr>
+
+    <h2>Graduation Writing Test</h2>
+      <p>All persons who receive undergraduate degrees from Cal Poly Pomona must pass the Graduation Writing Test (GWT).  The test must be taken by the semester following completion of 60 units for undergraduates.</p>
+    <script src="/Angular10Crud/src/assets/js/dropdownMenus.js"></script>
+      <script src="/Angular10Crud/src/assets/js/dataRetrieval.js"></script>
+  </body>
+</html>
