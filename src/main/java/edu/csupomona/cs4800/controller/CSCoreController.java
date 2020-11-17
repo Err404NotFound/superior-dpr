@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
+import edu.csupomona.cs4800.course.CSElectives1Course;
+import edu.csupomona.cs4800.course.CSElectives2Course;
+import edu.csupomona.cs4800.course.CSElectives3Course;
 import edu.csupomona.cs4800.course.Course;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
+import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 
 @RestController
@@ -23,6 +29,13 @@ public class CSCoreController {
 	
 	@Autowired
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
+
+	@Autowired
+	private ComputerScienceMajorElectivesGroup1Repository csElectives1Repository;
+	@Autowired
+	private ComputerScienceMajorElectivesGroup2Repository csElectives2Repository;
+	@Autowired
+	private ComputerScienceMajorElectivesGroup3Repository csElectives3Repository;
 	
 	@GetMapping
 	public List<CSCoreCourse> getAll() {
@@ -43,5 +56,21 @@ public class CSCoreController {
 	public Course getOne(@PathVariable String id) {
 		return csCoreRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException());
+	}
+	
+
+	@GetMapping (value="/elective1/list")
+	public List<CSElectives1Course> getAllElectives1() {
+		return csElectives1Repository.findAll();
+	}
+	
+	@GetMapping (value="/elective2/list")
+	public List<CSElectives2Course> getAllElectives2() {
+		return csElectives2Repository.findAll();
+	}
+	
+	@GetMapping (value="/elective3/list")
+	public List<CSElectives3Course> getAllElectives3() {
+		return csElectives3Repository.findAll();
 	}
 }

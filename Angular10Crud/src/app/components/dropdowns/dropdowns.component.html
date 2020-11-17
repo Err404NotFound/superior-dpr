@@ -7,8 +7,7 @@
   
   <body>
     <h2>Major Required Courses</h2>
-    <form [formGroup]="form1" (ngSubmit)="submitFormCore()" novalidate>
-
+    <form [formGroup]="form0" (ngSubmit)="submitFormCore()" novalidate>
       <div *ngFor="let data of coreCourses; let i=index">
         <label>
           <input type="checkbox" [value]="data|json " (change)="onCoreCheckboxChange($event)" />
@@ -16,26 +15,24 @@
         </label>
       </div>
 
-      <p class="error" *ngIf="this.form1.controls['checkArray1'].errors?.required">
+      <p class="error" *ngIf="this.form0.controls['checkArray0'].errors?.required">
         Checkbox is required, select at least one value.
       </p>
       <input type="submit" value="Submit">
     </form>   
     
     <h2>Major Electives: 19 Units</h2>
-    
-
     <h3>At least 12 units from:</h3>
-      <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+      <form [formGroup]="form1" (ngSubmit)="submitFormElective1()" novalidate>
 
         <div *ngFor="let data of elective1Courses; let i=index">
           <label>
-            <input type="checkbox" [value]="data |json" (change)="onCheckboxChange($event)" />
+            <input type="checkbox" [value]="data |json" (change)="onElective1CheckboxChange($event)" />
             {{data.courseNumber}} {{data.courseName}}
           </label>
         </div>
 
-        <p class="error" *ngIf="this.form.controls['checkArray'].errors?.required">
+        <p class="error" *ngIf="this.form1.controls['checkArray1'].errors?.required">
           Checkbox is required, select at least one value.
         </p>
         <input type="submit" value="Submit">
@@ -173,7 +170,7 @@
 
         Select one course from the following list:
 </pre>
-<form [formGroup]="form4" (ngSubmit)="submitForm()" novalidate>
+<form [formGroup]="form4" (ngSubmit)="submitFormIGE()" novalidate>
 
   <div *ngFor="let data of igeCourses; let i=index">
     <label>

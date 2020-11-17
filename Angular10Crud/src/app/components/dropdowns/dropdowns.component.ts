@@ -1,78 +1,77 @@
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { ValueTransformer } from '@angular/compiler/src/util';
 
 import { Component, OnInit } from '@angular/core';
 import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
-import { JsonPipe } from '@angular/common';
 
 
-var majorRequiredCoreClasses = 
-  [   
-    "BIO 1110 - Life Science (2) (B2)",
-    "BIO 1110L - Life Science Laboratory (1) (B3)",
-    "CS 1300 - Discrete Structures (3)",
-    "CS 1400 - Introduction to Programming and Problem Solving (4)",
-    "CS 2400 - Data Structures and Advanced Programming (4)",
-    "CS 2640 - Computer Organization and Assembly Programming (3)",
-    "CS 3110 - Formal Languages and Automata (3)",
-    "CS 3310 - Design and Analysis of Algorithms (4)",
-    "CS 3650 - Computer Architecture (4)",
-    "CS 3750 - Computers and Society (3) (B5 or D4)",
-    "CS 4080 - Concepts of Programming Languages (3)",
-    "CS 4310 - Operating Systems (3)",
-    "CS 4630 - Undergraduate Seminar (1)",
-    "CS 4800 - Software Engineering (3)",
-    "MAT 1140 - Calculus I (4) (B4)",
-    "MAT 1150 - Calculus II (4) (B4)",
-    "MAT 2250 - Linear Algebra with Applications to Differential Equations (4)",
-    "PHY 1510 - Introduction to Newtonian Mechanics (3) (B1)",
-    "PHY 1510L - Newtonian Mechanics Laboratory (1) (B3)",
-    "PHY 1520 - Introduction to Electromagnetism and Circuits (3)",
-    "PHY 1520L - Introductory Laboratory on Electromagnetism and Circuits (1)",
-    "STA 2260 - Probability and Statistics for Computer Scientists and Engineers (3)"
-  ];
-var majorElectivesAtLeast12 =
-  [
-    {name: "CS 3010 - Numerical Methods (3)", value: "3010"},
-    {name: "CS 3520 - Symbolic Programming (3)", value: "3520"},
-    {name: "CS 3560 - Object-Oriented Design and Programming (3)", value: "3560"},
-    {name: "CS 3700 - Parallel Processing (3)", value: "3700"},
-    {name: "CS 3800 - Computer Networks (3)", value: "3800"},
-    {name: "CS 4110 - Compilers and Interpreters (3)", value: "4110"},
-    {name: "CS 4200 - Artificial Intelligence (3)", value: "4200"},
-    {name: "CS 4350 - Database Systems (3)", value: "4350"},
-    {name: "CS 4450 - Computer Graphics (3)", value: "4450"},
-    {name: "CS 4500 - Computability (3)", value: "4500"},
-    {name: "CS 4600 - Cryptography and Information Security (3)", value: "4600"},
-    {name: "CS 4650 - Big Data Analytics and Cloud Computing (3)", value: "4650"},
-    {name: "CS 4700 - Game Development (3)", value: "4700"},
-    {name: "CS 4810 - Software Engineering Practice (3)", value: "4800"},
-    {name: "CS 4990 - Special Topics for Upper Division Students (1-3)", value: "4990"}
-  ];
-var majorElectivesNoMoreThan3 =
-  [
-    "CS 2450 - Programming Graphical User Interfaces (3)",
-    "CS 2560 - C++ Programming (3)",
-    "CS 2600 - Unix and Scripting (3)",
-    "CS 2990 - Special Topics for Lower Division Students (1-3)"
-  ];
-var majorElectivesNoMoreThan4 =
-  [
-    "CS 2000 - Special Study for Lower Division Students (1-3)",
-    "CS 4000 - Special Study for Upper Division Students (1-3)",
-    "CS 4410 - Internship in Computer Science (1-2)",
-    "CS 4610 - Senior Project (1)",
-    "CS 4620 - Senior Project (1)",
-    "MAT 3470 - Combinatorics (3)",
-    "MAT 3800 - Mathematics of Operations Research I (3)",
-    "MAT 3810 - Mathematics of Operations Research II (3)",
-    "MAT 4020 - Introduction to Numerical Analysis II (3)",
-    "MAT 4750 - Graph Theory (3)",
-    "MAT 4800 - Mathematical Programming (3)",
-    "MAT 4850 - Introduction to Mathematical Modeling I (3)",
-    "MAT 4860 - Introduction to Mathematical Modeling II (3)"
-  ];
+
+// var majorRequiredCoreClasses = 
+//   [   
+//     "BIO 1110 - Life Science (2) (B2)",
+//     "BIO 1110L - Life Science Laboratory (1) (B3)",
+//     "CS 1300 - Discrete Structures (3)",
+//     "CS 1400 - Introduction to Programming and Problem Solving (4)",
+//     "CS 2400 - Data Structures and Advanced Programming (4)",
+//     "CS 2640 - Computer Organization and Assembly Programming (3)",
+//     "CS 3110 - Formal Languages and Automata (3)",
+//     "CS 3310 - Design and Analysis of Algorithms (4)",
+//     "CS 3650 - Computer Architecture (4)",
+//     "CS 3750 - Computers and Society (3) (B5 or D4)",
+//     "CS 4080 - Concepts of Programming Languages (3)",
+//     "CS 4310 - Operating Systems (3)",
+//     "CS 4630 - Undergraduate Seminar (1)",
+//     "CS 4800 - Software Engineering (3)",
+//     "MAT 1140 - Calculus I (4) (B4)",
+//     "MAT 1150 - Calculus II (4) (B4)",
+//     "MAT 2250 - Linear Algebra with Applications to Differential Equations (4)",
+//     "PHY 1510 - Introduction to Newtonian Mechanics (3) (B1)",
+//     "PHY 1510L - Newtonian Mechanics Laboratory (1) (B3)",
+//     "PHY 1520 - Introduction to Electromagnetism and Circuits (3)",
+//     "PHY 1520L - Introductory Laboratory on Electromagnetism and Circuits (1)",
+//     "STA 2260 - Probability and Statistics for Computer Scientists and Engineers (3)"
+//   ];
+// var majorElectivesAtLeast12 =
+//   [
+//     {name: "CS 3010 - Numerical Methods (3)", value: "3010"},
+//     {name: "CS 3520 - Symbolic Programming (3)", value: "3520"},
+//     {name: "CS 3560 - Object-Oriented Design and Programming (3)", value: "3560"},
+//     {name: "CS 3700 - Parallel Processing (3)", value: "3700"},
+//     {name: "CS 3800 - Computer Networks (3)", value: "3800"},
+//     {name: "CS 4110 - Compilers and Interpreters (3)", value: "4110"},
+//     {name: "CS 4200 - Artificial Intelligence (3)", value: "4200"},
+//     {name: "CS 4350 - Database Systems (3)", value: "4350"},
+//     {name: "CS 4450 - Computer Graphics (3)", value: "4450"},
+//     {name: "CS 4500 - Computability (3)", value: "4500"},
+//     {name: "CS 4600 - Cryptography and Information Security (3)", value: "4600"},
+//     {name: "CS 4650 - Big Data Analytics and Cloud Computing (3)", value: "4650"},
+//     {name: "CS 4700 - Game Development (3)", value: "4700"},
+//     {name: "CS 4810 - Software Engineering Practice (3)", value: "4800"},
+//     {name: "CS 4990 - Special Topics for Upper Division Students (1-3)", value: "4990"}
+//   ];
+// var majorElectivesNoMoreThan3 =
+//   [
+//     "CS 2450 - Programming Graphical User Interfaces (3)",
+//     "CS 2560 - C++ Programming (3)",
+//     "CS 2600 - Unix and Scripting (3)",
+//     "CS 2990 - Special Topics for Lower Division Students (1-3)"
+//   ];
+// var majorElectivesNoMoreThan4 =
+//   [
+//     "CS 2000 - Special Study for Lower Division Students (1-3)",
+//     "CS 4000 - Special Study for Upper Division Students (1-3)",
+//     "CS 4410 - Internship in Computer Science (1-2)",
+//     "CS 4610 - Senior Project (1)",
+//     "CS 4620 - Senior Project (1)",
+//     "MAT 3470 - Combinatorics (3)",
+//     "MAT 3800 - Mathematics of Operations Research I (3)",
+//     "MAT 3810 - Mathematics of Operations Research II (3)",
+//     "MAT 4020 - Introduction to Numerical Analysis II (3)",
+//     "MAT 4750 - Graph Theory (3)",
+//     "MAT 4800 - Mathematical Programming (3)",
+//     "MAT 4850 - Introduction to Mathematical Modeling I (3)",
+//     "MAT 4860 - Introduction to Mathematical Modeling II (3)"
+//   ];
 
 
 @Component({
@@ -81,15 +80,13 @@ var majorElectivesNoMoreThan4 =
   styleUrls: ['./dropdowns.component.css']
 })
 export class DropdownsComponent {
-
-  
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
   elective2Courses: Array<any>;
   elective3Courses: Array<any>;
 
-  Data: Array<any> = majorElectivesAtLeast12;
+  //Data: Array<any> = majorElectivesAtLeast12;
   igeCourses=[
     {"name":"AG 4010 - Ethical Issues in Food, Agricultural and Apparel Industries (3) (fulfills Area C3 or D4)"},
     {"name":"ANT 3500 - Environment, Technology and Culture (3) (fulfills Area B5 or D4)"},
@@ -557,8 +554,6 @@ export class DropdownsComponent {
           "VCD 2370 - Visual Thinking (3)"
   ];
 
-  
-
     geForm: GenEdFormComponent;
     geForm2:GenEdFormComponent;
     geForm3: GenEdFormComponent;
@@ -571,14 +566,15 @@ export class DropdownsComponent {
     geForm10: GenEdFormComponent;
     completedGEs: any;
 
-    form: FormGroup;
+    form0: FormGroup;
     form1: FormGroup;
     form2: FormGroup;
     form3: FormGroup;
     form4: FormGroup;
+
   constructor(private fb: FormBuilder, private courseService: CourseService) {
-    this.form = this.fb.group({
-      checkArray: this.fb.array([], [Validators.required])
+    this.form0 = this.fb.group({
+      checkArray0: this.fb.array([], [Validators.required])
     })
 
     this.form1 = this.fb.group({
@@ -606,6 +602,9 @@ export class DropdownsComponent {
     this.retrieveElective3Courses();
   }
 
+  /**retrieveCourses populates the arrays needed for checkbox forms
+   * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
+  */
   retrieveCourses(): void{
     this.courseService.getAll()
       .subscribe(
@@ -654,9 +653,42 @@ export class DropdownsComponent {
         });
   }
 
+
+  /**onCheckboxChange methods take in event from respective form, add checkbox value which is json object to FormArray */
+  onCoreCheckboxChange(e) {
+    const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
+    if (e.target.checked) {
+      checkArray0.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray0.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray0.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
+  onElective1CheckboxChange(e) {
+    const checkArray1: FormArray = this.form1.get('checkArray1') as FormArray;
+    if (e.target.checked) {
+      checkArray1.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray1.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray1.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+
   onElective2CheckboxChange(e) {
     const checkArray2: FormArray = this.form2.get('checkArray2') as FormArray;
-
     if (e.target.checked) {
       checkArray2.push(new FormControl(e.target.value));
     } else {
@@ -673,10 +705,8 @@ export class DropdownsComponent {
 
   onElective3CheckboxChange(e) {
     const checkArray3: FormArray = this.form3.get('checkArray3') as FormArray;
-
     if (e.target.checked) {
       checkArray3.push(new FormControl(e.target.value));
-      console.log(JSON.stringify(e.target.value));
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
@@ -689,26 +719,8 @@ export class DropdownsComponent {
     }
   }
 
-  onCoreCheckboxChange(e) {
-    const checkArray1: FormArray = this.form1.get('checkArray1') as FormArray;
-
-    if (e.target.checked) {
-      checkArray1.push(new FormControl(e.target.value));
-    } else {
-      let i: number = 0;
-      checkArray1.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
-          checkArray1.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
-
   onIgeCheckboxChange(e) {
     const checkArray4: FormArray = this.form4.get('checkArray4') as FormArray;
-
     if (e.target.checked) {
       checkArray4.push(new FormControl(e.target.value));
     } else {
@@ -723,44 +735,19 @@ export class DropdownsComponent {
     }
   }
 
-  onCheckboxChange(e) {
-    const checkArray: FormArray = this.form.get('checkArray') as FormArray;
-
-    if (e.target.checked) {
-      checkArray.push(new FormControl(e.target.value));
-    } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
-          checkArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
-  }
-
-  submitForm() {
-    console.log(this.form.value)
-    
-  }
-
+/** submitForm methods user course.service.ts to send FormArray as HTTP Put request 
+ * to Java Spring backend
+ */
   submitFormCore() {
-    // let jstring;
-     console.log(this.form1.value)
-    // this.form1.value.forEach(element => {
-    //   jstring.append(element.id)
-    // });
-    // console.log(jstring);
-    //var result: String[] =[];
-    console.log(this.form1.value.checkArray1);
-   
-      // var obj =JSON.parse(this.form1.value.checkArray1);
-      // obj.foreach(element=>{
-      //   result.push(element.id);
-      // });
-    //  console.log(result);
-    this.courseService.update(this.form1.value.checkArray1);
+    //console.log(this.form1.value)
+    //console.log(this.form1.value.checkArray1);
+    //don't need the json key checkArray#, so just get value of key and send
+    this.courseService.update(this.form0.value.checkArray0);
+  }
+
+  submitFormElective1() {
+    console.log(this.form1.value)
+    
   }
 
   submitFormElective2() {
@@ -769,6 +756,10 @@ export class DropdownsComponent {
 
   submitFormElective3() {
     console.log(this.form3.value)
+  }
+
+  submitFormIGE() {
+    console.log(this.form4.value)
   }
 
   onGESubmit(e) {
