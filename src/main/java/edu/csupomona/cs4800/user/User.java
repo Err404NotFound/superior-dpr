@@ -15,9 +15,8 @@ public class User {
 
 	@Id
 	private String id;
-	private String firstName, lastName, fullName, username, password;
+	private String fullName, username, password;
 	private boolean enabled;
-	//@DBRef
 	private List<CSCoreCourse> toDoCore, inProgressCore, completedCore;
 	private List<CSElectives1Course> toDoElectives1, inProgressElectives1, completedElectives1;
 	private List<CSElectives2Course> toDoElectives2, inProgressElectives2, completedElectives2;
@@ -25,12 +24,10 @@ public class User {
 	
 	public User() {}
 	
-	public User(String user, String pass, String first, String last, boolean enable, List<CSCoreCourse> todoCore, List<CSCoreCourse> inProgCore, List<CSCoreCourse> compCore) {
+	public User(String user, String pass, String full, boolean enable, List<CSCoreCourse> todoCore, List<CSCoreCourse> inProgCore, List<CSCoreCourse> compCore) {
 		username = user;
 		password = pass;
-		firstName = first;
-		lastName = last;
-		fullName = first + " " + last;
+		fullName = full;
 		enabled = enable;
 		toDoCore = todoCore;
 		inProgressCore = inProgCore;
@@ -55,14 +52,6 @@ public class User {
 		return password;
 	}
 	
-	public String getFirstName() {
-		return firstName;
-	}
-	
-	public String getLastName() {
-		return lastName;
-	}
-	
 	public String getFullName() {
 		return fullName;
 	}
@@ -83,19 +72,49 @@ public class User {
 		return completedCore;
 	}
 	
+	public List<CSElectives1Course> getToDoElectives1() {
+		return toDoElectives1;
+	}
+	
+	public List<CSElectives1Course> getInProgressElectives1() {
+		return inProgressElectives1;
+	}
+	
+	public List<CSElectives1Course> getCompletedElectives1() {
+		return completedElectives1;
+	}
+	
+	public List<CSElectives2Course> getToDoElectives2() {
+		return toDoElectives2;
+	}
+	
+	public List<CSElectives2Course> getInProgressElectives2() {
+		return inProgressElectives2;
+	}
+	
+	public List<CSElectives2Course> getCompletedElectives2() {
+		return completedElectives2;
+	}
+	
+	public List<CSElectives3Course> getToDoElectives3() {
+		return toDoElectives3;
+	}
+	
+	public List<CSElectives3Course> getInProgressElectives3() {
+		return inProgressElectives3;
+	}
+	
+	public List<CSElectives3Course> getCompletedElectives3() {
+		return completedElectives3;
+	}
+	
 	//Setter Methods
 	public void setId(String id) {
 		this.id = id;
 	}
 	
-	public void setFistName(String first) {
-		firstName = first;
-		fullName = firstName + " " + lastName;
-	}
-	
-	public void setLastName(String last) {
-		lastName = last;
-		fullName = firstName + " " + lastName;
+	public void setFullName(String full) {
+		fullName = full;
 	}
 	
 	public void setUsername(String user) {
