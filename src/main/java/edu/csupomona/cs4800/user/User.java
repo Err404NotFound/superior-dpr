@@ -1,30 +1,21 @@
 package edu.csupomona.cs4800.user;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-
-import com.mongodb.BasicDBObjectBuilder;
-import com.mongodb.DBObject;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.CSElectives2Course;
 import edu.csupomona.cs4800.course.CSElectives3Course;
-import edu.csupomona.cs4800.course.Course;
 
 @Document(collection="computersciencestudent")
 public class User {
 
 	@Id
 	private String id;
-	private String fullName, username, password;
+	private String firstName, lastName, fullName, username, password;
 	private boolean enabled;
 	//@DBRef
 	private List<CSCoreCourse> toDoCore, inProgressCore, completedCore;
@@ -34,10 +25,12 @@ public class User {
 	
 	public User() {}
 	
-	public User(String user, String pass, String full, boolean enable, List<CSCoreCourse> todoCore, List<CSCoreCourse> inProgCore, List<CSCoreCourse> compCore) {
+	public User(String user, String pass, String first, String last, boolean enable, List<CSCoreCourse> todoCore, List<CSCoreCourse> inProgCore, List<CSCoreCourse> compCore) {
 		username = user;
 		password = pass;
-		fullName = full;
+		firstName = first;
+		lastName = last;
+		fullName = first + " " + last;
 		enabled = enable;
 		toDoCore = todoCore;
 		inProgressCore = inProgCore;
@@ -60,6 +53,14 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
 	}
 	
 	public String getFullName() {
@@ -87,8 +88,14 @@ public class User {
 		this.id = id;
 	}
 	
-	public void setFullName(String full) {
-		fullName = full;
+	public void setFistName(String first) {
+		firstName = first;
+		fullName = firstName + " " + lastName;
+	}
+	
+	public void setLastName(String last) {
+		lastName = last;
+		fullName = firstName + " " + lastName;
 	}
 	
 	public void setUsername(String user) {
@@ -150,26 +157,4 @@ public class User {
 	public void setCompletedElectives3(List<CSElectives3Course> comp) {
 		completedElectives3 = comp;
 	}
-	
-	public void updateCoreCourseToComplete(Optional<CSCoreCourse> optional) {
-		try {
-			optional.ifPresent(course -> {
-				System.out.println("Running the change status");
-				Query findQuery = Query.query(Criteria.where("toDoCore.id").is(course.getId()));
-				Update update = new Update().set("toDoCore.$.completionStatus", Course.COMPLETED);
-				//System.out.println(toDoCore.removeIf(c -> (c.getId() == course.getId())));
-				//course.setCompletionStatus(Course.COMPLETED);
-				//completedCore.add(course);
-				System.out.println("Changed the status");
-			});
-		} catch(NullPointerException e) {
-			System.out.println("Null is here");
-		}
-	}
-	
-	/*public void updateCoreCourseToComplete(CSCoreCourse course) {
-		toDoCore.remove(course);
-		course.setCompletionStatus(Course.COMPLETED);
-		completedCore.add(course);
-	}*/
 }

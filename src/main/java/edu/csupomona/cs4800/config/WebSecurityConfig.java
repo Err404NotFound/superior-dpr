@@ -8,11 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import edu.csupomona.cs4800.securingweb.CustomUserDetailsService;
@@ -32,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").permitAll()
-				.antMatchers("/signup").permitAll()
+				.antMatchers("/register").permitAll()
 				.antMatchers("/dpr").hasAnyAuthority("USER").anyRequest()
 				.authenticated().and().csrf().disable().formLogin().successHandler(customizeAuthenticationSuccessHandler)
 				.loginPage("/login").failureUrl("/login?error=true")
@@ -40,12 +37,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("password")
 				.and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and().exceptionHandling();
+				.logoutSuccessUrl("http://cs480-projects.github.io/teams-fall2020/Err404NotFound/index.html").and().exceptionHandling();
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**");
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/templates/**", "/css/**", "/js/**");
 	}
 	
 	@Bean

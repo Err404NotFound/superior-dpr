@@ -20,23 +20,23 @@ public class LoginController {
 	@Autowired
 	private CustomUserDetailsService userService;
 	
-	@GetMapping(value = "/login")
+	@GetMapping(value = {"/login", "/", "/home"})
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
 	
-	@GetMapping(value = "/signup")
+	@GetMapping(value = "/register")
 	public ModelAndView signup() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
 		modelAndView.addObject("user", user);
-		modelAndView.setViewName("signup");
+		modelAndView.setViewName("register");
 		return modelAndView;
 	}
 	
-	@PostMapping(value = "/signup")
+	@PostMapping(value = "/register")
 	public ModelAndView createNewUser(User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByUsername(user.getUsername());
@@ -44,7 +44,7 @@ public class LoginController {
 			bindingResult.rejectValue("username", "error.user", "There is already a user with the username provided");
 		}
 		if(bindingResult.hasErrors()) {
-			modelAndView.setViewName("signup");
+			modelAndView.setViewName("register");
 		}
 		else {
 			userService.saveUser(user);
@@ -77,13 +77,6 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("updateBIO");
 		userService.updateUser(user);
-		return modelAndView;
-	}
-	
-	@GetMapping(value = {"/", "/home"})
-	public ModelAndView home() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("home");
 		return modelAndView;
 	}
 }
