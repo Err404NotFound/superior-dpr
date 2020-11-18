@@ -742,7 +742,7 @@ export class DropdownsComponent {
     //console.log(this.form1.value)
     //console.log(this.form1.value.checkArray1);
     //don't need the json key checkArray#, so just get value of key and send
-    this.courseService.update(this.form0.value.checkArray0);
+    this.courseService.updateCore(this.form0.value.checkArray0);
   }
 
   submitFormElective1() {
