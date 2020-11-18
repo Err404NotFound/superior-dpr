@@ -107,6 +107,90 @@ public class CustomUserDetailsService implements UserDetailsService {
 		user.setCompletedCore(newComplete);
 		csStudentRepository.save(user);
 	}
+	
+	public void updateUserElectives1List(User user, List<CSElectives1Course> checkedElectives) {
+		List<CSElectives1Course> todo = user.getToDoElectives1();
+		List<CSElectives1Course> completed = user.getCompletedElectives1();
+		List<CSElectives1Course> newComplete = new ArrayList<CSElectives1Course>();
+		for(CSElectives1Course elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<CSElectives1Course> optional = csElectives1Repository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(CSElectives1Course elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(CSElectives1Course elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoElectives1(todo);
+		user.setCompletedElectives1(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserElectives2List(User user, List<CSElectives2Course> checkedElectives) {
+		List<CSElectives2Course> todo = user.getToDoElectives2();
+		List<CSElectives2Course> completed = user.getCompletedElectives2();
+		List<CSElectives2Course> newComplete = new ArrayList<CSElectives2Course>();
+		for(CSElectives2Course elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<CSElectives2Course> optional = csElectives2Repository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(CSElectives2Course elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(CSElectives2Course elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoElectives2(todo);
+		user.setCompletedElectives2(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserElectives3List(User user, List<CSElectives3Course> checkedElectives) {
+		List<CSElectives3Course> todo = user.getToDoElectives3();
+		List<CSElectives3Course> completed = user.getCompletedElectives3();
+		List<CSElectives3Course> newComplete = new ArrayList<CSElectives3Course>();
+		for(CSElectives3Course elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<CSElectives3Course> optional = csElectives3Repository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(CSElectives3Course elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(CSElectives3Course elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoElectives3(todo);
+		user.setCompletedElectives3(newComplete);
+		csStudentRepository.save(user);
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

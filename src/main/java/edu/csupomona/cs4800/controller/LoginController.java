@@ -26,6 +26,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.util.JSON;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
+import edu.csupomona.cs4800.course.CSElectives1Course;
+import edu.csupomona.cs4800.course.CSElectives2Course;
+import edu.csupomona.cs4800.course.CSElectives3Course;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 import edu.csupomona.cs4800.securingweb.CustomUserDetailsService;
 import edu.csupomona.cs4800.user.User;
@@ -36,14 +39,14 @@ public class LoginController {
 
 	@Autowired
 	private CustomUserDetailsService userService;
-	
+
 	@GetMapping(value = {"/login", "/", "/home"})
 	public ModelAndView login() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("login");
 		return modelAndView;
 	}
-	
+
 	@GetMapping(value = "/register")
 	public ModelAndView signup() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -52,7 +55,7 @@ public class LoginController {
 		modelAndView.setViewName("register");
 		return modelAndView;
 	}
-	
+
 	@PostMapping(value = "/register")
 	public ModelAndView createNewUser(User user, BindingResult bindingResult) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -71,7 +74,7 @@ public class LoginController {
 		}
 		return modelAndView;
 	}
-	
+
 	@GetMapping(value = "/dpr")
 	public ModelAndView dpr() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -83,7 +86,7 @@ public class LoginController {
 		modelAndView.setViewName("dpr");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/updateBIO", method = {RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView updateBIO() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -99,7 +102,7 @@ public class LoginController {
 
 	ObjectMapper objectMapper = new ObjectMapper();
 	@PutMapping("/updateCoreList")
-	  public ModelAndView updateTutorial(@RequestBody String[] jsonObjArr) {
+	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
 		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
 		try {
 			for (String s: jsonObjArr) {
@@ -118,10 +121,85 @@ public class LoginController {
 		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUserCoreList(user,checkedCoreCourse); //TODO change this to updateUserCoreList method
-		
+		userService.updateUserCoreList(user, checkedCoreCourse);
+
 		return modelAndView;
 	}
 	
-//TODO create @PutMapping for '/updateElectives1List', '/updateElectives2List', '/updateElectives3List';
+	//TODO create @PutMapping for '/updateElectives1List', '/updateElectives2List', '/updateElectives3List';
+	@PutMapping("/updateElectives1List")
+	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
+		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				CSElectives1Course course = objectMapper.readValue(s, CSElectives1Course.class);
+				checkedElectives1Course.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserElectives1List(user, checkedElectives1Course);
+
+		return modelAndView;
+	}
+	
+	@PutMapping("/updateElectives2List")
+	public ModelAndView updateElectives2List(@RequestBody String[] jsonObjArr) {
+		List<CSElectives2Course> checkedElectives2Course = new ArrayList<CSElectives2Course>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				CSElectives2Course course = objectMapper.readValue(s, CSElectives2Course.class);
+				checkedElectives2Course.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserElectives2List(user, checkedElectives2Course);
+
+		return modelAndView;
+	}
+	
+	@PutMapping("/updateElectives3List")
+	public ModelAndView updateElectives3List(@RequestBody String[] jsonObjArr) {
+		List<CSElectives3Course> checkedElectives3Course = new ArrayList<CSElectives3Course>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				CSElectives3Course course = objectMapper.readValue(s, CSElectives3Course.class);
+				checkedElectives3Course.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserElectives3List(user, checkedElectives3Course);
+
+		return modelAndView;
+	}
+
 }
