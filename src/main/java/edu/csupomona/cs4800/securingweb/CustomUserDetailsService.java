@@ -1,8 +1,11 @@
 package edu.csupomona.cs4800.securingweb;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +31,8 @@ import edu.csupomona.cs4800.repositories.GEAreaBRepository;
 import edu.csupomona.cs4800.repositories.GEAreaCRepository;
 import edu.csupomona.cs4800.repositories.GEAreaDRepository;
 import edu.csupomona.cs4800.repositories.GEAreaERepository;
+import edu.csupomona.cs4800.repositories.RoleRepository;
+import edu.csupomona.cs4800.role.Role;
 import edu.csupomona.cs4800.user.User;
 
 @Service
@@ -35,6 +40,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private ComputerScienceStudentRepository csStudentRepository;
+	@Autowired
+	private RoleRepository roleRepository;
 	@Autowired
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	@Autowired
@@ -64,6 +71,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
+		Role userRole = roleRepository.findByRole("USER");
+		user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 		//Set core courses
 		user.setToDoCore(csCoreRepository.findByCompletionStatus(Course.TODO));
 		user.setInProgressCore(csCoreRepository.findByCompletionStatus(Course.INPROGRESS));
@@ -233,17 +242,30 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = csStudentRepository.findByUsername(username);
 		if(user != null) {
-			return buildUserForAuthentication(user);
+			return buildUserForAuthentication(user, getUserAuthority(user.getRoles()));
 		}
 		else {
 			throw new UsernameNotFoundException("username not found");
 		}
 	}
+	
+	private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+	    Set<GrantedAuthority> roles = new HashSet<>();
+	    userRoles.forEach((role) -> {
+	        roles.add(new SimpleGrantedAuthority(role.getRole()));
+	    });
+
+	    List<GrantedAuthority> grantedAuthorities = new ArrayList<>(roles);
+	    return grantedAuthorities;
+	}
 
 	//Adds a User role with simple authorities
-	private UserDetails buildUserForAuthentication(User user) {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("USER"));
+	private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
+		//List<GrantedAuthority> authorities = new ArrayList<>();
+		//authorities.add(new SimpleGrantedAuthority("USER"));
+		//authorities = user.getRoles().stream()
+		//		.map(role -> new SimpleGrantedAuthority(role.getName()))
+		//		.collect(Collectors.toList());
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
 	}
 }

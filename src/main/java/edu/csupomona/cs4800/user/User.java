@@ -1,8 +1,11 @@
 package edu.csupomona.cs4800.user;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import edu.csupomona.cs4800.course.CSCoreCourse;
@@ -14,6 +17,7 @@ import edu.csupomona.cs4800.course.GEAreaBCourse;
 import edu.csupomona.cs4800.course.GEAreaCCourse;
 import edu.csupomona.cs4800.course.GEAreaDCourse;
 import edu.csupomona.cs4800.course.GEAreaECourse;
+import edu.csupomona.cs4800.role.Role;
 
 @Document(collection="computersciencestudent")
 public class User {
@@ -31,6 +35,8 @@ public class User {
 	private List<GEAreaCCourse> toDoAreaC, inProgressAreaC, completedAreaC;
 	private List<GEAreaDCourse> toDoAreaD, inProgressAreaD, completedAreaD;
 	private List<GEAreaECourse> toDoAreaE, inProgressAreaE, completedAreaE;
+	@DBRef
+	private Set<Role> roles = new HashSet<>();
 	
 	public User() {}
 	
@@ -43,7 +49,7 @@ public class User {
 		inProgressCore = inProgCore;
 		completedCore = compCore;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("CS Student[id=%s, Full Name = %s, Username = %s]", id, fullName, username);
@@ -178,6 +184,10 @@ public class User {
 		return completedAreaE;
 	}
 	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	
 	//Setter Methods
 	public void setId(String id) {
 		this.id = id;
@@ -305,5 +315,9 @@ public class User {
 
 	public void setCompletedAreaE(List<GEAreaECourse> completedAreaE) {
 		this.completedAreaE = completedAreaE;
+	}
+	
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 }
