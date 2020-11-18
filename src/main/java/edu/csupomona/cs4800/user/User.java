@@ -9,6 +9,11 @@ import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.CSElectives2Course;
 import edu.csupomona.cs4800.course.CSElectives3Course;
+import edu.csupomona.cs4800.course.GEAreaACourse;
+import edu.csupomona.cs4800.course.GEAreaBCourse;
+import edu.csupomona.cs4800.course.GEAreaCCourse;
+import edu.csupomona.cs4800.course.GEAreaDCourse;
+import edu.csupomona.cs4800.course.GEAreaECourse;
 
 @Document(collection="computersciencestudent")
 public class User {
@@ -21,6 +26,11 @@ public class User {
 	private List<CSElectives1Course> toDoElectives1, inProgressElectives1, completedElectives1;
 	private List<CSElectives2Course> toDoElectives2, inProgressElectives2, completedElectives2;
 	private List<CSElectives3Course> toDoElectives3, inProgressElectives3, completedElectives3;
+	private List<GEAreaACourse> toDoAreaA, inProgressAreaA, completedAreaA;
+	private List<GEAreaBCourse> toDoAreaB, inProgressAreaB, completedAreaB;
+	private List<GEAreaCCourse> toDoAreaC, inProgressAreaC, completedAreaC;
+	private List<GEAreaDCourse> toDoAreaD, inProgressAreaD, completedAreaD;
+	private List<GEAreaECourse> toDoAreaE, inProgressAreaE, completedAreaE;
 	
 	public User() {}
 	
@@ -108,6 +118,66 @@ public class User {
 		return completedElectives3;
 	}
 	
+	public List<GEAreaACourse> getToDoAreaA() {
+		return toDoAreaA;
+	}
+	
+	public List<GEAreaACourse> getInProgressAreaA() {
+		return inProgressAreaA;
+	}
+	
+	public List<GEAreaACourse> getCompletedAreaA() {
+		return completedAreaA;
+	}
+	
+	public List<GEAreaBCourse> getToDoAreaB() {
+		return toDoAreaB;
+	}
+	
+	public List<GEAreaBCourse> getInProgressAreaB() {
+		return inProgressAreaB;
+	}
+	
+	public List<GEAreaBCourse> getCompletedAreaB() {
+		return completedAreaB;
+	}
+	
+	public List<GEAreaCCourse> getToDoAreaC() {
+		return toDoAreaC;
+	}
+	
+	public List<GEAreaCCourse> getInProgressAreaC() {
+		return inProgressAreaC;
+	}
+	
+	public List<GEAreaCCourse> getCompletedAreaC() {
+		return completedAreaC;
+	}
+	
+	public List<GEAreaDCourse> getToDoAreaD() {
+		return toDoAreaD;
+	}
+	
+	public List<GEAreaDCourse> getInProgressAreaD() {
+		return inProgressAreaD;
+	}
+	
+	public List<GEAreaDCourse> getCompletedAreaD() {
+		return completedAreaD;
+	}
+	
+	public List<GEAreaECourse> getToDoAreaE() {
+		return toDoAreaE;
+	}
+	
+	public List<GEAreaECourse> getInProgressAreaE() {
+		return inProgressAreaE;
+	}
+	
+	public List<GEAreaECourse> getCompletedAreaE() {
+		return completedAreaE;
+	}
+	
 	//Setter Methods
 	public void setId(String id) {
 		this.id = id;
@@ -175,5 +245,65 @@ public class User {
 	
 	public void setCompletedElectives3(List<CSElectives3Course> comp) {
 		completedElectives3 = comp;
+	}
+
+	public void setToDoAreaA(List<GEAreaACourse> toDoAreaA) {
+		this.toDoAreaA = toDoAreaA;
+	}
+
+	public void setInProgressAreaA(List<GEAreaACourse> inProgressAreaA) {
+		this.inProgressAreaA = inProgressAreaA;
+	}
+
+	public void setCompletedAreaA(List<GEAreaACourse> completedAreaA) {
+		this.completedAreaA = completedAreaA;
+	}
+
+	public void setToDoAreaB(List<GEAreaBCourse> toDoAreaB) {
+		this.toDoAreaB = toDoAreaB;
+	}
+
+	public void setInProgressAreaB(List<GEAreaBCourse> inProgressAreaB) {
+		this.inProgressAreaB = inProgressAreaB;
+	}
+
+	public void setCompletedAreaB(List<GEAreaBCourse> completedAreaB) {
+		this.completedAreaB = completedAreaB;
+	}
+
+	public void setToDoAreaC(List<GEAreaCCourse> toDoAreaC) {
+		this.toDoAreaC = toDoAreaC;
+	}
+
+	public void setInProgressAreaC(List<GEAreaCCourse> inProgressAreaC) {
+		this.inProgressAreaC = inProgressAreaC;
+	}
+
+	public void setCompletedAreaC(List<GEAreaCCourse> completedAreaC) {
+		this.completedAreaC = completedAreaC;
+	}
+
+	public void setToDoAreaD(List<GEAreaDCourse> toDoAreaD) {
+		this.toDoAreaD = toDoAreaD;
+	}
+
+	public void setInProgressAreaD(List<GEAreaDCourse> inProgressAreaD) {
+		this.inProgressAreaD = inProgressAreaD;
+	}
+
+	public void setCompletedAreaD(List<GEAreaDCourse> completedAreaD) {
+		this.completedAreaD = completedAreaD;
+	}
+
+	public void setToDoAreaE(List<GEAreaECourse> toDoAreaE) {
+		this.toDoAreaE = toDoAreaE;
+	}
+
+	public void setInProgressAreaE(List<GEAreaECourse> inProgressAreaE) {
+		this.inProgressAreaE = inProgressAreaE;
+	}
+
+	public void setCompletedAreaE(List<GEAreaECourse> completedAreaE) {
+		this.completedAreaE = completedAreaE;
 	}
 }

@@ -23,6 +23,11 @@ import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repo
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 import edu.csupomona.cs4800.repositories.ComputerScienceStudentRepository;
+import edu.csupomona.cs4800.repositories.GEAreaARepository;
+import edu.csupomona.cs4800.repositories.GEAreaBRepository;
+import edu.csupomona.cs4800.repositories.GEAreaCRepository;
+import edu.csupomona.cs4800.repositories.GEAreaDRepository;
+import edu.csupomona.cs4800.repositories.GEAreaERepository;
 import edu.csupomona.cs4800.user.User;
 
 @Service
@@ -39,31 +44,63 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
 	private ComputerScienceMajorElectivesGroup3Repository csElectives3Repository;
 	@Autowired
+	private GEAreaARepository geAreaARepository;
+	@Autowired
+	private GEAreaBRepository geAreaBRepository;
+	@Autowired
+	private GEAreaCRepository geAreaCRepository;
+	@Autowired
+	private GEAreaDRepository geAreaDRepository;
+	@Autowired
+	private GEAreaERepository geAreaERepository;
+	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public User findUserByUsername(String username) {
 		return csStudentRepository.findByUsername(username);
 	}
 
+	//Initializes a user
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
-		List<CSCoreCourse> toDoCoreCourses = csCoreRepository.findByCompletionStatus(Course.TODO);
-		user.setToDoCore(toDoCoreCourses);
+		//Set core courses
+		user.setToDoCore(csCoreRepository.findByCompletionStatus(Course.TODO));
 		user.setInProgressCore(csCoreRepository.findByCompletionStatus(Course.INPROGRESS));
 		user.setCompletedCore(csCoreRepository.findByCompletionStatus(Course.COMPLETED));
-		List<CSElectives1Course> toDoElectives1Courses = csElectives1Repository.findByCompletionStatus(Course.TODO);
-		user.setToDoElectives1(toDoElectives1Courses);
+		//Set electives 1 courses
+		user.setToDoElectives1(csElectives1Repository.findByCompletionStatus(Course.TODO));
 		user.setInProgressElectives1(csElectives1Repository.findByCompletionStatus(Course.INPROGRESS));
 		user.setCompletedElectives1(csElectives1Repository.findByCompletionStatus(Course.COMPLETED));
-		List<CSElectives2Course> toDoElectives2Courses = csElectives2Repository.findByCompletionStatus(Course.TODO);
-		user.setToDoElectives2(toDoElectives2Courses);
+		//Set electives 2 courses
+		user.setToDoElectives2(csElectives2Repository.findByCompletionStatus(Course.TODO));
 		user.setInProgressElectives2(csElectives2Repository.findByCompletionStatus(Course.INPROGRESS));
 		user.setCompletedElectives2(csElectives2Repository.findByCompletionStatus(Course.COMPLETED));
-		List<CSElectives3Course> toDoElectives3Courses = csElectives3Repository.findByCompletionStatus(Course.TODO);
-		user.setToDoElectives3(toDoElectives3Courses);
+		//Set electives 3 courses
+		user.setToDoElectives3(csElectives3Repository.findByCompletionStatus(Course.TODO));
 		user.setInProgressElectives3(csElectives3Repository.findByCompletionStatus(Course.INPROGRESS));
 		user.setCompletedElectives3(csElectives3Repository.findByCompletionStatus(Course.COMPLETED));
+		//Set ge area a courses
+		user.setToDoAreaA(geAreaARepository.findByCompletionStatus(Course.TODO));
+		user.setInProgressAreaA(geAreaARepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedAreaA(geAreaARepository.findByCompletionStatus(Course.COMPLETED));
+		//Set ge area b courses
+		user.setToDoAreaB(geAreaBRepository.findByCompletionStatus(Course.TODO));
+		user.setInProgressAreaB(geAreaBRepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedAreaB(geAreaBRepository.findByCompletionStatus(Course.COMPLETED));
+		//Set ge area c courses
+		user.setToDoAreaC(geAreaCRepository.findByCompletionStatus(Course.TODO));
+		user.setInProgressAreaC(geAreaCRepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedAreaC(geAreaCRepository.findByCompletionStatus(Course.COMPLETED));
+		//Set ge area d courses
+		user.setToDoAreaD(geAreaDRepository.findByCompletionStatus(Course.TODO));
+		user.setInProgressAreaD(geAreaDRepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedAreaD(geAreaDRepository.findByCompletionStatus(Course.COMPLETED));
+		//Set ge area e courses
+		user.setToDoAreaE(geAreaERepository.findByCompletionStatus(Course.TODO));
+		user.setInProgressAreaE(geAreaERepository.findByCompletionStatus(Course.INPROGRESS));
+		user.setCompletedAreaE(geAreaERepository.findByCompletionStatus(Course.COMPLETED));
+		
 		csStudentRepository.save(user);
 	}
 
