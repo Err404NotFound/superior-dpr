@@ -9,7 +9,9 @@ const elective2Url = '/elective2/list';
 const elective3Url = '/elective3/list';
 
 const updateCoreUrl = '/api/updateCoreList';
-const updateElective1Url = '/api/updateElective1List';
+const updateElectives1Url = '/api/updateElectives1List';
+const updateElectives2Url = '/api/updateElectives2List';
+const updateElectives3Url = '/api/updateElectives3List';
 
 @Injectable({
   providedIn: 'root'
@@ -60,15 +62,27 @@ export class CourseService {
     
   }
 
-  updateElective1(data): Promise<any>{
+  updateElectives1(data): Promise<any>{
 
-    return this.http.put(`${updateElective1Url}`, data)
+    return this.http.put(`${updateElectives1Url}`, data)
     .toPromise()
     .then(res=>console.log(res))
     .catch(error=>console.log(error));
   }
 
+  updateElectives2(data): Promise<any>{
+    return this.http.put(`${updateElectives2Url}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
   
+  updateElectives3(data): Promise<any>{
+    return this.http.put(`${updateElectives3Url}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
   /*create(data): Observable<any> {
     return this.http.post(baseUrl, data);
   }
