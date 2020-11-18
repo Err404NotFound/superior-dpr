@@ -5,12 +5,12 @@
         <!--option disabled>Choose Value</option-->
         <option value="">Choose Course</option>
         <option *ngFor="let course of courses" [value]="course|json">
-          {{course}}
+          {{course.courseNumber}} {{course.courseName}}
         </option>
       </select>
   
       <div *ngIf="isValidated && courses.errors?.required" class="alert alert-danger mt-2">
-        Please choose some value
+        Please choose a course
       </div>
   
       <button type="submit" class="btn btn-success mt-3">Submit</button>

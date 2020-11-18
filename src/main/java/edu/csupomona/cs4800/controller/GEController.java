@@ -19,64 +19,76 @@ import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repo
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
+
+
+import edu.csupomona.cs4800.course.GEAreaACourse;
+import edu.csupomona.cs4800.course.GEAreaBCourse;
+import edu.csupomona.cs4800.course.GEAreaCCourse;
+import edu.csupomona.cs4800.course.GEAreaDCourse;
+import edu.csupomona.cs4800.course.GEAreaECourse;
+
 import edu.csupomona.cs4800.repositories.GEAreaARepository;
 import edu.csupomona.cs4800.repositories.GEAreaBRepository;
 import edu.csupomona.cs4800.repositories.GEAreaCRepository;
 import edu.csupomona.cs4800.repositories.GEAreaDRepository;
 import edu.csupomona.cs4800.repositories.GEAreaERepository;
 
+
 @RestController
-@RequestMapping("/cscore")
-public class CSCoreController {
+@RequestMapping("/ge")
+public class GEController {
 
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
-	@Autowired
-	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
-	@Autowired
-	private ComputerScienceMajorElectivesGroup1Repository csElectives1Repository;
-	@Autowired
-	private ComputerScienceMajorElectivesGroup2Repository csElectives2Repository;
-	@Autowired
-	private ComputerScienceMajorElectivesGroup3Repository csElectives3Repository;
-	
-	@GetMapping
-	public List<CSCoreCourse> getAll() {
-		return csCoreRepository.findAll();
-	}
+	//ge repos
+		@Autowired
+		private GEAreaARepository geAreaARepository;
+		@Autowired
+		private GEAreaBRepository geAreaBRepository;
+		@Autowired
+		private GEAreaCRepository geAreaCRepository;
+		@Autowired
+		private GEAreaDRepository geAreaDRepository;
+		@Autowired
+		private GEAreaERepository geAreaERepository;
+		
+		@GetMapping(value="/areaA")
+		public List<GEAreaACourse> getAllGEAreaA() {
+			return geAreaARepository.findAll();
+		}
+		@GetMapping(value="/areaB")
+		public List<GEAreaBCourse> getAllGEAreaB() {
+			return geAreaBRepository.findAll();
+		}
+		@GetMapping(value="/areaC")
+		public List<GEAreaCCourse> getAllGEAreaC() {
+			return geAreaCRepository.findAll();
+		}
+		@GetMapping(value="/areaD")
+		public List<GEAreaDCourse> getAllGEAreaD() {
+			return geAreaDRepository.findAll();
+		}
+		@GetMapping(value="/areaE")
+		public List<GEAreaECourse> getAllGEAreaE() {
+			return geAreaERepository.findAll();
+		}
+		
 	
 	@GetMapping(value = "/list")
 	public String listString() {
-		String coreClasses = "";
-		List<CSCoreCourse> courses = csCoreRepository.findAll();
-		for(Course c: courses) {
-			coreClasses += String.format("%s<br>", c.toString());
+		String geClasses = "";
+		List<GEAreaACourse> courses = geAreaARepository.findAll();
+		for(GEAreaACourse c: courses) {
+			geClasses += String.format("%s<br>", c.toString());
 		}
-		return coreClasses;
+		return geClasses;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Course getOne(@PathVariable String id) {
-		return csCoreRepository.findById(id)
+	public GEAreaACourse getOne(@PathVariable String id) {
+		return geAreaARepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException());
 	}
-	
-
-	@GetMapping (value="/elective1/list")
-	public List<CSElectives1Course> getAllElectives1() {
-		return csElectives1Repository.findAll();
-	}
-	
-	@GetMapping (value="/elective2/list")
-	public List<CSElectives2Course> getAllElectives2() {
-		return csElectives2Repository.findAll();
-	}
-	
-	@GetMapping (value="/elective3/list")
-	public List<CSElectives3Course> getAllElectives3() {
-		return csElectives3Repository.findAll();
-	}
-	
 	
 }

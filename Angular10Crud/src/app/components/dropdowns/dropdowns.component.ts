@@ -600,6 +600,7 @@ export class DropdownsComponent {
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
     this.retrieveElective3Courses();
+    this.retrieveGEAreaACourses();
   }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
@@ -646,6 +647,18 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.elective3Courses=data;
+          console.log(data);
+        },
+        error =>{
+          console.log(error);
+        });
+  }
+
+  retrieveGEAreaACourses(): void{
+    this.courseService.getGEAreaAAll()
+      .subscribe(
+        data=>{
+          this.a1courses=data;
           console.log(data);
         },
         error =>{

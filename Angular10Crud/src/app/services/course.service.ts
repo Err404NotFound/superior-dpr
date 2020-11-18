@@ -13,6 +13,13 @@ const updateElectives1Url = '/api/updateElectives1List';
 const updateElectives2Url = '/api/updateElectives2List';
 const updateElectives3Url = '/api/updateElectives3List';
 
+const geBaseUrl = '/api/ge';
+const geAreaAUrl = '/areaA';
+const geAreaBUrl = '/areaB';
+const geAreaCUrl = '/areaC';
+const geAreaDUrl = '/areaD';
+const geAreaEUrl = '/areaE';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -103,4 +110,23 @@ export class CourseService {
     return this.http.get(`${baseUrl}?title=${title}`);
   }    
 
+  getGEAreaAAll(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaAUrl}`);
+  }
+
+  getGEAreaBAll(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}`);
+  }
+
+  getGEAreaCAll(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaCUrl}`);
+  }
+
+  getGEAreaDAll(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaDUrl}`);
+  }
+
+  getGEAreaEAll(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaEUrl}`);
+  }
 }
