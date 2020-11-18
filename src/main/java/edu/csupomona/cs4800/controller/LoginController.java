@@ -100,11 +100,12 @@ public class LoginController {
 	ObjectMapper objectMapper = new ObjectMapper();
 	@PutMapping("/updateCoreList")
 	  public ModelAndView updateTutorial(@RequestBody String[] jsonObjArr) {
-		List<CSCoreCourse> listCourse = new ArrayList<CSCoreCourse>();
+		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
 		try {
 			for (String s: jsonObjArr) {
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-				listCourse.add(objectMapper.readValue(s,CSCoreCourse.class));
+				CSCoreCourse course = objectMapper.readValue(s, CSCoreCourse.class);
+				checkedCoreCourse.add(course);
 			}
 		}
 		catch(Exception e) {
@@ -117,7 +118,8 @@ public class LoginController {
 		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUserCoreList(user,listCourse);		
+		userService.updateUserCoreList(user,checkedCoreCourse); //TODO change this to updateUserCoreList method
+		
 		return modelAndView;
 	}
 	

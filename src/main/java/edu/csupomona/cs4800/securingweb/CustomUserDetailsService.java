@@ -40,11 +40,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private ComputerScienceMajorElectivesGroup3Repository csElectives3Repository;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	public User findUserByUsername(String username) {
 		return csStudentRepository.findByUsername(username);
 	}
-	
+
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
@@ -66,7 +66,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		user.setCompletedElectives3(csElectives3Repository.findByCompletionStatus(Course.COMPLETED));
 		csStudentRepository.save(user);
 	}
-	
+
 	public void updateUser(User user) {
 		Optional<CSCoreCourse> optional = csCoreRepository.findById("5f6cd6533cab4d677974fa57");
 		optional.ifPresent(course -> {
@@ -79,13 +79,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 			csStudentRepository.save(user);
 		});
 	}
-	
-	public void updateUserCoreList(User user, List<CSCoreCourse> completedCore) {
 
-				List<CSCoreCourse> todo = user.getToDoCore();
+	public void updateUserCoreList(User user, List<CSCoreCourse> checkedCore) {
+		List<CSCoreCourse> todo = user.getToDoCore();
 		List<CSCoreCourse> completed = user.getCompletedCore();
 		List<CSCoreCourse> newComplete = new ArrayList<CSCoreCourse>();
-		for(CSCoreCourse core : completedCore) {
+		for(CSCoreCourse core : checkedCore) {
 			//Make sure the course exists
 			Optional<CSCoreCourse> optional = csCoreRepository.findById(core.getId());
 			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
@@ -96,15 +95,19 @@ public class CustomUserDetailsService implements UserDetailsService {
 			});
 		}
 		//Find the difference between the completed lists to determine if a box was unchecked
-		completed.removeAll(newComplete);
-		//Add any unchecked courses
-		todo.addAll(completed);
+		for(CSCoreCourse core : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(core.getId())));
+		}
+		for(CSCoreCourse core : completed) {
+			core.setCompletionStatus(Course.TODO);
+			todo.add(core);
+		}
 		//Update and save user
 		user.setToDoCore(todo);
 		user.setCompletedCore(newComplete);
 		csStudentRepository.save(user);
 	}
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = csStudentRepository.findByUsername(username);
@@ -115,7 +118,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("username not found");
 		}
 	}
-	
+
 	//Adds a User role with simple authorities
 	private UserDetails buildUserForAuthentication(User user) {
 		List<GrantedAuthority> authorities = new ArrayList<>();
