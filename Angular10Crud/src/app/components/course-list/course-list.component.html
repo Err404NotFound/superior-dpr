@@ -1,4 +1,4 @@
-<p>course-list works!</p>
+<h2>Search for Courses to Complete Your Degree</h2>
 <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
@@ -28,7 +28,7 @@
           [class.active]="i == currentIndex"
           (click)="setActiveCourse(course, i)"
         >
-          {{ course.courseName }}
+         {{course.courseNumber}} {{ course.courseName }}
         </li>
       </ul>
   
@@ -36,11 +36,14 @@
         Remove All
       </button-->
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 selectedcourse">
       <div *ngIf="currentCourse">
         <h4>Course</h4>
         <div>
-          <label><strong>CourseTitle:</strong></label> {{ currentCourse.courseName }}
+          <label><strong>Course Number:</strong></label> {{ currentCourse.courseNumber }}
+        </div>
+        <div>
+          <label><strong>Course Title:</strong></label> {{ currentCourse.courseName }}
         </div>
         <div>
           <label><strong>Completion Status:</strong></label>
