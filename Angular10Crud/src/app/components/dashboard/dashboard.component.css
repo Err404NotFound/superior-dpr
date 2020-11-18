@@ -1,1 +1,10 @@
 @import '/Angular10Crud/src/styles.css';
+@import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.container-fluid{
+    justify-content: center;
+    margin: 1em;
+}
+.progress-bar{
+    margin-top:1em;
+}
