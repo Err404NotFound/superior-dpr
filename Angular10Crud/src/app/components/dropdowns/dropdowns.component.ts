@@ -10,6 +10,7 @@ import {CourseService} from '../../services/course.service';
   styleUrls: ['./dropdowns.component.css']
 })
 export class DropdownsComponent {
+  completedCoreCourses: Array<any>;
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
@@ -59,7 +60,7 @@ export class DropdownsComponent {
     {"name":"RS 3030 - Organization for Regenerative Practices (3) (fulfills Area C3 or D4)"},
     {"name":"RS 4500 - Sustainable Communities (3) (fulfills Area C3 or D4)"}
   ];
-
+  
   a1courses=[
     "COM 1100 - Public Speaking (3)",
     "COM 2204 - Advocacy and Argument (3)"
@@ -505,6 +506,7 @@ export class DropdownsComponent {
   
           "VCD 2370 - Visual Thinking (3)"
   ];
+  
 
     geForm: GenEdFormComponent;
     geForm2:GenEdFormComponent;
@@ -548,6 +550,7 @@ export class DropdownsComponent {
   }
 
   ngOnInit(): void {
+  	this.retrieveCompletedCoreCourses();
     this.retrieveCourses();
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
@@ -557,12 +560,26 @@ export class DropdownsComponent {
     this.retrieveGEAreaCCourses();
     this.retrieveGEAreaDCourses();
     this.retrieveGEAreaECourses();
+    // this.populateCore();
 
   }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
+  retrieveCompletedCoreCourses(): void{
+  	this.courseService.getCoreCompleted()
+  		.subscribe(
+  			data=>{
+  				this.completedCoreCourses=data;
+  				console.log(this.completedCoreCourses);
+  			},
+  			error =>{
+  				console.log(error);
+  			}
+  		);
+  }
+  
   retrieveCourses(): void{
     this.courseService.getAll()
       .subscribe(
@@ -572,6 +589,7 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
         });
+    // this.populateCore();
   }
 
   retrieveElective1Courses(): void{
@@ -952,5 +970,32 @@ export class DropdownsComponent {
   onGESubmit(e) {
     console.log(e);
   }
-
+	
+	populateCore() {
+		this.completedCoreCourses.forEach(function (completedCourse) {
+			var checked = "checked";
+			var isChecked = false;
+			this.coreCourses.forEach(function (coreCourse) {
+				if(completedCourse.courseNumber == coreCourse.courseNumber) {
+					isChecked = true;
+				}
+				if(isChecked) {
+					return;
+				}
+			});
+			completedCourse.push({checked: isChecked});
+		});
+	}
+	
+	isInCompletedCore(d) {
+		console.log("checking...");
+		this.completedCoreCourses.forEach(function (course) {
+			if(course.courseNumber == d.courseNumber) {
+				console.log("matches");
+				return true;
+			}
+		});
+		return false;
+	}
+	
 }

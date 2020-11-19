@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -78,12 +81,13 @@ public class LoginController {
 	}
 
 	@GetMapping(value = "/dpr")
-	public ModelAndView dpr() {
+	public ModelAndView progress() {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		modelAndView.addObject("currentUser", user);
 		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr");
 		return modelAndView;
@@ -103,7 +107,28 @@ public class LoginController {
 	}
 
 	ObjectMapper objectMapper = new ObjectMapper();
-	@RequestMapping(value="/updateCoreList", method={RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST})
+//	@GetMapping(value="/getCompletedCoreList")
+//	public ModelAndView getCoreCompleted() {
+//		ModelAndView modelAndView = new ModelAndView();
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		User user = userService.findUserByUsername(auth.getName());
+//		modelAndView.addObject("currentUser", user);
+//		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
+//		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+//		modelAndView.addObject("userMessage", "Content should be visible to all users");
+//		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+//		
+//		return modelAndView;
+//	}
+	
+	@GetMapping(value="/getCompletedCoreList")
+	public ResponseEntity<List<CSCoreCourse>> getCoreCompleted() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		return new ResponseEntity<List<CSCoreCourse>>(user.getCompletedCore(), HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/updateCoreList")
 	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
 		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
 		try {
@@ -130,7 +155,7 @@ public class LoginController {
 	}
 	
 	//TODO create @PutMapping for '/updateElectives1List', '/updateElectives2List', '/updateElectives3List';
-	@RequestMapping(value="/updateElectives1List", method={RequestMethod.PUT, RequestMethod.GET})
+	@PutMapping(value="/updateElectives1List")
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();
 		try {

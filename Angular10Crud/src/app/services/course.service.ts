@@ -20,6 +20,8 @@ const geAreaCUrl = '/areaC';
 const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
+const getCoreUrl = '/api/getCompletedCoreList';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,8 +29,16 @@ export class CourseService {
 
   constructor( private http:HttpClient) { }
   
+  getCoreCompleted(): Observable<any>{
+  	return this.http.get(`${getCoreUrl}`);
+  }
+  
   getAll(): Observable<any>{
     return this.http.get(`${baseUrl}`);
+  }
+  
+  getAllCompleted(): Observable<any> {
+  	return this.http.get(`${baseUrl}`);
   }
 
   getElective1All(): Observable<any>{
