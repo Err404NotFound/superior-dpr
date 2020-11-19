@@ -103,7 +103,7 @@ public class LoginController {
 	}
 
 	ObjectMapper objectMapper = new ObjectMapper();
-	@PutMapping("/updateCoreList")
+	@RequestMapping(value="/updateCoreList", method={RequestMethod.PUT, RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
 		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
 		try {
@@ -120,6 +120,7 @@ public class LoginController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
 		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
@@ -129,7 +130,7 @@ public class LoginController {
 	}
 	
 	//TODO create @PutMapping for '/updateElectives1List', '/updateElectives2List', '/updateElectives3List';
-	@PutMapping("/updateElectives1List")
+	@RequestMapping(value="/updateElectives1List", method={RequestMethod.PUT, RequestMethod.GET})
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();
 		try {
