@@ -4,76 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
 
-
-
-// var majorRequiredCoreClasses = 
-//   [   
-//     "BIO 1110 - Life Science (2) (B2)",
-//     "BIO 1110L - Life Science Laboratory (1) (B3)",
-//     "CS 1300 - Discrete Structures (3)",
-//     "CS 1400 - Introduction to Programming and Problem Solving (4)",
-//     "CS 2400 - Data Structures and Advanced Programming (4)",
-//     "CS 2640 - Computer Organization and Assembly Programming (3)",
-//     "CS 3110 - Formal Languages and Automata (3)",
-//     "CS 3310 - Design and Analysis of Algorithms (4)",
-//     "CS 3650 - Computer Architecture (4)",
-//     "CS 3750 - Computers and Society (3) (B5 or D4)",
-//     "CS 4080 - Concepts of Programming Languages (3)",
-//     "CS 4310 - Operating Systems (3)",
-//     "CS 4630 - Undergraduate Seminar (1)",
-//     "CS 4800 - Software Engineering (3)",
-//     "MAT 1140 - Calculus I (4) (B4)",
-//     "MAT 1150 - Calculus II (4) (B4)",
-//     "MAT 2250 - Linear Algebra with Applications to Differential Equations (4)",
-//     "PHY 1510 - Introduction to Newtonian Mechanics (3) (B1)",
-//     "PHY 1510L - Newtonian Mechanics Laboratory (1) (B3)",
-//     "PHY 1520 - Introduction to Electromagnetism and Circuits (3)",
-//     "PHY 1520L - Introductory Laboratory on Electromagnetism and Circuits (1)",
-//     "STA 2260 - Probability and Statistics for Computer Scientists and Engineers (3)"
-//   ];
-// var majorElectivesAtLeast12 =
-//   [
-//     {name: "CS 3010 - Numerical Methods (3)", value: "3010"},
-//     {name: "CS 3520 - Symbolic Programming (3)", value: "3520"},
-//     {name: "CS 3560 - Object-Oriented Design and Programming (3)", value: "3560"},
-//     {name: "CS 3700 - Parallel Processing (3)", value: "3700"},
-//     {name: "CS 3800 - Computer Networks (3)", value: "3800"},
-//     {name: "CS 4110 - Compilers and Interpreters (3)", value: "4110"},
-//     {name: "CS 4200 - Artificial Intelligence (3)", value: "4200"},
-//     {name: "CS 4350 - Database Systems (3)", value: "4350"},
-//     {name: "CS 4450 - Computer Graphics (3)", value: "4450"},
-//     {name: "CS 4500 - Computability (3)", value: "4500"},
-//     {name: "CS 4600 - Cryptography and Information Security (3)", value: "4600"},
-//     {name: "CS 4650 - Big Data Analytics and Cloud Computing (3)", value: "4650"},
-//     {name: "CS 4700 - Game Development (3)", value: "4700"},
-//     {name: "CS 4810 - Software Engineering Practice (3)", value: "4800"},
-//     {name: "CS 4990 - Special Topics for Upper Division Students (1-3)", value: "4990"}
-//   ];
-// var majorElectivesNoMoreThan3 =
-//   [
-//     "CS 2450 - Programming Graphical User Interfaces (3)",
-//     "CS 2560 - C++ Programming (3)",
-//     "CS 2600 - Unix and Scripting (3)",
-//     "CS 2990 - Special Topics for Lower Division Students (1-3)"
-//   ];
-// var majorElectivesNoMoreThan4 =
-//   [
-//     "CS 2000 - Special Study for Lower Division Students (1-3)",
-//     "CS 4000 - Special Study for Upper Division Students (1-3)",
-//     "CS 4410 - Internship in Computer Science (1-2)",
-//     "CS 4610 - Senior Project (1)",
-//     "CS 4620 - Senior Project (1)",
-//     "MAT 3470 - Combinatorics (3)",
-//     "MAT 3800 - Mathematics of Operations Research I (3)",
-//     "MAT 3810 - Mathematics of Operations Research II (3)",
-//     "MAT 4020 - Introduction to Numerical Analysis II (3)",
-//     "MAT 4750 - Graph Theory (3)",
-//     "MAT 4800 - Mathematical Programming (3)",
-//     "MAT 4850 - Introduction to Mathematical Modeling I (3)",
-//     "MAT 4860 - Introduction to Mathematical Modeling II (3)"
-//   ];
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './dropdowns.component.html',
@@ -85,6 +15,16 @@ export class DropdownsComponent {
   elective1Courses: Array<any>;
   elective2Courses: Array<any>;
   elective3Courses: Array<any>;
+
+  //Progress Bar variables
+  percentCore: String;
+  colorCore: String;
+  percentElectives1: String;
+  colorElectives1: String;
+  percentElectives2: String;
+  colorElectives2: String;
+  percentElectives3: String;
+  colorElectives3: String;
 
   //Data: Array<any> = majorElectivesAtLeast12;
   igeCourses=[
@@ -912,6 +852,24 @@ export class DropdownsComponent {
  * to Java Spring backend
  */
   submitFormCore() {
+    // Gets the number of checkboxes checked for core courses
+    var checkedCore = this.form0.value.checkArray0.length;
+    var percent = Math.round(checkedCore / 22 * 100);
+    this.percentCore = percent + "%";
+
+    //Change the color of the progress bar based on how many courses completed
+    if (percent < 26) {
+      this.colorCore = 'Red';
+    } else if (percent < 51) {
+      this.colorCore = 'DarkOrange';
+    } else if (percent < 76) {
+        this.colorCore = 'GoldenRod';
+    } else if (percent == 100) {
+      this.colorCore = 'RoyalBlue';
+    } else {
+      this.colorCore = 'ForestGreen';
+    }
+    
     //console.log(this.form1.value)
     //console.log(this.form1.value.checkArray1);
     //don't need the json key checkArray#, so just get value of key and send
@@ -919,16 +877,70 @@ export class DropdownsComponent {
   }
 
   submitFormElective1() {
+    // Gets the number of checkboxes checked for core courses
+    var checked = this.form1.value.checkArray1.length;
+    var percent = Math.round(checked / 15 * 100);
+    this.percentElectives1 = percent + "%";
+
+    //Change the color of the progress bar based on how many courses completed
+    if (percent < 26) {
+      this.colorElectives1 = 'Red';
+    } else if (percent < 51) {
+      this.colorElectives1 = 'DarkOrange';
+    } else if (percent < 76) {
+        this.colorElectives1 = 'GoldenRod';
+    } else if (percent == 100) {
+      this.colorElectives1 = 'RoyalBlue';
+    } else {
+      this.colorElectives1 = 'ForestGreen';
+    }
+
     console.log(this.form1.value);
     this.courseService.updateElectives1(this.form1.value.checkArray1);
   }
 
   submitFormElective2() {
+    // Gets the number of checkboxes checked for core courses
+    var checked = this.form2.value.checkArray2.length;
+    var percent = Math.round(checked / 4 * 100);
+    this.percentElectives2 = percent + "%";
+
+    //Change the color of the progress bar based on how many courses completed
+    if (percent < 26) {
+      this.colorElectives2 = 'Red';
+    } else if (percent < 51) {
+      this.colorElectives2 = 'DarkOrange';
+    } else if (percent < 76) {
+        this.colorElectives2 = 'GoldenRod';
+    } else if (percent == 100) {
+      this.colorElectives2 = 'RoyalBlue';
+    } else {
+      this.colorElectives2 = 'ForestGreen';
+    }
+
     console.log(this.form2.value);
     this.courseService.updateElectives2(this.form2.value.checkArray2);
   }
 
   submitFormElective3() {
+    // Gets the number of checkboxes checked for core courses
+    var checked = this.form3.value.checkArray3.length;
+    var percent = Math.round(checked / 13 * 100);
+    this.percentElectives3 = percent + "%";
+
+    //Change the color of the progress bar based on how many courses completed
+    if (percent < 26) {
+      this.colorElectives3 = 'Red';
+    } else if (percent < 51) {
+      this.colorElectives3 = 'DarkOrange';
+    } else if (percent < 76) {
+        this.colorElectives3 = 'GoldenRod';
+    } else if (percent == 100) {
+      this.colorElectives3 = 'RoyalBlue';
+    } else {
+      this.colorElectives3 = 'ForestGreen';
+    }
+
     console.log(this.form3.value);
     this.courseService.updateElectives3(this.form3.value.checkArray3);
   }
@@ -939,11 +951,6 @@ export class DropdownsComponent {
 
   onGESubmit(e) {
     console.log(e);
-  //   const geArray: FormArray = this.geForm.myForm.get('course') as FormArray;
-  //console.log(geArray.value);
-  //console.log(this.geForm.myForm);
-  
-
   }
 
 }
