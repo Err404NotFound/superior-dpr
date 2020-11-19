@@ -10,5 +10,7 @@ public interface GEAreaARepository extends MongoRepository<GEAreaACourse, String
 
 	List<GEAreaACourse> findByCompletionStatus(String status);
 	
+	List<GEAreaACourse> findByGeArea(String status);
+	
 	GEAreaACourse findByCourseNumber(String status);
 }

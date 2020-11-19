@@ -176,6 +176,18 @@ export class DropdownsComponent {
     "BIO 2120 - Life Science for Elementary Educators (2) and BIO 2120L - Life Science for Elementary Educators Laboratory (1)",
     "GSC 2700 - Age of the Dinosaurs (3)"           
   ];
+
+  b3courses=[
+    "ANT 1010 - Introduction to Biological Anthropology (3)",
+    "BIO 1020 - Plagues, Pandemics and Bioterrorism (3)",
+    "BIO 1040 - What is Evolution? (3)",
+    "BIO 1060 - Human Biology (3)",
+    "BIO 1110 - Life Science (2) and BIO 1110L - Life Science Laboratory (1)",
+    "BIO 1150 - Basic Biology (3) and BIO 1150L - Basic Biology Laboratory (1)",
+    "BIO 1210 - Foundations of Biology: Energy, Matter, and Information (3) and BIO 1210L - Foundations of Biology: Energy, Matter, and Information Laboratory (1)",           
+    "BIO 2120 - Life Science for Elementary Educators (2) and BIO 2120L - Life Science for Elementary Educators Laboratory (1)",
+    "GSC 2700 - Age of the Dinosaurs (3)"           
+  ];
   
   b4courses=[
     "CS 2180 - Logic and Computing (3)",
@@ -380,15 +392,15 @@ export class DropdownsComponent {
             "URP 4040 - Placemaking: Theories, Methods, and Practices (3)" 
           ];
   
-  d1acourses =[
+  d1courses =[
     " HST 2201 - United States History to 1877 (3)",
     "HST 2202 - United States History, 1877-Present (3)"
   ];
-  d1bcourses=[
+  d2courses=[
     "PLS 2010 - Introduction to American Government (3)"
   ];
   
-  d2courses=[
+  d3courses=[
     "AG 1010 - Agriculture & The Modern World (3)",
             "AG 2010 - Global Resources for Food (3)",
             "AMM 1080 - Culture, People, and Dress (3)",
@@ -601,6 +613,11 @@ export class DropdownsComponent {
     this.retrieveElective2Courses();
     this.retrieveElective3Courses();
     this.retrieveGEAreaACourses();
+    this.retrieveGEAreaBCourses();
+    this.retrieveGEAreaCCourses();
+    this.retrieveGEAreaDCourses();
+    this.retrieveGEAreaECourses();
+
   }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
@@ -611,7 +628,6 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.coreCourses=data;
-          console.log(data);
         },
         error =>{
           console.log(error);
@@ -623,7 +639,6 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.elective1Courses=data;
-          console.log(data);
         },
         error =>{
           console.log(error);
@@ -635,7 +650,6 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.elective2Courses=data;
-          console.log(data);
         },
         error =>{
           console.log(error);
@@ -647,7 +661,6 @@ export class DropdownsComponent {
       .subscribe(
         data=>{
           this.elective3Courses=data;
-          console.log(data);
         },
         error =>{
           console.log(error);
@@ -655,16 +668,163 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaACourses(): void{
-    this.courseService.getGEAreaAAll()
+    this.courseService.getGEAreaA1All()
       .subscribe(
         data=>{
           this.a1courses=data;
-          console.log(data);
         },
         error =>{
           console.log(error);
         });
+
+    this.courseService.getGEAreaA2All()
+      .subscribe(
+        data=>{
+          this.a2courses=data;
+      },          
+        error =>{
+          console.log(error);
+        });
+        
+    this.courseService.getGEAreaA3All()
+      .subscribe(
+        data=>{
+          this.a3courses=data;
+        },          
+        error =>{
+          console.log(error);
+    });
   }
+
+  retrieveGEAreaBCourses(): void{
+    this.courseService.getGEAreaB1All()
+      .subscribe(
+        data=>{
+          this.b1courses=data;
+          console.log(data)
+        },
+        error =>{
+          console.log(error);
+        });
+
+      this.courseService.getGEAreaB2All()
+        .subscribe(
+        data=>{
+          this.b2courses=data;
+        },          
+        error =>{
+          console.log(error);
+        });
+        
+      this.courseService.getGEAreaB3All()
+        .subscribe(
+        data=>{
+          this.b3courses=data;
+        },          
+        error =>{
+          console.log(error);
+        });
+
+    this.courseService.getGEAreaB4All()
+      .subscribe(
+       data=>{
+         this.b4courses=data;
+       },          
+       error =>{
+         console.log(error);
+       });
+ 
+    this.courseService.getGEAreaB5All()
+       .subscribe(
+        data=>{
+          this.b5courses=data;
+          console.log(data);
+        },          
+        error =>{
+          console.log(error);
+        });
+  }
+
+  retrieveGEAreaCCourses(): void{
+    this.courseService.getGEAreaC1All()
+      .subscribe(
+        data=>{
+          this.c1courses=data;
+        },
+        error =>{
+          console.log(error);
+        });
+
+    this.courseService.getGEAreaC2All()
+      .subscribe(
+        data=>{
+          this.c2courses=data;
+      },          
+        error =>{
+          console.log(error);
+        });
+        
+    this.courseService.getGEAreaC3All()
+      .subscribe(
+        data=>{
+          this.c3courses=data;
+        },          
+        error =>{
+          console.log(error);
+    });
+  }
+
+  retrieveGEAreaDCourses(): void{
+    this.courseService.getGEAreaD1All()
+      .subscribe(
+        data=>{
+          this.d1courses=data;
+          console.log(data)
+        },
+        error =>{
+          console.log(error);
+        });
+
+      this.courseService.getGEAreaD2All()
+        .subscribe(
+        data=>{
+          this.d2courses=data;
+        },          
+        error =>{
+          console.log(error);
+        });
+        
+      this.courseService.getGEAreaD3All()
+        .subscribe(
+        data=>{
+          this.d3courses=data;
+        },          
+        error =>{
+          console.log(error);
+        });
+
+    this.courseService.getGEAreaD4All()
+      .subscribe(
+       data=>{
+         this.d4courses=data;
+       },          
+       error =>{
+         console.log(error);
+       });
+ 
+  }
+
+  retrieveGEAreaECourses(): void{
+    this.courseService.getGEAreaEAll()
+      .subscribe(
+        data=>{
+          this.ecourses=data;
+          console.log(data)
+        },
+        error =>{
+          console.log(error);
+        });
+      }
 
 
   /**onCheckboxChange methods take in event from respective form, add checkbox value which is json object to FormArray */

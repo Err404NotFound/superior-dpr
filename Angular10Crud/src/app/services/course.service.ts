@@ -110,20 +110,60 @@ export class CourseService {
     return this.http.get(`${baseUrl}?title=${title}`);
   }    
 
-  getGEAreaAAll(): Observable<any>{
-    return this.http.get(`${geBaseUrl}${geAreaAUrl}`);
+  getGEAreaA1All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaAUrl}1`);
   }
 
-  getGEAreaBAll(): Observable<any>{
-    return this.http.get(`${geBaseUrl}${geAreaBUrl}`);
+  getGEAreaA2All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaAUrl}2`);
   }
 
-  getGEAreaCAll(): Observable<any>{
-    return this.http.get(`${geBaseUrl}${geAreaCUrl}`);
+  getGEAreaA3All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaAUrl}3`);
   }
 
-  getGEAreaDAll(): Observable<any>{
-    return this.http.get(`${geBaseUrl}${geAreaDUrl}`);
+  getGEAreaB1All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}1`);
+  }
+
+  getGEAreaB2All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}2`);
+  }
+
+  getGEAreaB3All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}3`);
+  }
+
+  getGEAreaB4All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}4`);
+  }
+  getGEAreaB5All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaBUrl}5`);
+  }
+
+  getGEAreaC1All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaCUrl}1`);
+  }
+
+  getGEAreaC2All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaCUrl}2`);
+  }
+
+  getGEAreaC3All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaCUrl}3`);
+  }
+
+  getGEAreaD1All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaDUrl}1`);
+  }
+  getGEAreaD2All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaDUrl}2`);
+  }
+  getGEAreaD3All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaDUrl}3`);
+  }
+  getGEAreaD4All(): Observable<any>{
+    return this.http.get(`${geBaseUrl}${geAreaDUrl}4`);
   }
 
   getGEAreaEAll(): Observable<any>{

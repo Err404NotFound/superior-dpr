@@ -10,17 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.csupomona.cs4800.course.CSCoreCourse;
-import edu.csupomona.cs4800.course.CSElectives1Course;
-import edu.csupomona.cs4800.course.CSElectives2Course;
-import edu.csupomona.cs4800.course.CSElectives3Course;
-import edu.csupomona.cs4800.course.Course;
-import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
-import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
-import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
-import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
-
-
 import edu.csupomona.cs4800.course.GEAreaACourse;
 import edu.csupomona.cs4800.course.GEAreaBCourse;
 import edu.csupomona.cs4800.course.GEAreaCCourse;
@@ -57,18 +46,87 @@ public class GEController {
 		public List<GEAreaACourse> getAllGEAreaA() {
 			return geAreaARepository.findAll();
 		}
+		
+		@GetMapping(value="/areaA1")
+		public List<GEAreaACourse> getAllGEAreaA1() {
+			return geAreaARepository.findByGeArea("A1");
+		}
+		
+		@GetMapping(value="/areaA2")
+		public List<GEAreaACourse> getAllGEAreaA2() {
+			return geAreaARepository.findByGeArea("A2");
+		}
+		@GetMapping(value="/areaA3")
+		public List<GEAreaACourse> getAllGEAreaA3() {
+			return geAreaARepository.findByGeArea("A3");
+		}
+		
+		
 		@GetMapping(value="/areaB")
 		public List<GEAreaBCourse> getAllGEAreaB() {
 			return geAreaBRepository.findAll();
 		}
+		
+		@GetMapping(value="/areaB1")
+		public List<GEAreaBCourse> getAllGEAreaB1() {
+			return geAreaBRepository.findByGeArea("B1");
+		}
+		@GetMapping(value="/areaB2")
+		public List<GEAreaBCourse> getAllGEAreaB2() {
+			return geAreaBRepository.findByGeArea("B2");
+		}
+		@GetMapping(value="/areaB3")
+		public List<GEAreaBCourse> getAllGEAreaB3() {
+			return geAreaBRepository.findByGeArea("B3");
+		}
+		@GetMapping(value="/areaB4")
+		public List<GEAreaBCourse> getAllGEAreaB4() {
+			return geAreaBRepository.findByGeArea("B4");
+		}
+		@GetMapping(value="/areaB5")
+		public List<GEAreaBCourse> getAllGEAreaB5() {
+			return geAreaBRepository.findByGeArea("B5");
+		}
+		
 		@GetMapping(value="/areaC")
 		public List<GEAreaCCourse> getAllGEAreaC() {
 			return geAreaCRepository.findAll();
 		}
+		@GetMapping(value="/areaC1")
+		public List<GEAreaCCourse> getAllGEAreaC1() {
+			return geAreaCRepository.findByGeArea("C1");
+		}
+		@GetMapping(value="/areaC2")
+		public List<GEAreaCCourse> getAllGEAreaC2() {
+			return geAreaCRepository.findByGeArea("C2");
+		}
+		@GetMapping(value="/areaC3")
+		public List<GEAreaCCourse> getAllGEAreaC3() {
+			return geAreaCRepository.findByGeArea("C3");
+		}
+		
 		@GetMapping(value="/areaD")
 		public List<GEAreaDCourse> getAllGEAreaD() {
 			return geAreaDRepository.findAll();
 		}
+		@GetMapping(value="/areaD1")
+		public List<GEAreaDCourse> getAllGEAreaD1() {
+			return geAreaDRepository.findByGeArea("D1");
+		}
+		@GetMapping(value="/areaD2")
+		public List<GEAreaDCourse> getAllGEAreaD2() {
+			return geAreaDRepository.findByGeArea("D2");
+		}
+		@GetMapping(value="/areaD3")
+		public List<GEAreaDCourse> getAllGEAreaD3() {
+			return geAreaDRepository.findByGeArea("D3");
+		}
+		@GetMapping(value="/areaD4")
+		public List<GEAreaDCourse> getAllGEAreaD4() {
+			return geAreaDRepository.findByGeArea("D4");
+		}
+		
+		
 		@GetMapping(value="/areaE")
 		public List<GEAreaECourse> getAllGEAreaE() {
 			return geAreaERepository.findAll();
