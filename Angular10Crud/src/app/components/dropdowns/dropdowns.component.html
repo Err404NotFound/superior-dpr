@@ -5,8 +5,6 @@
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="dropdowns.component.css">
   </head>
-  
-  
   <body>
 	<h2>Major Required Courses</h2>
     <div class="progress mb-2">
@@ -92,73 +90,156 @@
     <hr>
 
     <h2>General Education Requirements: 48 units</h2>
+
+  
+
+  <form [formGroup]='parentAreaAForm' (ngSubmit)='submitFormGE()'>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
       <h4>Oral Communication</h4>
-        <geForm [courses]='a1courses' (result)='onGESubmit($event)'></geForm>  
-      
+        <!--geForm [form]='parentAreaAForm' [courses]='a1courses' (result)='onGESubmit($event)'></geForm-->  
+        <select class="custom-select" formControlName="areaA1" >
+          <option value="">Choose Course</option>
+          <option *ngFor="let course of a1courses" [value]="course|json">
+            {{course.courseNumber}} {{course.courseName}}
+          </option>
+        </select> 
+
       <h4>Written Communication</h4>
-        <geForm [courses]='a2courses'></geForm>  
+        <!--geForm [form]='parentAreaAForm' [courses]='a2courses'></geForm-->
+        <select class="custom-select" formControlName="areaA2" >
+          <option value="">Choose Course</option>
+          <option *ngFor="let course of a2courses" [value]="course|json">
+            {{course.courseNumber}} {{course.courseName}}
+          </option>
+        </select>  
       
       <h4>Critical Thinking</h4>
-      <geForm [courses]='a3courses'></geForm>
+      <select class="custom-select" formControlName="areaA3" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of a3courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
+      <!--geForm [form]='parentAreaAForm' [courses]='a3courses'></geForm-->
       <hr>
+      
+  </form>
+
+  <form [formGroup]='parentAreaBForm' (ngSubmit)='submitFormGE()'>
     <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
       <h4>Physical Sciences</h4>
-      
-        <geForm [courses]='b1courses'></geForm>
-        
+      <select class="custom-select" formControlName="areaB1" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of b1courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
       <h4>Life Sciences</h4>
-      <geForm [courses]='b2courses'></geForm>
+      <select class="custom-select" formControlName="areaB2" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of b2courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
      
       <h4>Laboratory Activity</h4>
         <p>Laboratory courses are marked with an "L" following the course number. 
         At least one laboratory course from GE Sub-areas B1 or B2 must be taken to fulfill the GE Sub-area B3 requirement. 
         Activity courses, which are marked with an "A" following the course number, do not fulfill the GE Sub-area B3 requirement.
         </p>
+        <select class="custom-select" formControlName="areaB3" >
+          <option value="">Choose Course</option>
+          <option *ngFor="let course of b3courses" [value]="course|json">
+            {{course.courseNumber}} {{course.courseName}}
+          </option>
+        </select>
       <h4>Mathematics/Quantitative Reasoning</h4>
       
-      <geForm [courses]='b4courses'></geForm>
+      <select class="custom-select" formControlName="areaB4" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of b4courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
      
-        
       <h4>Science and Technology Synthesis</h4>
-      <geForm [courses]='b5courses'></geForm>
-        
-    <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
-      <h4>Visual and Performing Arts</h4>
-      <geForm [courses]='c1courses'></geForm>
-      
+      <select class="custom-select" formControlName="areaB5" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of b5courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
+  </form>
+  
+  <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
+  <form [formGroup]='parentAreaCForm' (ngSubmit)='submitFormGE()'> 
+    <h4>Visual and Performing Arts</h4>
+      <!--geForm [courses]='c1courses'></geForm-->
+      <select class="custom-select" formControlName="areaC1" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of c1courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
 
       <h4>Literature, Modern Languages, Philosophy and Civilization</h4>
-      <geForm [courses]='c2courses'></geForm>
+      <select class="custom-select" formControlName="areaC2" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of c2courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
       
       <h4>Arts and Humanities Synthesis</h4>
-      <geForm [courses]='c3courses'></geForm>
+      <select class="custom-select" formControlName="areaC3" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of c3courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
     
         <pre>
           Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
-
 
           *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
 
           **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
         </pre>
       <hr>
+    </form>
+  <form [formGroup]='parentAreaDForm' (ngSubmit)='submitFormGE()'>
     <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
       <h4>U.S. History and American Ideals</h4>
-      
-      <geForm [courses]='d1courses'></geForm>
-      
+      <select class="custom-select" formControlName="areaD1" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of d1courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
+
       <h4>U.S. Constitution and California Government</h4>
-      
-      <geForm [courses]='d2courses'></geForm> 
+      <select class="custom-select" formControlName="areaD2" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of d2courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
         
       <h4>Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
-      
-      <geForm [courses]='d3courses'></geForm>
+      <select class="custom-select" formControlName="areaD3" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of d3courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
         
       <h4>Social Science Synthesis</h4>
-      
-      <geForm [courses]='d4courses'></geForm>
+      <select class="custom-select" formControlName="areaD4" >
+        <option value="">Choose Course</option>
+        <option *ngFor="let course of d4courses" [value]="course|json">
+          {{course.courseNumber}} {{course.courseName}}
+        </option>
+      </select>
         <pre>
           Students must complete all GE lower-division requirements in Areas A and D before they take any GE D4 Synthesis course. Select one course from the following list:
 
@@ -167,15 +248,28 @@
           **Course fulfills American Ideals requirement part B (U.S. Constitution and California Government).
         </pre>     
       <hr>
+
+  </form>
+  <form [formGroup]='parentAreaEForm' (ngSubmit)='submitFormGE()'>
     <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
-    
-    <geForm [courses]='ecourses'></geForm>  
+    <select class="custom-select" formControlName="areaE" >
+      <option value="">Choose Course</option>
+      <option *ngFor="let course of ecourses" [value]="course|json">
+        {{course.courseNumber}} {{course.courseName}}
+      </option>
+    </select>
+
+    <button type="submit" class="btn btn-success mt-3">Save</button>
+  </form>
+
+  
       <p>For an alternative and interdisciplinary way to complete some of their GE requirements, students may choose the Interdisciplinary General Education program, see below.</p> 
       <pre>
        
 
         Students who completed basic military training, served one year of active-duty service, and passed ENG 1101 or ENG 1103 or a comparable transfer course will be granted 3 units of GE Area E credit. This credit is limited to students with an other than dishonorable discharge or still on active duty.
       </pre>
+      
     <hr>
 
     <h2>Interdisciplinary General Education</h2>

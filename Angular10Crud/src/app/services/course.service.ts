@@ -12,6 +12,11 @@ const updateCoreUrl = '/api/updateCoreList';
 const updateElectives1Url = '/api/updateElectives1List';
 const updateElectives2Url = '/api/updateElectives2List';
 const updateElectives3Url = '/api/updateElectives3List';
+const updateAreaAUrl = '/api/updateAreaAList';
+const updateAreaBUrl = '/api/updateAreaBList';
+const updateAreaCUrl = '/api/updateAreaCList';
+const updateAreaDUrl = '/api/updateAreaDList';
+const updateAreaEUrl = '/api/updateAreaEList';
 
 const geBaseUrl = '/api/ge';
 const geAreaAUrl = '/areaA';
@@ -176,8 +181,47 @@ export class CourseService {
   getGEAreaD4All(): Observable<any>{
     return this.http.get(`${geBaseUrl}${geAreaDUrl}4`);
   }
-
   getGEAreaEAll(): Observable<any>{
     return this.http.get(`${geBaseUrl}${geAreaEUrl}`);
   }
+
+  updateAreaA(data): Promise<any>{
+    return this.http.put(`${updateAreaAUrl}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
+
+  updateAreaB(data): Promise<any>{
+    console.log(data);
+    return this.http.put(`${updateAreaBUrl}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
+
+  updateAreaC(data): Promise<any>{
+    console.log(data);
+    return this.http.put(`${updateAreaCUrl}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
+
+  updateAreaD(data): Promise<any>{
+    console.log(data);
+    return this.http.put(`${updateAreaDUrl}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
+
+  updateAreaE(data): Promise<any>{
+    console.log(data);
+    return this.http.put(`${updateAreaEUrl}`, data)
+    .toPromise()
+    .then(res=>console.log(res))
+    .catch(error=>console.log(error));
+  }
+
 }

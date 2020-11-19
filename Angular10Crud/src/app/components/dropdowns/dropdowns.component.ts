@@ -86,17 +86,6 @@ export class DropdownsComponent {
   d4courses=[];
   ecourses=[];
   
-
-  geForm: GenEdFormComponent;
-  geForm2:GenEdFormComponent;
-  geForm3: GenEdFormComponent;
-  geForm4: GenEdFormComponent;
-  geForm5: GenEdFormComponent;
-  geForm6: GenEdFormComponent;
-  geForm7: GenEdFormComponent;
-  geForm8: GenEdFormComponent;
-  geForm9: GenEdFormComponent;
-  geForm10: GenEdFormComponent;
   completedGEs: any;
 
   form0: FormGroup;
@@ -104,6 +93,12 @@ export class DropdownsComponent {
   form2: FormGroup;
   form3: FormGroup;
   form4: FormGroup;
+  parentAreaAForm: FormGroup;
+  parentAreaBForm: FormGroup;
+  parentAreaCForm: FormGroup;
+  parentAreaDForm: FormGroup;
+  parentAreaEForm: FormGroup;
+
 
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
@@ -124,8 +119,38 @@ export class DropdownsComponent {
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     })
-    this.geForm= new GenEdFormComponent( fb );
     
+    this.parentAreaAForm = this.fb.group({
+      areaA1: '',
+      areaA2: '',
+      areaA3: ''
+    })
+
+    this.parentAreaBForm = this.fb.group({
+      areaB1: '',
+      areaB2: '',
+      areaB3: '',
+      areaB4: '',
+      areaB5: ''
+    })
+
+    this.parentAreaCForm = this.fb.group({
+      areaC1: '',
+      areaC2: '',
+      areaC3: ''
+    })
+
+    this.parentAreaDForm = this.fb.group({
+      areaD1: '',
+      areaD2: '',
+      areaD3: '',
+      areaD4: ''
+    })
+
+    this.parentAreaEForm = this.fb.group({
+      areaE: ''
+    })
+
   }
 
   ngOnInit(): void {
@@ -140,6 +165,7 @@ export class DropdownsComponent {
     this.retrieveGEAreaECourses();
   }
 
+  
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
@@ -596,8 +622,25 @@ export class DropdownsComponent {
     console.log(this.form4.value)
   }
 
-  onGESubmit(e) {
-    console.log(e);
+  submitFormGE() {
+    console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
+    this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
+    
+    console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
+    this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
+    
+    console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
+    this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
+    
+    console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
+    this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
+    
+    console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
+    this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
+    
+  //   const geArray: FormArray = this.geForm.myForm.get('course') as FormArray;
+  //console.log(geArray.value);
+  //console.log(this.geForm.myForm);
   }
 	
 	populateCore(arg:Array<boolean>):Array<boolean> {
@@ -671,4 +714,16 @@ export class DropdownsComponent {
     });
     return this.booleanElectives3Array;
 	}
+
+  // get areaA1() {
+  //   return this.parentAreaAForm.get('areaA1');
+  // }
+// changeAreaAForm(e){
+//   this.parentAreaAForm.areaA1.setValue(e.target.value)
+// }
+  // changeCourse(e) {
+  //   this.parentAreaAForm.areaA1.setValue(e.target.value)
+  //   //console.log(e.target.value);
+  // }
+
 }

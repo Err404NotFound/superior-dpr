@@ -33,6 +33,11 @@ import edu.csupomona.cs4800.course.CSCoreCourse;
 import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.CSElectives2Course;
 import edu.csupomona.cs4800.course.CSElectives3Course;
+import edu.csupomona.cs4800.course.GEAreaACourse;
+import edu.csupomona.cs4800.course.GEAreaBCourse;
+import edu.csupomona.cs4800.course.GEAreaCCourse;
+import edu.csupomona.cs4800.course.GEAreaDCourse;
+import edu.csupomona.cs4800.course.GEAreaECourse;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
 import edu.csupomona.cs4800.securingweb.CustomUserDetailsService;
 import edu.csupomona.cs4800.user.User;
@@ -157,11 +162,134 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserCoreList(user, checkedCoreCourse);
-
 		return modelAndView;
 	}
 	
+<<<<<<< HEAD
 	@PutMapping(value="/updateElectives1List")
+=======
+	@PutMapping("/updateAreaAList")
+	public ModelAndView updateAreaAList(@RequestBody String[] jsonObjArr) {
+		List<GEAreaACourse> checkedCoreCourse = new ArrayList<GEAreaACourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				GEAreaACourse course = objectMapper.readValue(s, GEAreaACourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserAreaAList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	@PutMapping("/updateAreaBList")
+	public ModelAndView updateAreaBList(@RequestBody String[] jsonObjArr) {
+		List<GEAreaBCourse> checkedCoreCourse = new ArrayList<GEAreaBCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				GEAreaBCourse course = objectMapper.readValue(s, GEAreaBCourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserAreaBList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	@PutMapping("/updateAreaCList")
+	public ModelAndView updateAreaCList(@RequestBody String[] jsonObjArr) {
+		List<GEAreaCCourse> checkedCoreCourse = new ArrayList<GEAreaCCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				GEAreaCCourse course = objectMapper.readValue(s, GEAreaCCourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserAreaCList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	@PutMapping("/updateAreaDList")
+	public ModelAndView updateAreaDList(@RequestBody String[] jsonObjArr) {
+		List<GEAreaDCourse> checkedCoreCourse = new ArrayList<GEAreaDCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				GEAreaDCourse course = objectMapper.readValue(s, GEAreaDCourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserAreaDList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	@PutMapping("/updateAreaEList")
+	public ModelAndView updateAreaEList(@RequestBody String[] jsonObjArr) {
+		List<GEAreaECourse> checkedCoreCourse = new ArrayList<GEAreaECourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				GEAreaECourse course = objectMapper.readValue(s, GEAreaECourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserAreaEList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	
+	@PutMapping("/updateElectives1List")
+>>>>>>> GE updateUser methods added
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();
 		try {

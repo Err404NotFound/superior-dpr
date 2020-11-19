@@ -21,6 +21,11 @@ import edu.csupomona.cs4800.course.CSElectives1Course;
 import edu.csupomona.cs4800.course.CSElectives2Course;
 import edu.csupomona.cs4800.course.CSElectives3Course;
 import edu.csupomona.cs4800.course.Course;
+import edu.csupomona.cs4800.course.GEAreaACourse;
+import edu.csupomona.cs4800.course.GEAreaBCourse;
+import edu.csupomona.cs4800.course.GEAreaCCourse;
+import edu.csupomona.cs4800.course.GEAreaDCourse;
+import edu.csupomona.cs4800.course.GEAreaECourse;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
@@ -235,6 +240,146 @@ public class CustomUserDetailsService implements UserDetailsService {
 		//Update and save user
 		user.setToDoElectives3(todo);
 		user.setCompletedElectives3(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserAreaAList(User user, List<GEAreaACourse> checkedElectives) {
+		List<GEAreaACourse> todo = user.getToDoAreaA();
+		List<GEAreaACourse> completed = user.getCompletedAreaA();
+		List<GEAreaACourse> newComplete = new ArrayList<GEAreaACourse>();
+		for(GEAreaACourse elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<GEAreaACourse> optional = geAreaARepository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(GEAreaACourse elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(GEAreaACourse elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoAreaA(todo);
+		user.setCompletedAreaA(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserAreaBList(User user, List<GEAreaBCourse> checkedElectives) {
+		List<GEAreaBCourse> todo = user.getToDoAreaB();
+		List<GEAreaBCourse> completed = user.getCompletedAreaB();
+		List<GEAreaBCourse> newComplete = new ArrayList<GEAreaBCourse>();
+		for(GEAreaBCourse elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<GEAreaBCourse> optional = geAreaBRepository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(GEAreaBCourse elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(GEAreaBCourse elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoAreaB(todo);
+		user.setCompletedAreaB(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserAreaCList(User user, List<GEAreaCCourse> checkedElectives) {
+		List<GEAreaCCourse> todo = user.getToDoAreaC();
+		List<GEAreaCCourse> completed = user.getCompletedAreaC();
+		List<GEAreaCCourse> newComplete = new ArrayList<GEAreaCCourse>();
+		for(GEAreaCCourse elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<GEAreaCCourse> optional = geAreaCRepository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(GEAreaCCourse elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(GEAreaCCourse elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoAreaC(todo);
+		user.setCompletedAreaC(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserAreaDList(User user, List<GEAreaDCourse> checkedElectives) {
+		List<GEAreaDCourse> todo = user.getToDoAreaD();
+		List<GEAreaDCourse> completed = user.getCompletedAreaD();
+		List<GEAreaDCourse> newComplete = new ArrayList<GEAreaDCourse>();
+		for(GEAreaDCourse elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<GEAreaDCourse> optional = geAreaDRepository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(GEAreaDCourse elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(GEAreaDCourse elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoAreaD(todo);
+		user.setCompletedAreaD(newComplete);
+		csStudentRepository.save(user);
+	}
+	
+	public void updateUserAreaEList(User user, List<GEAreaECourse> checkedElectives) {
+		List<GEAreaECourse> todo = user.getToDoAreaE();
+		List<GEAreaECourse> completed = user.getCompletedAreaE();
+		List<GEAreaECourse> newComplete = new ArrayList<GEAreaECourse>();
+		for(GEAreaECourse elective : checkedElectives) {
+			//Make sure the course exists
+			Optional<GEAreaECourse> optional = geAreaERepository.findById(elective.getId());
+			//If it does exist, remove it from todo (if it's there), set the completion status, and add it to the new completed list
+			optional.ifPresent(course -> {
+				todo.removeIf(c -> (c.getId().equals(course.getId())));
+				course.setCompletionStatus(Course.COMPLETED);
+				newComplete.add(course);
+			});
+		}
+		//Find the difference between the completed lists to determine if a box was unchecked
+		for(GEAreaECourse elective : newComplete) {
+			completed.removeIf(c -> (c.getId().equals(elective.getId())));
+		}
+		for(GEAreaECourse elective : completed) {
+			elective.setCompletionStatus(Course.TODO);
+			todo.add(elective);
+		}
+		//Update and save user
+		user.setToDoAreaE(todo);
+		user.setCompletedAreaE(newComplete);
 		csStudentRepository.save(user);
 	}
 
