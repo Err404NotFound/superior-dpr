@@ -165,9 +165,6 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-<<<<<<< HEAD
-	@PutMapping(value="/updateElectives1List")
-=======
 	@PutMapping("/updateAreaAList")
 	public ModelAndView updateAreaAList(@RequestBody String[] jsonObjArr) {
 		List<GEAreaACourse> checkedCoreCourse = new ArrayList<GEAreaACourse>();
@@ -289,7 +286,6 @@ public class LoginController {
 	
 	
 	@PutMapping("/updateElectives1List")
->>>>>>> GE updateUser methods added
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();
 		try {
