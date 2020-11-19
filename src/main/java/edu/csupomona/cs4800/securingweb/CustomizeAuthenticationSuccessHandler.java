@@ -22,7 +22,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 	    response.setStatus(HttpServletResponse.SC_OK);
 
 	    for (GrantedAuthority auth : authentication.getAuthorities()) {
-	        if ("USER".equals(auth.getAuthority())) {
+	    	if ("USER".equals(auth.getAuthority())) {
 	            response.sendRedirect("/dpr");
 	        }
 	    }

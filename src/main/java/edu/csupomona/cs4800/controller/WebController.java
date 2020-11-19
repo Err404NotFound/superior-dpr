@@ -28,6 +28,11 @@ public class WebController {
 	public String endpoints() {
 		return String.format("There are other pages at: /hello and /serena and /world and /guava and /jsoup");
 	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "index";
+	}
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {

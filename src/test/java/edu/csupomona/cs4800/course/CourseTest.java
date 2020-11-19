@@ -16,9 +16,10 @@ public class CourseTest {
 	private String prereqCourseNumber = "CS 100";
 	private String coreqCourseNumber = "CS 101L";
 	private String geArea = "E";
+	private String other = "Lab";
 
 	@Autowired
-	private Course c = new Course(courseNumber, courseName, units, completionStatus, prereqCourseNumber, coreqCourseNumber, geArea);
+	private Course c = new Course(courseNumber, courseName, units, completionStatus, prereqCourseNumber, coreqCourseNumber, geArea, other);
 
 	@Before
 	public void setup() {
