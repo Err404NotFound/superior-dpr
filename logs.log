@@ -1,0 +1,141 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.4.RELEASE)
+
+2020-11-19 05:17:16.304  INFO 4752 --- [           main] edu.csupomona.cs4800.dpr.DprApplication  : Starting DprApplication v0.0.1-SNAPSHOT on ip-172-31-8-165 with PID 4752 (/home/ec2-user/dpr-0.0.1-SNAPSHOT.jar started by ec2-user in /home/ec2-user)
+2020-11-19 05:17:16.318  INFO 4752 --- [           main] edu.csupomona.cs4800.dpr.DprApplication  : No active profile set, falling back to default profiles: default
+2020-11-19 05:17:18.288  INFO 4752 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2020-11-19 05:17:18.505  INFO 4752 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 202ms. Found 11 MongoDB repository interfaces.
+2020-11-19 05:17:20.700  INFO 4752 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-11-19 05:17:20.725  INFO 4752 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-11-19 05:17:20.725  INFO 4752 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.38]
+2020-11-19 05:17:20.905  INFO 4752 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-11-19 05:17:20.906  INFO 4752 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4405 ms
+2020-11-19 05:17:22.890  INFO 4752 --- [           main] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[127.0.0.1:27017], srvHost=superiordpr.kvhjn.mongodb.net, mode=MULTIPLE, requiredClusterType=REPLICA_SET, serverSelectionTimeout='30000 ms', requiredReplicaSetName='atlas-wgif5p-shard-0'}
+2020-11-19 05:17:23.210  INFO 4752 --- [hjn.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server superiordpr-shard-00-02.kvhjn.mongodb.net:27017 to client view of cluster
+2020-11-19 05:17:23.390  INFO 4752 --- [hjn.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server superiordpr-shard-00-01.kvhjn.mongodb.net:27017 to client view of cluster
+2020-11-19 05:17:23.398  INFO 4752 --- [hjn.mongodb.net] org.mongodb.driver.cluster               : Adding discovered server superiordpr-shard-00-00.kvhjn.mongodb.net:27017 to client view of cluster
+2020-11-19 05:17:24.938  INFO 4752 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server superiordpr-shard-00-02.kvhjn.mongodb.net:27017
+
+com.mongodb.MongoSocketReadException: Prematurely reached end of stream
+	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:112) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:579) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:444) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:298) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.sendAndReceive(InternalStreamConnection.java:258) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.sendAndReceive(CommandHelper.java:83) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.executeCommand(CommandHelper.java:33) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:103) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:60) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:128) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2020-11-19 05:17:24.940  INFO 4752 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server superiordpr-shard-00-01.kvhjn.mongodb.net:27017
+
+com.mongodb.MongoSocketReadException: Prematurely reached end of stream
+	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:112) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:579) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:444) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:298) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.sendAndReceive(InternalStreamConnection.java:258) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.sendAndReceive(CommandHelper.java:83) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.executeCommand(CommandHelper.java:33) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:103) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:60) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:128) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2020-11-19 05:17:24.940  INFO 4752 --- [ngodb.net:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server superiordpr-shard-00-00.kvhjn.mongodb.net:27017
+
+com.mongodb.MongoSocketReadException: Prematurely reached end of stream
+	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:112) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:579) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveMessage(InternalStreamConnection.java:444) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:298) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.sendAndReceive(InternalStreamConnection.java:258) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.sendAndReceive(CommandHelper.java:83) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.CommandHelper.executeCommand(CommandHelper.java:33) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initializeConnectionDescription(InternalStreamConnectionInitializer.java:103) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:60) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:128) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:117) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2020-11-19 05:17:26.058  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/resources/**'], []
+2020-11-19 05:17:26.064  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/static/**'], []
+2020-11-19 05:17:26.064  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/templates/**'], []
+2020-11-19 05:17:26.065  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/css/**'], []
+2020-11-19 05:17:26.065  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: Ant [pattern='/js/**'], []
+2020-11-19 05:17:26.275  INFO 4752 --- [           main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@33b082c5, org.springframework.security.web.context.SecurityContextPersistenceFilter@44de0113, org.springframework.security.web.header.HeaderWriterFilter@1dc2de84, org.springframework.security.web.authentication.logout.LogoutFilter@47547132, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@47ec7422, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@76d05cc9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5177e388, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16073fa8, org.springframework.security.web.session.SessionManagementFilter@7c4fc2bf, org.springframework.security.web.access.ExceptionTranslationFilter@5c748168, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@77c7ed8e]
+2020-11-19 05:17:26.724  INFO 4752 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-11-19 05:17:26.996  INFO 4752 --- [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2020-11-19 05:17:27.876  INFO 4752 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-11-19 05:17:27.908  INFO 4752 --- [           main] edu.csupomona.cs4800.dpr.DprApplication  : Started DprApplication in 12.706 seconds (JVM running for 13.909)
+2020-11-19 05:17:28.042  INFO 4752 --- [           main] org.mongodb.driver.cluster               : No server chosen by com.mongodb.client.internal.MongoClientDelegate$1@55e2fe3c from cluster description ClusterDescription{type=REPLICA_SET, connectionMode=MULTIPLE, serverDescriptions=[ServerDescription{address=superiordpr-shard-00-00.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, ServerDescription{address=superiordpr-shard-00-02.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, ServerDescription{address=superiordpr-shard-00-01.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]}. Waiting for 30000 ms before timing out
+2020-11-19 05:17:38.039  INFO 4752 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-11-19 05:17:38.046  INFO 4752 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-11-19 05:17:38.077  INFO 4752 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 31 ms
+2020-11-19 05:17:58.039  INFO 4752 --- [           main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2020-11-19 05:17:58.041 ERROR 4752 --- [           main] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.IllegalStateException: Failed to execute CommandLineRunner
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:798) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:779) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:322) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1237) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at edu.csupomona.cs4800.dpr.DprApplication.main(DprApplication.java:20) ~[classes!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) ~[dpr-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:107) ~[dpr-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) ~[dpr-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) ~[dpr-0.0.1-SNAPSHOT.jar:0.0.1-SNAPSHOT]
+Caused by: org.springframework.dao.DataAccessResourceFailureException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@55e2fe3c. Client view of cluster state is {type=REPLICA_SET, servers=[{address=superiordpr-shard-00-00.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-02.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-01.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]; nested exception is com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@55e2fe3c. Client view of cluster state is {type=REPLICA_SET, servers=[{address=superiordpr-shard-00-00.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-02.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-01.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+	at org.springframework.data.mongodb.core.MongoExceptionTranslator.translateExceptionIfPossible(MongoExceptionTranslator.java:88) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.core.MongoTemplate.potentiallyConvertRuntimeException(MongoTemplate.java:2874) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:2799) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.core.MongoTemplate.doFind(MongoTemplate.java:2542) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.core.ExecutableFindOperationSupport$ExecutableFindSupport.doFind(ExecutableFindOperationSupport.java:215) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.core.ExecutableFindOperationSupport$ExecutableFindSupport.oneValue(ExecutableFindOperationSupport.java:127) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.repository.query.AbstractMongoQuery.lambda$getExecution$4(AbstractMongoQuery.java:153) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.repository.query.AbstractMongoQuery.doExecute(AbstractMongoQuery.java:126) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.mongodb.repository.query.AbstractMongoQuery.execute(AbstractMongoQuery.java:101) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor$QueryMethodInvoker.invoke(QueryExecutorMethodInterceptor.java:195) ~[spring-data-commons-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:152) ~[spring-data-commons-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:130) ~[spring-data-commons-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar!/:5.2.9.RELEASE]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:80) ~[spring-data-commons-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar!/:5.2.9.RELEASE]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95) ~[spring-aop-5.2.9.RELEASE.jar!/:5.2.9.RELEASE]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.2.9.RELEASE.jar!/:5.2.9.RELEASE]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:212) ~[spring-aop-5.2.9.RELEASE.jar!/:5.2.9.RELEASE]
+	at com.sun.proxy.$Proxy82.findByRole(Unknown Source) ~[na:na]
+	at edu.csupomona.cs4800.dpr.DprApplication.lambda$init$0(DprApplication.java:26) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:795) ~[spring-boot-2.3.4.RELEASE.jar!/:2.3.4.RELEASE]
+	... 13 common frames omitted
+Caused by: com.mongodb.MongoTimeoutException: Timed out after 30000 ms while waiting for a server that matches com.mongodb.client.internal.MongoClientDelegate$1@55e2fe3c. Client view of cluster state is {type=REPLICA_SET, servers=[{address=superiordpr-shard-00-00.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-02.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}, {address=superiordpr-shard-00-01.kvhjn.mongodb.net:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketReadException: Prematurely reached end of stream}}]
+	at com.mongodb.internal.connection.BaseCluster.createTimeoutException(BaseCluster.java:403) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.BaseCluster.selectServer(BaseCluster.java:118) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.internal.connection.AbstractMultiServerCluster.selectServer(AbstractMultiServerCluster.java:54) ~[mongodb-driver-core-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoClientDelegate.getConnectedClusterDescription(MongoClientDelegate.java:149) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoClientDelegate.createClientSession(MongoClientDelegate.java:98) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoClientDelegate$DelegateOperationExecutor.getClientSession(MongoClientDelegate.java:278) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoClientDelegate$DelegateOperationExecutor.execute(MongoClientDelegate.java:182) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoIterableImpl.execute(MongoIterableImpl.java:135) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at com.mongodb.client.internal.MongoIterableImpl.iterator(MongoIterableImpl.java:92) ~[mongodb-driver-sync-4.0.5.jar!/:na]
+	at org.springframework.data.mongodb.core.MongoTemplate.executeFindMultiInternal(MongoTemplate.java:2782) ~[spring-data-mongodb-3.0.4.RELEASE.jar!/:3.0.4.RELEASE]
+	... 31 common frames omitted
+
+2020-11-19 05:17:58.112  INFO 4752 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
