@@ -99,7 +99,6 @@ export class DropdownsComponent {
   parentAreaDForm: FormGroup;
   parentAreaEForm: FormGroup;
 
-
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
       checkArray0: this.fb.array([], [Validators.required])
@@ -154,6 +153,7 @@ export class DropdownsComponent {
   }
 
   ngOnInit(): void {
+  	this.retrieveCompletedCoreCourses();
     this.retrieveCourses();
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
@@ -165,10 +165,22 @@ export class DropdownsComponent {
     this.retrieveGEAreaECourses();
   }
 
-  
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
+  retrieveCompletedCoreCourses(): void{
+  	this.courseService.getCoreCompleted()
+  		.subscribe(
+  			data=>{
+  				this.completedCoreCourses=data;
+  				console.log(this.completedCoreCourses);
+  			},
+  			error =>{
+  				console.log(error);
+  			}
+  		);
+  }
+  
   retrieveCourses(): void{
     this.courseService.getAll()
       .subscribe(
@@ -713,17 +725,5 @@ export class DropdownsComponent {
       }
     });
     return this.booleanElectives3Array;
-	}
-
-  // get areaA1() {
-  //   return this.parentAreaAForm.get('areaA1');
-  // }
-// changeAreaAForm(e){
-//   this.parentAreaAForm.areaA1.setValue(e.target.value)
-// }
-  // changeCourse(e) {
-  //   this.parentAreaAForm.areaA1.setValue(e.target.value)
-  //   //console.log(e.target.value);
-  // }
-
+  }
 }
