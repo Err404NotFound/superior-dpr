@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbProgressbar} from '@ng-bootstrap/ng-bootstrap/progressbar/progressbar.module';
 
 
 @Component({
