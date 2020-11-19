@@ -9,10 +9,8 @@
   
   <body>
 	<h2>Major Required Courses</h2>
-	<div class='container-fluid'>
-	    <div class="progress">
-	    	<div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
-	    </div>
+    <div class="progress mb-2">
+    	<div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="16" aria-valuemin="0" aria-valuemax="22">75%</div>
     </div>
     <form [formGroup]="form0" (ngSubmit)="submitFormCore()" novalidate>
       <div *ngFor="let data of coreCourses; let i=index">
@@ -30,8 +28,8 @@
     <hr>   
     
     <h2>Major Electives: 19 Units</h2>
-    <div class="progress">
-    	<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+    <div class="progress mb-2">
+    	<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="8" aria-valuemin="0" aria-valuemax="15">50%</div>
     </div>
     <h3>At least 12 units from:</h3>
       <form [formGroup]="form1" (ngSubmit)="submitFormElective1()" novalidate>
@@ -50,6 +48,9 @@
       </form> 
     <hr>
     <h3>No more than 3 units from:</h3>
+    <div class="progress mb-2">
+    	<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="2" aria-valuemin="0" aria-valuemax="4">50%</div>
+    </div>
     <form [formGroup]="form2" (ngSubmit)="submitFormElective2()" novalidate>
 
       <div *ngFor="let data of elective2Courses; let i=index">
@@ -69,6 +70,9 @@
     </pre>
     <hr>
     <h3>No more than 4 units from:</h3>
+    <div class="progress mb-2">
+    	<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="6" aria-valuemin="0" aria-valuemax="13">50%</div>
+    </div>
     <form [formGroup]="form3" (ngSubmit)="submitFormElective3()" novalidate>
 
       <div *ngFor="let data of elective3Courses; let i=index">
