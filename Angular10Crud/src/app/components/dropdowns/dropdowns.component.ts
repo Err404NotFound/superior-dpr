@@ -871,8 +871,12 @@ export class DropdownsComponent {
  */
   submitFormCore() {
     // Gets the number of checkboxes checked for core courses
-    var checkedCore = this.form0.value.checkArray0.length;
-    var percent = Math.round(checkedCore / 22 * 100);
+    var checkedUnits = 0;
+    this.form0.value.checkArray0.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 65 * 100);
     this.percentCore = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -895,9 +899,13 @@ export class DropdownsComponent {
   }
 
   submitFormElective1() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form1.value.checkArray1.length;
-    var percent = Math.round(checked / 15 * 100);
+    // Gets the number of checkboxes checked for electives1 courses
+    var checkedUnits = 0;
+    this.form1.value.checkArray1.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 12 * 100);
     this.percentElectives1 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -907,10 +915,11 @@ export class DropdownsComponent {
       this.colorElectives1 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives1 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives1 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives1 = 'ForestGreen';
+    } else {
+      this.colorElectives1 = 'RoyalBlue';
+      this.percentElectives1 = "100%";
     }
 
     console.log(this.form1.value);
@@ -918,9 +927,13 @@ export class DropdownsComponent {
   }
 
   submitFormElective2() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form2.value.checkArray2.length;
-    var percent = Math.round(checked / 4 * 100);
+    // Gets the number of checkboxes checked for electives2 courses
+    var checkedUnits = 0;
+    this.form2.value.checkArray2.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 3 * 100);
     this.percentElectives2 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -930,10 +943,11 @@ export class DropdownsComponent {
       this.colorElectives2 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives2 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives2 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives2 = 'ForestGreen';
+    } else {
+      this.colorElectives2 = 'RoyalBlue';
+      this.percentElectives2 = "100%";
     }
 
     console.log(this.form2.value);
@@ -941,9 +955,13 @@ export class DropdownsComponent {
   }
 
   submitFormElective3() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form3.value.checkArray3.length;
-    var percent = Math.round(checked / 13 * 100);
+    // Gets the number of checkboxes checked for electives3 courses
+    var checkedUnits = 0;
+    this.form3.value.checkArray3.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 4 * 100);
     this.percentElectives3 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -953,10 +971,11 @@ export class DropdownsComponent {
       this.colorElectives3 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives3 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives3 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives3 = 'ForestGreen';
+    } else {
+      this.colorElectives3 = 'RoyalBlue';
+      this.percentElectives3 = "100%";
     }
 
     console.log(this.form3.value);
