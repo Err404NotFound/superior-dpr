@@ -3,22 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subscription } from 'rxjs';
 import { KeyValuePipe } from '@angular/common';
 
-const baseUrl = '/api/cscore';
+const apiBase='/api';
+const baseUrl = `${apiBase}/cscore`;
 const elective1Url = '/elective1/list';
 const elective2Url = '/elective2/list';
 const elective3Url = '/elective3/list';
 
-const updateCoreUrl = '/api/updateCoreList';
-const updateElectives1Url = '/api/updateElectives1List';
-const updateElectives2Url = '/api/updateElectives2List';
-const updateElectives3Url = '/api/updateElectives3List';
-const updateAreaAUrl = '/api/updateAreaAList';
-const updateAreaBUrl = '/api/updateAreaBList';
-const updateAreaCUrl = '/api/updateAreaCList';
-const updateAreaDUrl = '/api/updateAreaDList';
-const updateAreaEUrl = '/api/updateAreaEList';
+const updateCoreUrl = `${apiBase}/updateCoreList`;
+const updateElectives1Url = `${apiBase}/updateElectives1List`;
+const updateElectives2Url = `${apiBase}/updateElectives2List`;
+const updateElectives3Url = `${apiBase}/updateElectives3List`;
+const updateAreaAUrl = `${apiBase}/updateAreaAList`;
+const updateAreaBUrl = `${apiBase}/updateAreaBList`;
+const updateAreaCUrl = `${apiBase}/updateAreaCList`;
+const updateAreaDUrl = `${apiBase}updateAreaDList`;
+const updateAreaEUrl = `${apiBase}/updateAreaEList`;
 
-const geBaseUrl = '/api/ge';
+const geBaseUrl = `${apiBase}/ge`;
 const geAreaAUrl = '/areaA';
 const geAreaBUrl = '/areaB';
 const geAreaCUrl = '/areaC';
