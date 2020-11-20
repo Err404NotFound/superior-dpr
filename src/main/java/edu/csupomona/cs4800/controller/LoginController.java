@@ -203,6 +203,7 @@ public class LoginController {
 		userService.updateUserAreaCList(user, checkedCoreCourse);
 		return modelAndView;
 	}
+	
 	@PutMapping("/updateAreaDList")
 	public ModelAndView updateAreaDList(@RequestBody String[] jsonObjArr) {
 		List<GEAreaDCourse> checkedCoreCourse = new ArrayList<GEAreaDCourse>();
@@ -298,7 +299,6 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserElectives2List(user, checkedElectives2Course);
-
 		return modelAndView;
 	}
 	
@@ -323,7 +323,6 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserElectives3List(user, checkedElectives3Course);
-
 		return modelAndView;
 	}
 
