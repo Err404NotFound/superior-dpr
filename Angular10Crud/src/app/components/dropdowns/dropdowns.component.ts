@@ -591,27 +591,19 @@ export class DropdownsComponent {
   }
 	
 	populateCore(arg:Array<boolean>):Array<boolean> {
-		// this.completedCoreCourses.forEach(function (completed) {
-    //   let completedCourse = JSON.parse(JSON.stringify(completed));
-    //   console.log("populate core course: " + this.coreCourses);
-		// 	var checked = "checked";
-		// 	var isChecked = false;
-		// 	this.coreCourses.forEach(function (core) {
-		// 		let coreCourse = JSON.parse(JSON.stringify(core));
-		// 		if(completedCourse.courseNumber == coreCourse.courseNumber) {
-		// 			isChecked = true;
-		// 		}
-		// 		if(isChecked) {
-		// 			return;
-		// 		}
-		// 	});
-		// 	completedCourse.push({checked: isChecked});
-    // });
-    this.completedCoreCourses.forEach(function (fun) {
-      console.log("boolean array" + arg);
-      arg.push(true);
-      
-    })
+    this.coreCourses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedCoreCourses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          console.log(e.courseNumber + " " + c.courseNumber + " " + arg.length);
+          arg.push(true);
+        }
+      });
+      if(arg.length != (this.coreCourses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
     return this.booleanArray;
 	}
 	
