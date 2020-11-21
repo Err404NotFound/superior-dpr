@@ -598,6 +598,8 @@ export class DropdownsComponent {
         if(e.courseNumber == c.courseNumber) {
           console.log(e.courseNumber + " " + c.courseNumber + " " + arg.length);
           arg.push(true);
+          const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
+          checkArray0.push(new FormControl(JSON.stringify(element)));
         }
       });
       if(arg.length != (this.coreCourses.indexOf(element) + 1)) {
