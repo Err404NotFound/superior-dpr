@@ -96,7 +96,6 @@
   <form [formGroup]='parentAreaAForm'>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
       <h4>Oral Communication</h4>
-        <!--geForm [form]='parentAreaAForm' [courses]='a1courses' (result)='onGESubmit($event)'></geForm-->  
         <select class="custom-select" formControlName="areaA1" >
           <option value="">Choose Course</option>
           <option *ngFor="let course of a1courses" [value]="course|json">
@@ -105,7 +104,6 @@
         </select> 
 
       <h4>Written Communication</h4>
-        <!--geForm [form]='parentAreaAForm' [courses]='a2courses'></geForm-->
         <select class="custom-select" formControlName="areaA2" >
           <option value="">Choose Course</option>
           <option *ngFor="let course of a2courses" [value]="course|json">
@@ -175,7 +173,6 @@
   <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
   <form [formGroup]='parentAreaCForm'> 
     <h4>Visual and Performing Arts</h4>
-      <!--geForm [courses]='c1courses'></geForm-->
       <select class="custom-select" formControlName="areaC1" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of c1courses" [value]="course|json">
@@ -265,38 +262,6 @@
 
     <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeE()'>Save</button>
   </form>
-
-  
-      <p>For an alternative and interdisciplinary way to complete some of their GE requirements, students may choose the Interdisciplinary General Education program, see below.</p> 
-      <pre>
-       
-
-        Students who completed basic military training, served one year of active-duty service, and passed ENG 1101 or ENG 1103 or a comparable transfer course will be granted 3 units of GE Area E credit. This credit is limited to students with an other than dishonorable discharge or still on active duty.
-      </pre>
-      
-    <hr>
-
-    <h2>Interdisciplinary General Education</h2>
-      <p>An alternate pattern for partial fulfillment of GE Areas A, C, and D available for students is the Interdisciplinary General Education (IGE) program.  Students should see an advisor for specific GE coursework required by their major.</p>
-      <pre>
-        These courses will satisfy the requirement in one of subareas: B5, C4, D4. Students must complete all lower-division courses in Area A and relevant subareas before they take an Interdisciplinary Synthesis course.
-
-        Select one course from the following list:
-</pre>
-<!--form [formGroup]="form4" (ngSubmit)="submitFormIGE()" novalidate>
-
-  <div *ngFor="let data of igeCourses; let i=index">
-    <label>
-      <input type="checkbox" [value]="data.name" (change)="onIgeCheckboxChange($event)" />
-      {{data.name}}
-    </label>
-  </div>
-
-  <p class="error" *ngIf="this.form4.controls['checkArray4'].errors?.required">
-    Checkbox is required, select at least one value.
-  </p>
-  <input type="submit" value="Submit">
-</form--> 
 
     <hr>
 

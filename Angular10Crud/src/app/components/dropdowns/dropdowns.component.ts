@@ -1,7 +1,6 @@
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 import { Component, OnInit } from '@angular/core';
-import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class DropdownsComponent {
   percentElectives3: String;
   colorElectives3: String;
 
-  //Data: Array<any> = majorElectivesAtLeast12;
   igeCourses=[
     {"name":"AG 4010 - Ethical Issues in Food, Agricultural and Apparel Industries (3) (fulfills Area C3 or D4)"},
     {"name":"ANT 3500 - Environment, Technology and Culture (3) (fulfills Area B5 or D4)"},
@@ -467,9 +465,6 @@ export class DropdownsComponent {
       this.colorCore = 'ForestGreen';
     }
     
-    //console.log(this.form1.value)
-    //console.log(this.form1.value.checkArray1);
-    //don't need the json key checkArray#, so just get value of key and send
     this.courseService.updateCore(this.form0.value.checkArray0);
   }
 
@@ -581,28 +576,9 @@ export class DropdownsComponent {
     });
     this.courseService.updateAreaD(temp);
   }
-    //  //areaE is legit one value
 
   submitFormGeE() {
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
   }
     
-    // console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
-    // console.log('areaA: ' + JSON.stringify(temp));
-    //this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
-    
-    // console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
-    // this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
-    
-    // console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
-    // this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
-    
-    // console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
-    // this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
-    
-    // console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
-    // this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
-    
-  //}
-
 }
