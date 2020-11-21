@@ -175,7 +175,6 @@ export class CourseService {
   }
 
   updateAreaA(data): Promise<any>{
-    console.log('areaA put:'+data);
     return this.http.put(`${updateAreaAUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -183,7 +182,6 @@ export class CourseService {
   }
 
   updateAreaB(data): Promise<any>{
-    console.log('areaB put:'+data);
     return this.http.put(`${updateAreaBUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -191,7 +189,6 @@ export class CourseService {
   }
 
   updateAreaC(data): Promise<any>{
-    //console.log(data);
     return this.http.put(`${updateAreaCUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -199,7 +196,6 @@ export class CourseService {
   }
 
   updateAreaD(data): Promise<any>{
-    //console.log(data);
     return this.http.put(`${updateAreaDUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -207,7 +203,6 @@ export class CourseService {
   }
 
   updateAreaE(data): Promise<any>{
-    //console.log(data);
     return this.http.put(`${updateAreaEUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))

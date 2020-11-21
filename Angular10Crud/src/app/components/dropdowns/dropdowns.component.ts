@@ -587,22 +587,4 @@ export class DropdownsComponent {
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
   }
     
-    // console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
-    // console.log('areaA: ' + JSON.stringify(temp));
-    //this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
-    
-    // console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
-    // this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
-    
-    // console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
-    // this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
-    
-    // console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
-    // this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
-    
-    // console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
-    // this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
-    
-  //}
-
 }
