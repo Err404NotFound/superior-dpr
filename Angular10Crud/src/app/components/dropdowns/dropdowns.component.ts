@@ -640,10 +640,6 @@ export class DropdownsComponent {
     
     console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
-    
-  //   const geArray: FormArray = this.geForm.myForm.get('course') as FormArray;
-  //console.log(geArray.value);
-  //console.log(this.geForm.myForm);
   }
 	
 	populateCore(arg:Array<boolean>):Array<boolean> {
