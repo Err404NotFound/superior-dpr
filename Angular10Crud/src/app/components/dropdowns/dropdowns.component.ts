@@ -16,6 +16,9 @@ export class DropdownsComponent {
   booleanElectives3Array: Array<boolean>=[];
   
   completedCoreCourses: Array<any>;
+  completedElectives1Courses: Array<any>;
+  completedElectives2Courses: Array<any>;
+  completedElectives3Courses: Array<any>;
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
@@ -171,6 +174,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives1Completed()
+          .subscribe(response => {
+            this.completedElectives1Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives1Array=this.populateElectives1(this.booleanElectives1Array);
+          })
         });
   }
 
@@ -182,6 +197,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives2Completed()
+          .subscribe(response => {
+            this.completedElectives2Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives2Array=this.populateElectives2(this.booleanElectives2Array);
+          })
         });
   }
 
@@ -193,6 +220,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives3Completed()
+          .subscribe(response => {
+            this.completedElectives3Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives3Array=this.populateElectives3(this.booleanElectives3Array);
+          })
         });
   }
 
@@ -577,5 +616,59 @@ export class DropdownsComponent {
       }
     });
     return this.booleanCoreArray;
+  }
+  
+  populateElectives1(arg:Array<boolean>):Array<boolean> {
+    this.elective1Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives1Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray1: FormArray = this.form1.get('checkArray1') as FormArray;
+          checkArray1.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective1Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives1Array;
+  }
+  
+  populateElectives2(arg:Array<boolean>):Array<boolean> {
+    this.elective2Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives2Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray2: FormArray = this.form2.get('checkArray2') as FormArray;
+          checkArray2.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective2Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives2Array;
+  }
+  
+  populateElectives3(arg:Array<boolean>):Array<boolean> {
+    this.elective3Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives3Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray3: FormArray = this.form3.get('checkArray3') as FormArray;
+          checkArray3.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective3Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives3Array;
 	}
 }

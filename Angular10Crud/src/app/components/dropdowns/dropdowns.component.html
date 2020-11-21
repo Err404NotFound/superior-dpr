@@ -36,7 +36,7 @@
 
         <div *ngFor="let data of elective1Courses; let i=index">
           <label>
-            <input type="checkbox" [value]="data |json" (change)="onElective1CheckboxChange($event)" />
+            <input type="checkbox" [value]="data |json" (change)="onElective1CheckboxChange($event)" [checked]="booleanElectives1Array[i]" />
             {{data.courseNumber}} {{data.courseName}}
           </label>
         </div>
@@ -55,7 +55,7 @@
 
       <div *ngFor="let data of elective2Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" />
+          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" [checked]="booleanElectives2Array[i]" />
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>
@@ -77,7 +77,7 @@
 
       <div *ngFor="let data of elective3Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" />
+          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" [checked]="booleanElectives3Array[i]" />
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>

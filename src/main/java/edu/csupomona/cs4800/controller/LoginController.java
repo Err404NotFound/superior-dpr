@@ -107,25 +107,32 @@ public class LoginController {
 	}
 
 	ObjectMapper objectMapper = new ObjectMapper();
-//	@GetMapping(value="/getCompletedCoreList")
-//	public ModelAndView getCoreCompleted() {
-//		ModelAndView modelAndView = new ModelAndView();
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		User user = userService.findUserByUsername(auth.getName());
-//		modelAndView.addObject("currentUser", user);
-//		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
-//		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
-//		modelAndView.addObject("userMessage", "Content should be visible to all users");
-//		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-//		
-//		return modelAndView;
-//	}
-	
 	@GetMapping(value="/getCompletedCoreList")
 	public ResponseEntity<List<CSCoreCourse>> getCoreCompleted() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		return new ResponseEntity<List<CSCoreCourse>>(user.getCompletedCore(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedElectives1List")
+	public ResponseEntity<List<CSElectives1Course>> getElectives1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		return new ResponseEntity<List<CSElectives1Course>>(user.getCompletedElectives1(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedElectives2List")
+	public ResponseEntity<List<CSElectives2Course>> getElectives2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		return new ResponseEntity<List<CSElectives2Course>>(user.getCompletedElectives2(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedElectives3List")
+	public ResponseEntity<List<CSElectives3Course>> getElectives3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		return new ResponseEntity<List<CSElectives3Course>>(user.getCompletedElectives3(), HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/updateCoreList")
@@ -154,7 +161,6 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	//TODO create @PutMapping for '/updateElectives1List', '/updateElectives2List', '/updateElectives3List';
 	@PutMapping(value="/updateElectives1List")
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();

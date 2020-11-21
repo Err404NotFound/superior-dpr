@@ -21,6 +21,9 @@ const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
 const getCoreUrl = '/api/getCompletedCoreList';
+const getElectives1Url ='/api/getCompletedElectives1List';
+const getElectives2Url ='/api/getCompletedElectives2List';
+const getElectives3Url ='/api/getCompletedElectives3List';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +34,18 @@ export class CourseService {
   
   getCoreCompleted(): Observable<any>{
     return this.http.get(`${getCoreUrl}`);
+  }
+
+  getElectives1Completed(): Observable<any>{
+    return this.http.get(`${getElectives1Url}`);
+  }
+  
+  getElectives2Completed(): Observable<any>{
+    return this.http.get(`${getElectives2Url}`);
+  }
+  
+  getElectives3Completed(): Observable<any>{
+    return this.http.get(`${getElectives3Url}`);
   }
   
   getAll(): Observable<any>{
@@ -57,7 +72,7 @@ export class CourseService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  async updateCore(data): Promise<any> {
+  updateCore(data): Promise<any> {
     return this.http.put(`${updateCoreUrl}`, data)
     	.toPromise()
     	.then(res => console.log(res)) 
