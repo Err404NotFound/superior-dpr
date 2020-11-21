@@ -15,7 +15,7 @@
     <form [formGroup]="form0" (ngSubmit)="submitFormCore()" novalidate>
       <div *ngFor="let data of coreCourses; let i=index">
         <label>
-          <input name="coreCheckboxes" type="checkbox" [value]="data|json " (change)="onCoreCheckboxChange($event)" [checked]="data.checked"/>
+          <input name="coreCheckboxes" type="checkbox" [value]="data|json " (change)="onCoreCheckboxChange($event)" [checked]="booleanArray[i]"/>
           {{data.courseNumber}} {{data.courseName}}
         </label>
       </div>
