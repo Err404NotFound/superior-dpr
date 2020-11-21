@@ -102,29 +102,28 @@ export class DropdownsComponent {
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
       checkArray0: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form1 = this.fb.group({
       checkArray1: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form2 = this.fb.group({
       checkArray2: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
-    })
-
+    });
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
-    })
+    });
     
     this.parentAreaAForm = this.fb.group({
       areaA1: '',
       areaA2: '',
       areaA3: ''
-    })
+    });
 
     this.parentAreaBForm = this.fb.group({
       areaB1: '',
@@ -132,24 +131,23 @@ export class DropdownsComponent {
       areaB3: '',
       areaB4: '',
       areaB5: ''
-    })
-
+    });
     this.parentAreaCForm = this.fb.group({
       areaC1: '',
       areaC2: '',
       areaC3: ''
-    })
+    });
 
     this.parentAreaDForm = this.fb.group({
       areaD1: '',
       areaD2: '',
       areaD3: '',
       areaD4: ''
-    })
+    });
 
     this.parentAreaEForm = this.fb.group({
       areaE: ''
-    })
+    });
 
   }
 
@@ -640,17 +638,48 @@ export class DropdownsComponent {
   }
 
   submitFormGE() {
-    console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
-    this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
+    var temp=[];//don't want to add "" as as objects so checking controls for those values before sending http request
+    Object.keys(this.parentAreaAForm.controls).forEach(key => {
+      if(this.parentAreaAForm.controls[key].value!="")
+        temp.push(this.parentAreaAForm.controls[key].value);
+    });
+    this.courseService.updateAreaA(temp);
     
-    console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
-    this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
+    temp=[];//reset
+    Object.keys(this.parentAreaBForm.controls).forEach(key => {
+      if(this.parentAreaBForm.controls[key].value!="")
+        temp.push(this.parentAreaBForm.controls[key].value);
+    });
+    this.courseService.updateAreaB(temp);
+
+    temp=[];//reset
+    Object.keys(this.parentAreaCForm.controls).forEach(key => {
+      if(this.parentAreaCForm.controls[key].value!="")
+        temp.push(this.parentAreaCForm.controls[key].value);
+    });
+    this.courseService.updateAreaC(temp);
+
+    temp=[];//reset
+    Object.keys(this.parentAreaDForm.controls).forEach(key => {
+      if(this.parentAreaDForm.controls[key].value!="")
+        temp.push(this.parentAreaDForm.controls[key].value);
+    });
+    this.courseService.updateAreaD(temp);
+
+    //areaE is legit one value
+    this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
+    // console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
+    // console.log('areaA: ' + JSON.stringify(temp));
+    //this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
     
-    console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
-    this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
+    // console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
+    // this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
     
-    console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
-    this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
+    // console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
+    // this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
+    
+    // console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
+    // this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
     
     console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
