@@ -677,6 +677,7 @@ export class DropdownsComponent {
   submitFormGeE() {
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
   }
+<<<<<<< HEAD
 	
 	populateCore(arg:Array<boolean>):Array<boolean> {
     this.coreCourses.forEach(element => {
@@ -749,4 +750,7 @@ export class DropdownsComponent {
     });
     return this.booleanElectives3Array;
   }
+=======
+    
+>>>>>>> Must check for null values in the control array as any null values in Json array will not be properly processed by Java Spring UpdateUser methods
 }
