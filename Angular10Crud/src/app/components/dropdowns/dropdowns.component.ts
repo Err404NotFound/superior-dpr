@@ -112,12 +112,8 @@ export class DropdownsComponent {
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
-<<<<<<< HEAD
     });
-=======
-    })
 
->>>>>>> master
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     });
