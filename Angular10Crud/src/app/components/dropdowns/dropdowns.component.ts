@@ -10,8 +10,12 @@ import {CourseService} from '../../services/course.service';
   styleUrls: ['./dropdowns.component.css']
 })
 export class DropdownsComponent {
+  booleanCoreArray: Array<boolean>=[];
+  booleanElectives1Array: Array<boolean>=[];
+  booleanElectives2Array: Array<boolean>=[];
+  booleanElectives3Array: Array<boolean>=[];
+  
   completedCoreCourses: Array<any>;
-  booleanArray: Array<boolean>=[];
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
@@ -80,23 +84,23 @@ export class DropdownsComponent {
   ecourses=[];
   
 
-    geForm: GenEdFormComponent;
-    geForm2:GenEdFormComponent;
-    geForm3: GenEdFormComponent;
-    geForm4: GenEdFormComponent;
-    geForm5: GenEdFormComponent;
-    geForm6: GenEdFormComponent;
-    geForm7: GenEdFormComponent;
-    geForm8: GenEdFormComponent;
-    geForm9: GenEdFormComponent;
-    geForm10: GenEdFormComponent;
-    completedGEs: any;
+  geForm: GenEdFormComponent;
+  geForm2:GenEdFormComponent;
+  geForm3: GenEdFormComponent;
+  geForm4: GenEdFormComponent;
+  geForm5: GenEdFormComponent;
+  geForm6: GenEdFormComponent;
+  geForm7: GenEdFormComponent;
+  geForm8: GenEdFormComponent;
+  geForm9: GenEdFormComponent;
+  geForm10: GenEdFormComponent;
+  completedGEs: any;
 
-    form0: FormGroup;
-    form1: FormGroup;
-    form2: FormGroup;
-    form3: FormGroup;
-    form4: FormGroup;
+  form0: FormGroup;
+  form1: FormGroup;
+  form2: FormGroup;
+  form3: FormGroup;
+  form4: FormGroup;
 
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
@@ -122,7 +126,6 @@ export class DropdownsComponent {
   }
 
   ngOnInit(): void {
-  	//this.retrieveCompletedCoreCourses();
     this.retrieveCourses();
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
@@ -132,40 +135,11 @@ export class DropdownsComponent {
     this.retrieveGEAreaCCourses();
     this.retrieveGEAreaDCourses();
     this.retrieveGEAreaECourses();
-    // this.populateCore();
-
-  }
-  
-  ngAfterViewInit() {
-  	//this.populateCore();
   }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
-  retrieveCompletedCoreCourses(): void{
-    this.courseService.getCoreCompleted()
-      // .then(data =>
-      //   {
-      //     this.completedCoreCourses=data;
-      //     console.log("retrieve completed data: " + data);
-      //   })
-      // .then(() => this.populateCore())
-      // .catch(error => console.log(error));
-  		.subscribe(
-  			data=>{
-          this.completedCoreCourses=data;
-  			},
-  			error =>{
-  				console.log(error);
-  			}
-      )
-      .add(() => {
-        console.log("Add method: " + this.completedCoreCourses);
-        //this.populateCore();
-      });
-  }
-  
   retrieveCourses(): void{
     this.courseService.getAll()
       .subscribe(
@@ -176,7 +150,6 @@ export class DropdownsComponent {
           console.log(error);
         })
         .add(() => {
-          console.log("Add retrieveCourses coreCourses: " + this.coreCourses);
           this.courseService.getCoreCompleted()
           .subscribe(response=>{
             this.completedCoreCourses=response;
@@ -185,11 +158,9 @@ export class DropdownsComponent {
             console.log(err);
           })
           .add(() => {
-            console.log("Add retrieveCourses completedCoreCourses: " + this.completedCoreCourses);
-            this.booleanArray=this.populateCore(this.booleanArray);
+            this.booleanCoreArray=this.populateCore(this.booleanCoreArray);
           })
         });
-    // this.populateCore();
   }
 
   retrieveElective1Courses(): void{
@@ -596,7 +567,6 @@ export class DropdownsComponent {
       this.completedCoreCourses.forEach(completedElement => {
         let c = JSON.parse(JSON.stringify(completedElement));
         if(e.courseNumber == c.courseNumber) {
-          console.log(e.courseNumber + " " + c.courseNumber + " " + arg.length);
           arg.push(true);
           const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
           checkArray0.push(new FormControl(JSON.stringify(element)));
@@ -606,18 +576,6 @@ export class DropdownsComponent {
         arg.push(false);
       }
     });
-    return this.booleanArray;
+    return this.booleanCoreArray;
 	}
-	
-	isInCompletedCore(d) {
-		console.log("checking...");
-		this.completedCoreCourses.forEach(function (course) {
-			if(course.courseNumber == d.courseNumber) {
-				console.log("matches");
-				return true;
-			}
-		});
-		return false;
-	}
-	
 }
