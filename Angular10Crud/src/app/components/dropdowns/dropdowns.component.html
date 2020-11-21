@@ -93,7 +93,7 @@
 
   
 
-  <form [formGroup]='parentAreaAForm' (ngSubmit)='submitFormGE()'>
+  <form [formGroup]='parentAreaAForm'>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
       <h4>Oral Communication</h4>
         <!--geForm [form]='parentAreaAForm' [courses]='a1courses' (result)='onGESubmit($event)'></geForm-->  
@@ -120,12 +120,12 @@
           {{course.courseNumber}} {{course.courseName}}
         </option>
       </select>
-      <!--geForm [form]='parentAreaAForm' [courses]='a3courses'></geForm-->
+      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeA()'>Save</button>
       <hr>
       
   </form>
 
-  <form [formGroup]='parentAreaBForm' (ngSubmit)='submitFormGE()'>
+  <form [formGroup]='parentAreaBForm' >
     <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
       <h4>Physical Sciences</h4>
       <select class="custom-select" formControlName="areaB1" >
@@ -169,10 +169,11 @@
           {{course.courseNumber}} {{course.courseName}}
         </option>
       </select>
+      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeB()'>Save</button>
   </form>
   
   <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
-  <form [formGroup]='parentAreaCForm' (ngSubmit)='submitFormGE()'> 
+  <form [formGroup]='parentAreaCForm'> 
     <h4>Visual and Performing Arts</h4>
       <!--geForm [courses]='c1courses'></geForm-->
       <select class="custom-select" formControlName="areaC1" >
@@ -206,8 +207,10 @@
           **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
         </pre>
       <hr>
+      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeC()'>Save</button>
     </form>
-  <form [formGroup]='parentAreaDForm' (ngSubmit)='submitFormGE()'>
+
+  <form [formGroup]='parentAreaDForm'>
     <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
       <h4>U.S. History and American Ideals</h4>
       <select class="custom-select" formControlName="areaD1" >
@@ -248,9 +251,10 @@
           **Course fulfills American Ideals requirement part B (U.S. Constitution and California Government).
         </pre>     
       <hr>
-
+      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeD()'>Save</button>
   </form>
-  <form [formGroup]='parentAreaEForm' (ngSubmit)='submitFormGE()'>
+
+  <form [formGroup]='parentAreaEForm' >
     <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
     <select class="custom-select" formControlName="areaE" >
       <option value="">Choose Course</option>
@@ -259,7 +263,7 @@
       </option>
     </select>
 
-    <button type="submit" class="btn btn-success mt-3">Save</button>
+    <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeE()'>Save</button>
   </form>
 
   

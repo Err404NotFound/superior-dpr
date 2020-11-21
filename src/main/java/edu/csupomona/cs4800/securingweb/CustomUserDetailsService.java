@@ -269,6 +269,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		user.setToDoAreaA(todo);
 		user.setCompletedAreaA(newComplete);
 		csStudentRepository.save(user);
+		csStudentRepository.save(user);
 	}
 	
 	public void updateUserAreaBList(User user, List<GEAreaBCourse> checkedElectives) {
