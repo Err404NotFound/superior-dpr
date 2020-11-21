@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 const apiBase='/api';
 const baseUrl = `${apiBase}/cscore`;
@@ -25,6 +25,11 @@ const geAreaCUrl = '/areaC';
 const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
+const getCoreUrl = `${apiBase}/getCompletedCoreList`;
+const getElectives1Url =`${apiBase}/getCompletedElectives1List`;
+const getElectives2Url =`${apiBase}/getCompletedElectives2List`;
+const getElectives3Url =`${apiBase}/getCompletedElectives3List`;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,8 +37,28 @@ export class CourseService {
 
   constructor( private http:HttpClient) { }
   
+  getCoreCompleted(): Observable<any>{
+    return this.http.get(`${getCoreUrl}`);
+  }
+
+  getElectives1Completed(): Observable<any>{
+    return this.http.get(`${getElectives1Url}`);
+  }
+  
+  getElectives2Completed(): Observable<any>{
+    return this.http.get(`${getElectives2Url}`);
+  }
+  
+  getElectives3Completed(): Observable<any>{
+    return this.http.get(`${getElectives3Url}`);
+  }
+  
   getAll(): Observable<any>{
     return this.http.get(`${baseUrl}`);
+  }
+  
+  getAllCompleted(): Observable<any> {
+  	return this.http.get(`${baseUrl}`);
   }
 
   getElective1All(): Observable<any>{
@@ -52,25 +77,11 @@ export class CourseService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  updateCore(data): any {
-//   data = [{ "id": "5f6cda383cab4d677974fa58", "courseNumber": "BIO1110L", "courseName": "Life Science Laboratory", "completionStatus": "TO DO",  "prereqCourseNumber": "",  "coreqCourseNumber": "",  "geArea": "B3",  "units": 1},
-//   { "id": "5f6d6b523cab4d677974fa68",  "courseNumber": "PHY1510",  "courseName": "Introduction to Newtonian Mechanics",  "completionStatus": "TO DO", "prereqCourseNumber": "MAT1140|MAT1150","coreqCourseNumber": "PHY1510L","geArea": "B3","units": 3},
-//   {
-//     "id": "5f6d6c953cab4d677974fa6c",
-//     "courseNumber": "STA2260",
-//     "courseName": "Probability and Statistics for Computer Scientists and Engineers",
-//     "completionStatus": "TO DO",
-//     "prereqCourseNumber": "MAT1150|MAT1310",
-//     "coreqCourseNumber": "",
-//     "geArea": "",
-//     "units": 3
-//   }
-// ];
-
-    //console.log('update '+ coursedata + ' data: ' + data);
+  updateCore(data): Promise<any> {
     return this.http.put(`${updateCoreUrl}`, data)
-      .subscribe(data => console.log(data), 
-      error => console.log(error));
+    	.toPromise()
+    	.then(res => console.log(res)) 
+      .catch(error => console.log(error));
     
   }
 

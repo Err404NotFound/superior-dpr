@@ -9,6 +9,15 @@ import {CourseService} from '../../services/course.service';
   styleUrls: ['./dropdowns.component.css']
 })
 export class DropdownsComponent {
+  booleanCoreArray: Array<boolean>=[];
+  booleanElectives1Array: Array<boolean>=[];
+  booleanElectives2Array: Array<boolean>=[];
+  booleanElectives3Array: Array<boolean>=[];
+  
+  completedCoreCourses: Array<any>;
+  completedElectives1Courses: Array<any>;
+  completedElectives2Courses: Array<any>;
+  completedElectives3Courses: Array<any>;
   
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
@@ -57,7 +66,7 @@ export class DropdownsComponent {
     {"name":"RS 3030 - Organization for Regenerative Practices (3) (fulfills Area C3 or D4)"},
     {"name":"RS 4500 - Sustainable Communities (3) (fulfills Area C3 or D4)"}
   ];
-
+  
   a1courses=[];
   a2courses=[];
   a3courses=[];
@@ -77,17 +86,16 @@ export class DropdownsComponent {
 
   completedGEs: any;
 
-    form0: FormGroup;
-    form1: FormGroup;
-    form2: FormGroup;
-    form3: FormGroup;
-    form4: FormGroup;
-    parentAreaAForm: FormGroup;
-    parentAreaBForm: FormGroup;
-    parentAreaCForm: FormGroup;
-    parentAreaDForm: FormGroup;
-    parentAreaEForm: FormGroup;
-
+  form0: FormGroup;
+  form1: FormGroup;
+  form2: FormGroup;
+  form3: FormGroup;
+  form4: FormGroup;
+  parentAreaAForm: FormGroup;
+  parentAreaBForm: FormGroup;
+  parentAreaCForm: FormGroup;
+  parentAreaDForm: FormGroup;
+  parentAreaEForm: FormGroup;
 
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
@@ -151,7 +159,6 @@ export class DropdownsComponent {
     this.retrieveGEAreaCCourses();
     this.retrieveGEAreaDCourses();
     this.retrieveGEAreaECourses();
-
   }
 
   
@@ -166,6 +173,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getCoreCompleted()
+          .subscribe(response=>{
+            this.completedCoreCourses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanCoreArray=this.populateCore(this.booleanCoreArray);
+          })
         });
   }
 
@@ -177,6 +196,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives1Completed()
+          .subscribe(response => {
+            this.completedElectives1Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives1Array=this.populateElectives1(this.booleanElectives1Array);
+          })
         });
   }
 
@@ -188,6 +219,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives2Completed()
+          .subscribe(response => {
+            this.completedElectives2Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives2Array=this.populateElectives2(this.booleanElectives2Array);
+          })
         });
   }
 
@@ -199,6 +242,18 @@ export class DropdownsComponent {
         },
         error =>{
           console.log(error);
+        })
+        .add(() => {
+          this.courseService.getElectives3Completed()
+          .subscribe(response => {
+            this.completedElectives3Courses=response;
+          },
+          err => {
+            console.log(err);
+          })
+          .add(() => {
+            this.booleanElectives3Array=this.populateElectives3(this.booleanElectives3Array);
+          })
         });
   }
 
@@ -364,7 +419,7 @@ export class DropdownsComponent {
 
   /**onCheckboxChange methods take in event from respective form, add checkbox value which is json object to FormArray */
   onCoreCheckboxChange(e) {
-    const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
+  	const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
     if (e.target.checked) {
       checkArray0.push(new FormControl(e.target.value));
     } else {
@@ -448,8 +503,12 @@ export class DropdownsComponent {
  */
   submitFormCore() {
     // Gets the number of checkboxes checked for core courses
-    var checkedCore = this.form0.value.checkArray0.length;
-    var percent = Math.round(checkedCore / 22 * 100);
+    var checkedUnits = 0;
+    this.form0.value.checkArray0.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 65 * 100);
     this.percentCore = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -464,14 +523,18 @@ export class DropdownsComponent {
     } else {
       this.colorCore = 'ForestGreen';
     }
-    
+    //don't need the json key checkArray#, so just get value of key and send
     this.courseService.updateCore(this.form0.value.checkArray0);
   }
 
   submitFormElective1() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form1.value.checkArray1.length;
-    var percent = Math.round(checked / 15 * 100);
+    // Gets the number of checkboxes checked for electives1 courses
+    var checkedUnits = 0;
+    this.form1.value.checkArray1.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 12 * 100);
     this.percentElectives1 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -481,10 +544,11 @@ export class DropdownsComponent {
       this.colorElectives1 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives1 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives1 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives1 = 'ForestGreen';
+    } else {
+      this.colorElectives1 = 'RoyalBlue';
+      this.percentElectives1 = "100%";
     }
 
     console.log(this.form1.value);
@@ -492,9 +556,13 @@ export class DropdownsComponent {
   }
 
   submitFormElective2() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form2.value.checkArray2.length;
-    var percent = Math.round(checked / 4 * 100);
+    // Gets the number of checkboxes checked for electives2 courses
+    var checkedUnits = 0;
+    this.form2.value.checkArray2.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 3 * 100);
     this.percentElectives2 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -504,10 +572,11 @@ export class DropdownsComponent {
       this.colorElectives2 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives2 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives2 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives2 = 'ForestGreen';
+    } else {
+      this.colorElectives2 = 'RoyalBlue';
+      this.percentElectives2 = "100%";
     }
 
     console.log(this.form2.value);
@@ -515,9 +584,13 @@ export class DropdownsComponent {
   }
 
   submitFormElective3() {
-    // Gets the number of checkboxes checked for core courses
-    var checked = this.form3.value.checkArray3.length;
-    var percent = Math.round(checked / 13 * 100);
+    // Gets the number of checkboxes checked for electives3 courses
+    var checkedUnits = 0;
+    this.form3.value.checkArray3.forEach(function (value) {
+    	let course = JSON.parse(value);
+    	checkedUnits += course.units;
+    });
+    var percent = Math.round(checkedUnits / 4 * 100);
     this.percentElectives3 = percent + "%";
 
     //Change the color of the progress bar based on how many courses completed
@@ -527,10 +600,11 @@ export class DropdownsComponent {
       this.colorElectives3 = 'DarkOrange';
     } else if (percent < 76) {
         this.colorElectives3 = 'GoldenRod';
-    } else if (percent == 100) {
-      this.colorElectives3 = 'RoyalBlue';
-    } else {
+    } else if (percent < 100) {
       this.colorElectives3 = 'ForestGreen';
+    } else {
+      this.colorElectives3 = 'RoyalBlue';
+      this.percentElectives3 = "100%";
     }
 
     console.log(this.form3.value);
@@ -580,5 +654,76 @@ export class DropdownsComponent {
   submitFormGeE() {
     this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
   }
-    
+	
+	populateCore(arg:Array<boolean>):Array<boolean> {
+    this.coreCourses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedCoreCourses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray0: FormArray = this.form0.get('checkArray0') as FormArray;
+          checkArray0.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.coreCourses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanCoreArray;
+  }
+  
+  populateElectives1(arg:Array<boolean>):Array<boolean> {
+    this.elective1Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives1Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray1: FormArray = this.form1.get('checkArray1') as FormArray;
+          checkArray1.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective1Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives1Array;
+  }
+  
+  populateElectives2(arg:Array<boolean>):Array<boolean> {
+    this.elective2Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives2Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray2: FormArray = this.form2.get('checkArray2') as FormArray;
+          checkArray2.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective2Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives2Array;
+  }
+  
+  populateElectives3(arg:Array<boolean>):Array<boolean> {
+    this.elective3Courses.forEach(element => {
+      let e = JSON.parse(JSON.stringify(element));
+      this.completedElectives3Courses.forEach(completedElement => {
+        let c = JSON.parse(JSON.stringify(completedElement));
+        if(e.courseNumber == c.courseNumber) {
+          arg.push(true);
+          const checkArray3: FormArray = this.form3.get('checkArray3') as FormArray;
+          checkArray3.push(new FormControl(JSON.stringify(element)));
+        }
+      });
+      if(arg.length != (this.elective3Courses.indexOf(element) + 1)) {
+        arg.push(false);
+      }
+    });
+    return this.booleanElectives3Array;
+  }
 }

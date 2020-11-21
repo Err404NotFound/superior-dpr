@@ -1,10 +1,12 @@
 package edu.csupomona.cs4800.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,11 +21,13 @@ import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup1Repo
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup2Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorElectivesGroup3Repository;
 import edu.csupomona.cs4800.repositories.ComputerScienceMajorRequiredCoreRepository;
+import edu.csupomona.cs4800.repositories.ComputerScienceStudentRepository;
 import edu.csupomona.cs4800.repositories.GEAreaARepository;
 import edu.csupomona.cs4800.repositories.GEAreaBRepository;
 import edu.csupomona.cs4800.repositories.GEAreaCRepository;
 import edu.csupomona.cs4800.repositories.GEAreaDRepository;
 import edu.csupomona.cs4800.repositories.GEAreaERepository;
+import edu.csupomona.cs4800.user.User;
 
 @RestController
 @RequestMapping("/cscore")
@@ -32,6 +36,8 @@ public class CSCoreController {
 	@Autowired
 	MongoTemplate mongoTemplate;
 	
+	@Autowired
+	private ComputerScienceStudentRepository studentRepository;
 	@Autowired
 	private ComputerScienceMajorRequiredCoreRepository csCoreRepository;
 	@Autowired
@@ -44,6 +50,15 @@ public class CSCoreController {
 	@GetMapping
 	public List<CSCoreCourse> getAll() {
 		return csCoreRepository.findAll();
+	}
+	
+	@GetMapping (value="/getCompleteCore/{id}")
+	public List<CSCoreCourse> getCoreCompleted(@PathVariable("id") String id) {
+		Optional<User> student = studentRepository.findById(id);
+		User user = student.get();
+		if(user == null)
+			throw new ResourceNotFoundException();
+		return user.getCompletedCore();
 	}
 	
 	@GetMapping(value = "/list")
