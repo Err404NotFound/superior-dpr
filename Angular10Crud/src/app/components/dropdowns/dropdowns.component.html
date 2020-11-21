@@ -13,8 +13,8 @@
     <form [formGroup]="form0" (ngSubmit)="submitFormCore()" novalidate>
       <div *ngFor="let data of coreCourses; let i=index">
         <label>
-          <input name="coreCheckboxes" type="checkbox" [value]="data|json " (change)="onCoreCheckboxChange($event)" />
-          {{data.courseNumber}} {{data.courseName}}
+          <input name="coreCheckboxes" type="checkbox" [value]="data|json " (change)="onCoreCheckboxChange($event)" [checked]="booleanCoreArray[i]"/>
+          {{data.courseNumber}} {{data.courseName}} ({{data.units}})
         </label>
       </div>
 
@@ -34,8 +34,8 @@
 
         <div *ngFor="let data of elective1Courses; let i=index">
           <label>
-            <input type="checkbox" [value]="data |json" (change)="onElective1CheckboxChange($event)" />
-            {{data.courseNumber}} {{data.courseName}}
+            <input type="checkbox" [value]="data |json" (change)="onElective1CheckboxChange($event)" [checked]="booleanElectives1Array[i]" />
+            {{data.courseNumber}} {{data.courseName}} ({{data.units}})
           </label>
         </div>
 
@@ -53,8 +53,8 @@
 
       <div *ngFor="let data of elective2Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" />
-          {{data.courseNumber}} {{data.courseName}}
+          <input type="checkbox" [value]="data |json" (change)="onElective2CheckboxChange($event)" [checked]="booleanElectives2Array[i]" />
+          {{data.courseNumber}} {{data.courseName}} ({{data.units}})
         </label>
       </div>
 
@@ -75,8 +75,8 @@
 
       <div *ngFor="let data of elective3Courses; let i=index">
         <label>
-          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" />
-          {{data.courseNumber}} {{data.courseName}}
+          <input type="checkbox" [value]="data |json" (change)="onElective3CheckboxChange($event)" [checked]="booleanElectives3Array[i]" />
+          {{data.courseNumber}} {{data.courseName}} ({{data.units}})
         </label>
       </div>
 
