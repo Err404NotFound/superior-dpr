@@ -283,7 +283,7 @@ public class LoginController {
 		userService.updateUserAreaEList(user, checkedCoreCourse);
 		return modelAndView;
 	}
-		
+  
 	@PutMapping("/updateElectives1List")
 	public ModelAndView updateElectives1List(@RequestBody String[] jsonObjArr) {
 		List<CSElectives1Course> checkedElectives1Course = new ArrayList<CSElectives1Course>();

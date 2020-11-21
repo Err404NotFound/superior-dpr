@@ -164,6 +164,7 @@ export class DropdownsComponent {
     this.retrieveGEAreaECourses();
   }
 
+  
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
