@@ -85,7 +85,7 @@ export class DropdownsComponent {
   d3courses=[];
   d4courses=[];
   ecourses=[];
-  
+
   completedGEs: any;
 
   form0: FormGroup;
@@ -153,7 +153,6 @@ export class DropdownsComponent {
   }
 
   ngOnInit(): void {
-  	//this.retrieveCompletedCoreCourses();
     this.retrieveCourses();
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
@@ -163,10 +162,6 @@ export class DropdownsComponent {
     this.retrieveGEAreaCCourses();
     this.retrieveGEAreaDCourses();
     this.retrieveGEAreaECourses();
-  }
-  
-  ngAfterViewInit() {
-  	//this.populateCore();
   }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
