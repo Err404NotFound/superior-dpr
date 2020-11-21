@@ -162,7 +162,7 @@ export class DropdownsComponent {
       )
       .add(() => {
         console.log("Add method: " + this.completedCoreCourses);
-        this.populateCore();
+        //this.populateCore();
       });
   }
   
@@ -186,7 +186,7 @@ export class DropdownsComponent {
           })
           .add(() => {
             console.log("Add retrieveCourses completedCoreCourses: " + this.completedCoreCourses);
-            this.populateCore();
+            this.booleanArray=this.populateCore(this.booleanArray);
           })
         });
     // this.populateCore();
@@ -590,7 +590,7 @@ export class DropdownsComponent {
     console.log(e);
   }
 	
-	populateCore() {
+	populateCore(arg:Array<boolean>):Array<boolean> {
 		// this.completedCoreCourses.forEach(function (completed) {
     //   let completedCourse = JSON.parse(JSON.stringify(completed));
     //   console.log("populate core course: " + this.coreCourses);
@@ -608,10 +608,11 @@ export class DropdownsComponent {
 		// 	completedCourse.push({checked: isChecked});
     // });
     this.completedCoreCourses.forEach(function (fun) {
-      console.log("boolean array" + this.booleanArray);
-      this.booleanArray.push(true);
+      console.log("boolean array" + arg);
+      arg.push(true);
       
     })
+    return this.booleanArray;
 	}
 	
 	isInCompletedCore(d) {
