@@ -153,7 +153,7 @@ export class DropdownsComponent {
   }
 
   ngOnInit(): void {
-  	this.retrieveCompletedCoreCourses();
+  	//this.retrieveCompletedCoreCourses();
     this.retrieveCourses();
     this.retrieveElective1Courses();
     this.retrieveElective2Courses();
@@ -164,23 +164,14 @@ export class DropdownsComponent {
     this.retrieveGEAreaDCourses();
     this.retrieveGEAreaECourses();
   }
+  
+  ngAfterViewInit() {
+  	//this.populateCore();
+  }
 
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
-  retrieveCompletedCoreCourses(): void{
-  	this.courseService.getCoreCompleted()
-  		.subscribe(
-  			data=>{
-  				this.completedCoreCourses=data;
-  				console.log(this.completedCoreCourses);
-  			},
-  			error =>{
-  				console.log(error);
-  			}
-  		);
-  }
-  
   retrieveCourses(): void{
     this.courseService.getAll()
       .subscribe(
