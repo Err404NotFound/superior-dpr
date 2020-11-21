@@ -115,6 +115,7 @@ export class DropdownsComponent {
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
     })
+
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     })
@@ -164,7 +165,6 @@ export class DropdownsComponent {
     this.retrieveGEAreaECourses();
   }
 
-  
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
@@ -417,8 +417,7 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
         });
-      }
-
+  }
 
   /**onCheckboxChange methods take in event from respective form, add checkbox value which is json object to FormArray */
   onCoreCheckboxChange(e) {
@@ -428,7 +427,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray0.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if(loopItem == eventItem) {
           checkArray0.removeAt(i);
           return;
         }
@@ -444,7 +445,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray1.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray1.removeAt(i);
           return;
         }
@@ -460,7 +463,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray2.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray2.removeAt(i);
           return;
         }
@@ -476,7 +481,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray3.removeAt(i);
           return;
         }
