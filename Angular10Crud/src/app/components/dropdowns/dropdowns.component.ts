@@ -112,7 +112,12 @@ export class DropdownsComponent {
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
+<<<<<<< HEAD
     });
+=======
+    })
+
+>>>>>>> master
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     });
@@ -161,7 +166,6 @@ export class DropdownsComponent {
     this.retrieveGEAreaECourses();
   }
 
-  
   /**retrieveCourses populates the arrays needed for checkbox forms
    * calls course.service.ts to retrieve data from Java spring backend with HTTP get request
   */
@@ -184,6 +188,7 @@ export class DropdownsComponent {
           })
           .add(() => {
             this.booleanCoreArray=this.populateCore(this.booleanCoreArray);
+            this.updateCoreProgressBar();
           })
         });
   }
@@ -207,6 +212,7 @@ export class DropdownsComponent {
           })
           .add(() => {
             this.booleanElectives1Array=this.populateElectives1(this.booleanElectives1Array);
+            this.updateElectives1ProgressBar();
           })
         });
   }
@@ -230,6 +236,7 @@ export class DropdownsComponent {
           })
           .add(() => {
             this.booleanElectives2Array=this.populateElectives2(this.booleanElectives2Array);
+            this.updateElectives2ProgressBar();
           })
         });
   }
@@ -253,6 +260,7 @@ export class DropdownsComponent {
           })
           .add(() => {
             this.booleanElectives3Array=this.populateElectives3(this.booleanElectives3Array);
+            this.updateElectives3ProgressBar();
           })
         });
   }
@@ -414,8 +422,7 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
         });
-      }
-
+  }
 
   /**onCheckboxChange methods take in event from respective form, add checkbox value which is json object to FormArray */
   onCoreCheckboxChange(e) {
@@ -425,7 +432,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray0.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if(loopItem == eventItem) {
           checkArray0.removeAt(i);
           return;
         }
@@ -441,7 +450,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray1.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray1.removeAt(i);
           return;
         }
@@ -457,7 +468,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray2.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray2.removeAt(i);
           return;
         }
@@ -473,7 +486,9 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
+        if (loopItem == eventItem) {
           checkArray3.removeAt(i);
           return;
         }
@@ -498,10 +513,7 @@ export class DropdownsComponent {
     }
   }
 
-/** submitForm methods user course.service.ts to send FormArray as HTTP Put request 
- * to Java Spring backend
- */
-  submitFormCore() {
+  updateCoreProgressBar() {
     // Gets the number of checkboxes checked for core courses
     var checkedUnits = 0;
     this.form0.value.checkArray0.forEach(function (value) {
@@ -523,11 +535,9 @@ export class DropdownsComponent {
     } else {
       this.colorCore = 'ForestGreen';
     }
-    //don't need the json key checkArray#, so just get value of key and send
-    this.courseService.updateCore(this.form0.value.checkArray0);
   }
 
-  submitFormElective1() {
+  updateElectives1ProgressBar() {
     // Gets the number of checkboxes checked for electives1 courses
     var checkedUnits = 0;
     this.form1.value.checkArray1.forEach(function (value) {
@@ -550,12 +560,9 @@ export class DropdownsComponent {
       this.colorElectives1 = 'RoyalBlue';
       this.percentElectives1 = "100%";
     }
-
-    console.log(this.form1.value);
-    this.courseService.updateElectives1(this.form1.value.checkArray1);
   }
 
-  submitFormElective2() {
+  updateElectives2ProgressBar() {
     // Gets the number of checkboxes checked for electives2 courses
     var checkedUnits = 0;
     this.form2.value.checkArray2.forEach(function (value) {
@@ -578,12 +585,9 @@ export class DropdownsComponent {
       this.colorElectives2 = 'RoyalBlue';
       this.percentElectives2 = "100%";
     }
-
-    console.log(this.form2.value);
-    this.courseService.updateElectives2(this.form2.value.checkArray2);
   }
 
-  submitFormElective3() {
+  updateElectives3ProgressBar() {
     // Gets the number of checkboxes checked for electives3 courses
     var checkedUnits = 0;
     this.form3.value.checkArray3.forEach(function (value) {
@@ -606,8 +610,29 @@ export class DropdownsComponent {
       this.colorElectives3 = 'RoyalBlue';
       this.percentElectives3 = "100%";
     }
+  }
 
-    console.log(this.form3.value);
+/** submitForm methods user course.service.ts to send FormArray as HTTP Put request 
+ * to Java Spring backend
+ */
+  submitFormCore() {
+    this.updateCoreProgressBar();
+    //don't need the json key checkArray#, so just get value of key and send
+    this.courseService.updateCore(this.form0.value.checkArray0);
+  }
+
+  submitFormElective1() {
+    this.updateElectives1ProgressBar();
+    this.courseService.updateElectives1(this.form1.value.checkArray1);
+  }
+
+  submitFormElective2() {
+    this.updateElectives2ProgressBar();
+    this.courseService.updateElectives2(this.form2.value.checkArray2);
+  }
+
+  submitFormElective3() {
+    this.updateElectives3ProgressBar();
     this.courseService.updateElectives3(this.form3.value.checkArray3);
   }
 
