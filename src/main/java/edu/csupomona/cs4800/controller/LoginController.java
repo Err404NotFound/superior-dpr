@@ -140,36 +140,28 @@ public class LoginController {
 		return new ResponseEntity<List<CSElectives3Course>>(user.getCompletedElectives3(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/updateCoreList")
-	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
-		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
-		try {
-			for (String s: jsonObjArr) {
-				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-				CSCoreCourse course = objectMapper.readValue(s, CSCoreCourse.class);
-				checkedCoreCourse.add(course);
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		ModelAndView modelAndView = new ModelAndView();
+	@GetMapping(value="/getCompletedGEAreaA1")
+	public ResponseEntity<GEAreaACourse> getGEAreaA1Completed() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
-		modelAndView.addObject("currentUser", user);
-		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
-		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
-		modelAndView.addObject("userMessage", "Content should be visible to all users");
-		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUserCoreList(user, checkedCoreCourse);
-		return modelAndView;
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse a1 = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A1")) {
+				a1 = c;
+				break; //If for some reason there are multiple A1's completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(a1, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateAreaAList")
 	public ModelAndView updateAreaAList(@RequestBody String[] jsonObjArr) {
 		List<GEAreaACourse> checkedCoreCourse = new ArrayList<GEAreaACourse>();
+		System.out.println("Request body: " + jsonObjArr);
 		try {
 			for (String s: jsonObjArr) {
+				System.out.println("String: " + s);
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 				GEAreaACourse course = objectMapper.readValue(s, GEAreaACourse.class);
 				checkedCoreCourse.add(course);
@@ -282,6 +274,31 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserAreaEList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	@PutMapping(value="/updateCoreList")
+	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
+		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				CSCoreCourse course = objectMapper.readValue(s, CSCoreCourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserCoreList(user, checkedCoreCourse);
 		return modelAndView;
 	}
   
