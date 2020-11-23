@@ -661,7 +661,6 @@ export class DropdownsComponent {
     var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
     Object.keys(this.parentAreaAForm.controls).forEach(key => {
       if(this.parentAreaAForm.controls[key].value!="") {
-        console.log(this.parentAreaAForm.controls[key].value);
         var temp = this.parentAreaAForm.controls[key].value;
         tempA.push(temp);
       }
