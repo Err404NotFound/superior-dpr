@@ -25,6 +25,8 @@ const geAreaCUrl = '/areaC';
 const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
+const getCompletedGEAreaA = `${apiBase}/getCompletedGEAreaA`;
+
 const getCoreUrl = `${apiBase}/getCompletedCoreList`;
 const getElectives1Url =`${apiBase}/getCompletedElectives1List`;
 const getElectives2Url =`${apiBase}/getCompletedElectives2List`;
@@ -125,6 +127,10 @@ export class CourseService {
   findByCourseName(title): Observable<any> {
     return this.http.get(`${baseUrl}?title=${title}`);
   }    
+
+  getGEAreaA1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}1`);
+  }
 
   getGEAreaA1All(): Observable<any>{
     return this.http.get(`${geBaseUrl}${geAreaAUrl}1`);

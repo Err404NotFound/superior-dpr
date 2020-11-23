@@ -85,6 +85,7 @@ export class DropdownsComponent {
   ecourses=[];
 
   completedGEs: any;
+  completedA1=[];
 
   form0: FormGroup;
   form1: FormGroup;
@@ -112,12 +113,8 @@ export class DropdownsComponent {
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
-<<<<<<< HEAD
     });
-=======
-    })
 
->>>>>>> master
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     });
@@ -135,6 +132,7 @@ export class DropdownsComponent {
       areaB4: '',
       areaB5: ''
     });
+    
     this.parentAreaCForm = this.fb.group({
       areaC1: '',
       areaC2: '',
@@ -266,14 +264,94 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaACourses(): void{
-    this.courseService.getGEAreaA1All()
+    //completed a1 before a1all
+    this.courseService.getGEAreaA1Completed()
       .subscribe(
         data=>{
-          this.a1courses=data;
+          this.completedA1=data;
+          console.log("completeda1: " + this.completedA1);
+          if(this.completedA1[0] != null) {
+            console.log("Is this running: " + this.completedA1);
+            this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
+            console.log("Prepopulate: " + this.completedA1[0]);
+          }
         },
-        error =>{
+        error=>{
           console.log(error);
-        });
+        }
+      )
+
+    this.courseService.getGEAreaA1All()
+    .subscribe(
+      response=>{
+        this.a1courses=response;
+        console.log("a1courses: " + this.a1courses);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+      // .add(
+      //   // this.courseService.getGEAreaA1All()
+      //   //   .subscribe(
+      //   //     response=>{
+      //   //       this.a1courses=response;
+      //   //       console.log("a1courses: " + this.a1courses);
+      //   //     },
+      //   //     err=>{
+      //   //       console.log(err);
+      //   //     }
+      //   //   )
+      // )
+
+
+    //A1 all before completeda1
+    // this.courseService.getGEAreaA1All()
+    //   .subscribe(
+    //     data=>{
+    //       //Test the stringify shit
+    //       // data.forEach(element => {
+    //       //   console.log("Element pushed: " + JSON.stringify(element));
+    //       //   this.a1courses.push(JSON.stringify(element));
+    //       // });
+          
+    //       // Original code
+    //       this.a1courses=data;
+    //       console.log("a1course: " + this.a1courses);
+    //     },
+    //     error =>{
+    //       console.log(error);
+    //     }
+    //   )
+    //   .add(
+    //     this.courseService.getGEAreaA1Completed()
+    //       .subscribe(
+    //         response=>{
+    //           this.completedA1=response;
+    //           console.log("completeda1: " + this.completedA1);
+    //           if (this.completedA1[0] != null) {
+    //             this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
+    //             console.log("Prepopulate: " + this.completedA1[0]);
+    //           }
+    //           //Original code
+    //           // this.completedA1=response;
+    //           // console.log("completed course: " + this.completedA1);
+    //         },
+    //         err =>{
+    //           console.log(err);
+    //         }
+    //       )
+    //   );
+  
+    // this.courseService.getGEAreaA1Completed()
+    //   .subscribe(
+    //     response=>{
+    //       this.completedA1=response;
+    //       console.log("completed course: " + this.completedA1);
+    //     },
+    //     err =>{
+    //       console.log(err);
+    //     });
 
     this.courseService.getGEAreaA2All()
       .subscribe(
@@ -292,6 +370,14 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
     });
+  }
+
+  populateA1(): void{
+    console.log("Is this running: " + this.completedA1[0]);
+    if(this.completedA1[0] != null) {
+      this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
+      console.log("Prepopulate: " + this.completedA1[0]);
+    }
   }
 
   retrieveGEAreaBCourses(): void{
@@ -643,6 +729,8 @@ export class DropdownsComponent {
   submitFormGeA() {
     var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
     Object.keys(this.parentAreaAForm.controls).forEach(key => {
+      console.log(key + " " + this.parentAreaAForm.controls[key].value);
+      console.log("String " + JSON.stringify(this.parentAreaAForm.controls[key].value));
       if(this.parentAreaAForm.controls[key].value!="")
         tempA.push(this.parentAreaAForm.controls[key].value);
     });
