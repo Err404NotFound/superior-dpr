@@ -99,7 +99,7 @@
         <select class="custom-select" formControlName="areaA1" >
           <option value="">Choose Course</option>
           <option *ngFor="let course of a1courses" [value]="course">
-            {{(course.courseNumber | json).replaceAll("\"", "")}} {{(course.courseName | json).replaceAll("\"", "")}} ({{course.units | json}}) {{course|json}}
+            {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
           </option>
         </select> 
 

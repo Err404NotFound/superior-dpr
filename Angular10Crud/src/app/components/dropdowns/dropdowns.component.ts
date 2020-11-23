@@ -2,6 +2,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 
 import { Component, OnInit } from '@angular/core';
 import {CourseService} from '../../services/course.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -270,10 +271,13 @@ export class DropdownsComponent {
         data=>{
           this.completedA1=data;
           console.log("completeda1: " + this.completedA1);
-          if(this.completedA1[0] != null) {
-            console.log("Is this running: " + this.completedA1);
-            this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
-            console.log("Prepopulate: " + this.completedA1[0]);
+          var course = this.completedA1[0];
+          if(course != null) {
+            console.log("Is this running: " + course);
+            var c = JSON.parse(JSON.stringify(course));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA1"].patchValue(JSON.stringify(c));
+            console.log("Prepopulate: " + JSON.stringify(c));
           }
         },
         error=>{
@@ -284,8 +288,12 @@ export class DropdownsComponent {
     this.courseService.getGEAreaA1All()
     .subscribe(
       response=>{
-        this.a1courses=response;
-        console.log("a1courses: " + this.a1courses);
+        response.forEach(element => {
+          console.log("pushed element: " + JSON.stringify(element));
+          this.a1courses.push(JSON.stringify(element));
+        })
+        // this.a1courses=response;
+        // console.log("a1courses: " + this.a1courses);
       },
       err=>{
         console.log(err);
@@ -729,10 +737,12 @@ export class DropdownsComponent {
   submitFormGeA() {
     var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
     Object.keys(this.parentAreaAForm.controls).forEach(key => {
-      console.log(key + " " + this.parentAreaAForm.controls[key].value);
-      console.log("String " + JSON.stringify(this.parentAreaAForm.controls[key].value));
-      if(this.parentAreaAForm.controls[key].value!="")
-        tempA.push(this.parentAreaAForm.controls[key].value);
+      if(this.parentAreaAForm.controls[key].value!="") {
+        console.log(this.parentAreaAForm.controls[key].value);
+        var temp = this.parentAreaAForm.controls[key].value;
+        JsonPipe.ɵpipe
+        tempA.push(temp);
+      }
     });
     this.courseService.updateAreaA(tempA);
   }
