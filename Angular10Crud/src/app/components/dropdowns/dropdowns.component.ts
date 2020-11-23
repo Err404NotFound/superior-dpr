@@ -2,6 +2,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 
 import { Component, OnInit } from '@angular/core';
 import {CourseService} from '../../services/course.service';
+import { PrepopulateService } from '../../services/prepopulate.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class DropdownsComponent {
   completedElectives1Courses: Array<any>;
   completedElectives2Courses: Array<any>;
   completedElectives3Courses: Array<any>;
-  
+  completedAreaACourses: Array<any>;
+
   coreCourses: Array<any>;
   elective1Courses: Array<any>;
   elective2Courses: Array<any>;
@@ -97,7 +99,7 @@ export class DropdownsComponent {
   parentAreaDForm: FormGroup;
   parentAreaEForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private courseService: CourseService) {
+  constructor(private fb: FormBuilder, private courseService: CourseService, private prepopulateService: PrepopulateService) {
     this.form0 = this.fb.group({
       checkArray0: this.fb.array([], [Validators.required])
     });
@@ -112,12 +114,7 @@ export class DropdownsComponent {
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
-<<<<<<< HEAD
     });
-=======
-    })
-
->>>>>>> master
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     });
@@ -265,16 +262,47 @@ export class DropdownsComponent {
         });
   }
 
-  retrieveGEAreaACourses(): void{
-    this.courseService.getGEAreaA1All()
-      .subscribe(
-        data=>{
-          this.a1courses=data;
-        },
-        error =>{
-          console.log(error);
-        });
+  async retrieveGEAreaACourses(){
+    // this.courseService.getAreaACompleted()
+    //   .subscribe(
+    //     data=>{
+    //       this.completedAreaACourses=data;
+    //       console.log('AreaACompleted: ' + JSON.stringify(this.completedAreaACourses));
+    
+    //     },
+    //     error =>{
+    //       console.log(error);
+    //     });
+    
+    await this.courseService.getGEAreaA1All();
+    this.a1courses=this.courseService.a1courses;
+    await this.prepopulateService.getAreaACompleted();
+    this.completedAreaACourses= this.prepopulateService.completedAreaA;
+    
+    let index=0;
+    this.completedAreaACourses.forEach(completedCourse=>{
+      this.a1courses.forEach(a1course=>{
+        if(JSON.parse(JSON.stringify(a1course)).courseNumber==JSON.parse(JSON.stringify(completedCourse)).courseNumber)
+          //this.parentAreaAForm.value.areaA1=JSON.parse(JSON.stringify((a1course)));
+          this.parentAreaAForm.controls["areaA1"].setValue(JSON.stringify(a1course));
+          //this.parentAreaAForm.value.areaA1.Element.value=JSON.parse(JSON.stringify((a1course)));
+          console.log('va'+this.parentAreaAForm.value);
+          console.log('matches' + a1course);
+      })
+      index++;
+    })
+    console.log('A1: ' + JSON.stringify(this.a1courses));
+    console.log('CompletedAreaA: ' + JSON.stringify(this.completedAreaACourses));
 
+    // this.courseService.getGEAreaA1All()
+    //   .subscribe(
+    //     data=>{
+    //       this.a1courses=data;
+    //     },
+    //     error =>{
+    //       console.log(error);
+    //     });
+      
     this.courseService.getGEAreaA2All()
       .subscribe(
         data=>{
@@ -283,7 +311,6 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
         });
-        
     this.courseService.getGEAreaA3All()
       .subscribe(
         data=>{

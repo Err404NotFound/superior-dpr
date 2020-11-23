@@ -140,6 +140,13 @@ public class LoginController {
 		return new ResponseEntity<List<CSElectives3Course>>(user.getCompletedElectives3(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/getCompletedAreaAList")
+	public ResponseEntity<List<GEAreaACourse>> getGeAreaACompleted() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		return new ResponseEntity<List<GEAreaACourse>>(user.getCompletedAreaA(), HttpStatus.OK);
+	}
+	
 	@PutMapping(value="/updateCoreList")
 	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
 		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
