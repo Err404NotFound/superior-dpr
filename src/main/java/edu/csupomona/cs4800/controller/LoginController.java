@@ -141,27 +141,25 @@ public class LoginController {
 	}
 	
 	@GetMapping(value="/getCompletedGEAreaA1")
-	public ResponseEntity<List<GEAreaACourse>> getGEAreaA1Completed() {
+	public ResponseEntity<GEAreaACourse> getGEAreaA1Completed() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		List<GEAreaACourse> areaA = user.getCompletedAreaA();
-		List<GEAreaACourse> a1 = new ArrayList<GEAreaACourse>();
+		GEAreaACourse a1 = null;
 		for(GEAreaACourse c : areaA) {
 			if(c.getGeArea().contains("A1")) {
-				a1.add(c);
+				a1 = c;
 				break; //If for some reason there are multiple A1's completed, just take the first one
 			}
 		}
-		return new ResponseEntity<List<GEAreaACourse>>(a1, HttpStatus.OK);
+		return new ResponseEntity<GEAreaACourse>(a1, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateAreaAList")
 	public ModelAndView updateAreaAList(@RequestBody String[] jsonObjArr) {
 		List<GEAreaACourse> checkedCoreCourse = new ArrayList<GEAreaACourse>();
-		System.out.println("Request body: " + jsonObjArr);
 		try {
 			for (String s: jsonObjArr) {
-				System.out.println("String: " + s);
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 				GEAreaACourse course = objectMapper.readValue(s, GEAreaACourse.class);
 				checkedCoreCourse.add(course);

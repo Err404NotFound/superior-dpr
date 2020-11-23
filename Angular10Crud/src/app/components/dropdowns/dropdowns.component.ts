@@ -86,7 +86,7 @@ export class DropdownsComponent {
   ecourses=[];
 
   completedGEs: any;
-  completedA1=[];
+  completedA1: any;
 
   form0: FormGroup;
   form1: FormGroup;
@@ -265,19 +265,14 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaACourses(): void{
-    //completed a1 before a1all
     this.courseService.getGEAreaA1Completed()
       .subscribe(
         data=>{
           this.completedA1=data;
-          console.log("completeda1: " + this.completedA1);
-          var course = this.completedA1[0];
-          if(course != null) {
-            console.log("Is this running: " + course);
-            var c = JSON.parse(JSON.stringify(course));
+          if(this.completedA1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA1));
             c.completionStatus = "TO DO";
             this.parentAreaAForm.controls["areaA1"].patchValue(JSON.stringify(c));
-            console.log("Prepopulate: " + JSON.stringify(c));
           }
         },
         error=>{
@@ -289,77 +284,13 @@ export class DropdownsComponent {
     .subscribe(
       response=>{
         response.forEach(element => {
-          console.log("pushed element: " + JSON.stringify(element));
           this.a1courses.push(JSON.stringify(element));
         })
-        // this.a1courses=response;
-        // console.log("a1courses: " + this.a1courses);
       },
       err=>{
         console.log(err);
       }
     )
-      // .add(
-      //   // this.courseService.getGEAreaA1All()
-      //   //   .subscribe(
-      //   //     response=>{
-      //   //       this.a1courses=response;
-      //   //       console.log("a1courses: " + this.a1courses);
-      //   //     },
-      //   //     err=>{
-      //   //       console.log(err);
-      //   //     }
-      //   //   )
-      // )
-
-
-    //A1 all before completeda1
-    // this.courseService.getGEAreaA1All()
-    //   .subscribe(
-    //     data=>{
-    //       //Test the stringify shit
-    //       // data.forEach(element => {
-    //       //   console.log("Element pushed: " + JSON.stringify(element));
-    //       //   this.a1courses.push(JSON.stringify(element));
-    //       // });
-          
-    //       // Original code
-    //       this.a1courses=data;
-    //       console.log("a1course: " + this.a1courses);
-    //     },
-    //     error =>{
-    //       console.log(error);
-    //     }
-    //   )
-    //   .add(
-    //     this.courseService.getGEAreaA1Completed()
-    //       .subscribe(
-    //         response=>{
-    //           this.completedA1=response;
-    //           console.log("completeda1: " + this.completedA1);
-    //           if (this.completedA1[0] != null) {
-    //             this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
-    //             console.log("Prepopulate: " + this.completedA1[0]);
-    //           }
-    //           //Original code
-    //           // this.completedA1=response;
-    //           // console.log("completed course: " + this.completedA1);
-    //         },
-    //         err =>{
-    //           console.log(err);
-    //         }
-    //       )
-    //   );
-  
-    // this.courseService.getGEAreaA1Completed()
-    //   .subscribe(
-    //     response=>{
-    //       this.completedA1=response;
-    //       console.log("completed course: " + this.completedA1);
-    //     },
-    //     err =>{
-    //       console.log(err);
-    //     });
 
     this.courseService.getGEAreaA2All()
       .subscribe(
@@ -378,14 +309,6 @@ export class DropdownsComponent {
         error =>{
           console.log(error);
     });
-  }
-
-  populateA1(): void{
-    console.log("Is this running: " + this.completedA1[0]);
-    if(this.completedA1[0] != null) {
-      this.parentAreaAForm.controls["areaA1"].patchValue(this.completedA1[0]);
-      console.log("Prepopulate: " + this.completedA1[0]);
-    }
   }
 
   retrieveGEAreaBCourses(): void{
@@ -738,9 +661,7 @@ export class DropdownsComponent {
     var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
     Object.keys(this.parentAreaAForm.controls).forEach(key => {
       if(this.parentAreaAForm.controls[key].value!="") {
-        console.log(this.parentAreaAForm.controls[key].value);
         var temp = this.parentAreaAForm.controls[key].value;
-        JsonPipe.ɵpipe
         tempA.push(temp);
       }
     });
