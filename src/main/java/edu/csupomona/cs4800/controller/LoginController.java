@@ -186,6 +186,7 @@ public class LoginController {
 		List<GEAreaBCourse> checkedCoreCourse = new ArrayList<GEAreaBCourse>();
 		try {
 			for (String s: jsonObjArr) {
+				System.out.println("String b: " + s);
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 				GEAreaBCourse course = objectMapper.readValue(s, GEAreaBCourse.class);
 				checkedCoreCourse.add(course);
