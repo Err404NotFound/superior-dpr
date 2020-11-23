@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DropdownsComponent } from './components/dropdowns/dropdowns.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { GenEdFormComponent } from './components/gen-ed-form/gen-ed-form.component';
 import { ContactadvisingComponent} from './components/contactadvising/contactadvising.component';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { ContactadvisingComponent} from './components/contactadvising/contactadv
     CourseListComponent,
     DashboardComponent,
     DropdownsComponent,
-    GenEdFormComponent,
     ContactadvisingComponent
   ],
   imports: [

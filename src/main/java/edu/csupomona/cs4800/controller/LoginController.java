@@ -141,18 +141,18 @@ public class LoginController {
 	}
 	
 	@GetMapping(value="/getCompletedGEAreaA1")
-	public ResponseEntity<GEAreaACourse> getGEAreaA1Completed() {
+	public ResponseEntity<List<GEAreaACourse>> getGEAreaA1Completed() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		List<GEAreaACourse> areaA = user.getCompletedAreaA();
-		GEAreaACourse a1 = null;
+		List<GEAreaACourse> a1 = new ArrayList<GEAreaACourse>();
 		for(GEAreaACourse c : areaA) {
 			if(c.getGeArea().contains("A1")) {
-				a1 = c;
+				a1.add(c);
 				break; //If for some reason there are multiple A1's completed, just take the first one
 			}
 		}
-		return new ResponseEntity<GEAreaACourse>(a1, HttpStatus.OK);
+		return new ResponseEntity<List<GEAreaACourse>>(a1, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateAreaAList")
