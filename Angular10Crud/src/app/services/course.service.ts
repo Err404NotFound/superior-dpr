@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const apiBase='/api';
+const apiBase='';
 const baseUrl = `${apiBase}/cscore`;
 const elective1Url = '/elective1/list';
 const elective2Url = '/elective2/list';
