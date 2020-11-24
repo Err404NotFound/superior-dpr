@@ -21,7 +21,7 @@
       <p class="error" *ngIf="this.form0.controls['checkArray0'].errors?.required">
         Checkbox is required, select at least one value.
       </p>
-      <input type="submit" value="Submit">
+      <input type="submit" class="btn btn-success" value="Save">
     </form>
     <hr>   
     
@@ -42,7 +42,7 @@
         <p class="error" *ngIf="this.form1.controls['checkArray1'].errors?.required">
           Checkbox is required, select at least one value.
         </p>
-        <input type="submit" value="Submit">
+        <input type="submit" class="btn btn-success" value="Save">
       </form> 
     <hr>
     <h3>No more than 3 units from:</h3>
@@ -61,11 +61,9 @@
       <p class="error" *ngIf="this.form2.controls['checkArray2'].errors?.required">
         Checkbox is required, select at least one value.
       </p>
-      <input type="submit" value="Submit">
+      <input type="submit" class="btn btn-success" value="Save">
     </form>
 
-    <pre>
-    </pre>
     <hr>
     <h3>No more than 4 units from:</h3>
     <div class="progress mb-2">
@@ -83,10 +81,9 @@
       <p class="error" *ngIf="this.form3.controls['checkArray3'].errors?.required">
         Checkbox is required, select at least one value.
       </p>
-      <input type="submit" value="Submit">
+      <input type="submit" class="btn btn-success" value="Save">
     </form>
-    
-    
+
     <hr>
 
     <h2>General Education Requirements: 48 units</h2>
@@ -105,7 +102,7 @@
           </option>
         </select> 
 
-      <h4>A2. Written Communication</h4>
+      <h4 class="mt-2">A2. Written Communication</h4>
         <select class="custom-select" formControlName="areaA2" >
           <option value="">Choose Course</option>
           <option *ngFor="let course of a2courses" [value]="course">
@@ -113,17 +110,17 @@
           </option>
         </select>  
       
-      <h4>A3. Critical Thinking</h4>
+      <h4 class="mt-2">A3. Critical Thinking</h4>
       <select class="custom-select" formControlName="areaA3" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of a3courses" [value]="course">
           {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
-      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeA()'>Save</button>
-      <hr>
-      
+      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeA()'>Save</button>      
   </form>
+
+  <hr>
 
   <form [formGroup]='parentAreaBForm' >
     <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
@@ -134,7 +131,7 @@
           {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
-      <h4>B2. Life Sciences</h4>
+      <h4 class="mt-2">B2. Life Sciences</h4>
       <select class="custom-select" formControlName="areaB2" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of b2courses" [value]="course">
@@ -142,7 +139,7 @@
         </option>
       </select>
      
-      <h4>B3. Laboratory Activity</h4>
+      <h4 class="mt-2">B3. Laboratory Activity</h4>
         <p>Laboratory courses are marked with an "L" following the course number. 
         At least one laboratory course from GE Sub-areas B1 or B2 must be taken to fulfill the GE Sub-area B3 requirement. 
         Activity courses, which are marked with an "A" following the course number, do not fulfill the GE Sub-area B3 requirement.
@@ -154,7 +151,7 @@
           </option>
         </select>
 
-      <h4>B4. Mathematics/Quantitative Reasoning</h4>
+      <h4 class="mt-2">B4. Mathematics/Quantitative Reasoning</h4>
       <select class="custom-select" formControlName="areaB4" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of b4courses" [value]="course">
@@ -162,7 +159,7 @@
         </option>
       </select>
      
-      <h4>B5. Science and Technology Synthesis</h4>
+      <h4 class="mt-2">B5. Science and Technology Synthesis</h4>
       <select class="custom-select" formControlName="areaB5" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of b5courses" [value]="course">
@@ -172,6 +169,8 @@
       <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeB()'>Save</button>
   </form>
   
+  <hr>
+
   <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
   <form [formGroup]='parentAreaCForm'> 
     <h4>C1. Visual and Performing Arts</h4>
@@ -182,7 +181,7 @@
         </option>
       </select>
 
-      <h4>C2. Literature, Modern Languages, Philosophy and Civilization</h4>
+      <h4 class="mt-2">C2. Literature, Modern Languages, Philosophy and Civilization</h4>
       <select class="custom-select" formControlName="areaC2" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of c2courses" [value]="course">
@@ -190,24 +189,25 @@
         </option>
       </select>
       
-      <h4>C3. Arts and Humanities Synthesis</h4>
+      <h4 class="mt-2">C3. Arts and Humanities Synthesis</h4>
+      <p class="mb-2">
+        Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
+      </p>
       <select class="custom-select" formControlName="areaC3" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of c3courses" [value]="course">
           {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
-    
-        <p>
-          Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
-
-          *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
-
-          **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
-        </p>
-      <hr>
-      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeC()'>Save</button>
+      <p class="mt-2 mb-2">
+        *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas
+        <br>
+        **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
+      </p>
+      <button type="submit" class="btn btn-success" (click)='submitFormGeC()'>Save</button>
     </form>
+
+  <hr>
 
   <form [formGroup]='parentAreaDForm'>
     <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
@@ -219,7 +219,7 @@
         </option>
       </select>
 
-      <h4>D2. U.S. Constitution and California Government</h4>
+      <h4 class="mt-2">D2. U.S. Constitution and California Government</h4>
       <select class="custom-select" formControlName="areaD2" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of d2courses" [value]="course">
@@ -227,7 +227,7 @@
         </option>
       </select>
         
-      <h4>D3. Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
+      <h4 class="mt-2">D3. Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
       <select class="custom-select" formControlName="areaD3" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of d3courses" [value]="course">
@@ -235,23 +235,25 @@
         </option>
       </select>
         
-      <h4>D4. Social Science Synthesis</h4>
+      <h4 class="mt-2">D4. Social Science Synthesis</h4>
+      <p>
+        Students must complete all GE lower-division requirements in Areas A and D before they take any GE D4 Synthesis course. Select one course from the following list:
+      </p>
       <select class="custom-select" formControlName="areaD4" >
         <option value="">Choose Course</option>
         <option *ngFor="let course of d4courses" [value]="course">
           {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
-        <pre>
-          Students must complete all GE lower-division requirements in Areas A and D before they take any GE D4 Synthesis course. Select one course from the following list:
-
+        <p class="mt-2">
           *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
 
-          **Course fulfills American Ideals requirement part B (U.S. Constitution and California Government).
-        </pre>     
-      <hr>
-      <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeD()'>Save</button>
+          <br>**Course fulfills American Ideals requirement part B (U.S. Constitution and California Government).
+        </p>     
+      <button type="submit" class="btn btn-success" (click)='submitFormGeD()'>Save</button>
   </form>
+
+  <hr>
 
   <form [formGroup]='parentAreaEForm' >
     <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
@@ -265,7 +267,7 @@
     <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeE()'>Save</button>
   </form>
 
-    <hr>
+  <hr>
 
     <h2>American Institutions: 6 units</h2>
       <p>Courses that satisfy this requirement may also satisfy GE areas D1 and D2.</p>
