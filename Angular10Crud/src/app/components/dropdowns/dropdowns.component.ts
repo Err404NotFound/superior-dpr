@@ -37,7 +37,6 @@ export class DropdownsComponent {
   colorGEs: String;
   numGEsCompleted = 0;
 
-  //Data: Array<any> = majorElectivesAtLeast12;
   igeCourses=[
     {"name":"AG 4010 - Ethical Issues in Food, Agricultural and Apparel Industries (3) (fulfills Area C3 or D4)"},
     {"name":"ANT 3500 - Environment, Technology and Culture (3) (fulfills Area B5 or D4)"},
@@ -82,7 +81,7 @@ export class DropdownsComponent {
   c1courses=[];
   c2courses=[];
   c3courses=[];
-  d1courses =[];
+  d1courses=[];
   d2courses=[];
   d3courses=[];
   d4courses=[];
@@ -133,6 +132,7 @@ export class DropdownsComponent {
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
     });
+    
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
     });
@@ -1148,8 +1148,7 @@ export class DropdownsComponent {
     });
     this.courseService.updateAreaD(temp);
   }
-    //  //areaE is legit one value
-
+  
   submitFormGeE() {
     if(this.completedE==null && this.parentAreaEForm.controls["areaE"].value!="") {
       this.completedE=this.parentAreaEForm.controls["areaE"].value;
