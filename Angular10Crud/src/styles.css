@@ -43,6 +43,10 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+#courseSearch{
+  background-color: plum;
+}
+
 /* *,
 *::before,
 *::after {
@@ -5025,11 +5029,11 @@ a.badge-dark:focus, a.badge-dark.focus {
   z-index: 1;
   color: #495057;
   text-decoration: none;
-  background-color: #f8f9fa;
+  background-color: plum;
 }
 .list-group-item-action:active {
   color: #212529;
-  background-color: #e9ecef;
+  background-color: plum;
 }
 
 .list-group-item {
@@ -5054,9 +5058,9 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 .list-group-item.active {
   z-index: 2;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  color: white;
+  background-color: rebeccapurple;
+  border-color: purple;
 }
 .list-group-item + .list-group-item {
   border-top-width: 0;
