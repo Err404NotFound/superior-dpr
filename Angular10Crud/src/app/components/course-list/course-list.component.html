@@ -1,13 +1,29 @@
 <h2>Search for Courses to Complete Your Degree</h2>
 <div class="list row">
     <div class="col-md-8">
-      <div class="input-group mb-3">
+      <!--div class="input-group mb-3">
         <input
           type="text"
           class="form-control"
           placeholder="Search by courseName"
           [(ngModel)]="courseName"
+        /-->
+
+        <label for="typeahead-focus">Search for a course:</label>
+        <input class="input-group mb-3"
+          id="typeahead-focus"
+          type="text"
+          class="form-control"
+          placeholder="Search by course name"
+          [(ngModel)]="model"
+          [ngbTypeahead]="search"
+          (focus)="focus$.next($any($event).target.value)"
+          (click)="click$.next($any($event).target.value)"
+          #instance="ngbTypeahead"
         />
+        <hr>
+        <pre>Model: {{ model | json }}</pre>
+
         <div class="input-group-append">
           <button
             class="btn btn-outline-secondary"
@@ -16,7 +32,7 @@
           >
             Search
           </button>
-        </div>
+        <!--/div-->
       </div>
     </div>
     <div class="col-md-6">
@@ -31,6 +47,8 @@
          {{course.courseNumber}} {{ course.courseName }}
         </li>
       </ul>
+
+      
   
       <!--button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
         Remove All
