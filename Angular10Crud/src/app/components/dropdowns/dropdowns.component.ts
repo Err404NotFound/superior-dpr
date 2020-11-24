@@ -1,7 +1,6 @@
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 import { Component, OnInit } from '@angular/core';
-import {GenEdFormComponent } from '../gen-ed-form/gen-ed-form.component';
 import {CourseService} from '../../services/course.service';
 
 @Component({
@@ -34,8 +33,10 @@ export class DropdownsComponent {
   colorElectives2: String;
   percentElectives3: String;
   colorElectives3: String;
+  percentGEs: String;
+  colorGEs: String;
+  numGEsCompleted = 0;
 
-  //Data: Array<any> = majorElectivesAtLeast12;
   igeCourses=[
     {"name":"AG 4010 - Ethical Issues in Food, Agricultural and Apparel Industries (3) (fulfills Area C3 or D4)"},
     {"name":"ANT 3500 - Environment, Technology and Culture (3) (fulfills Area B5 or D4)"},
@@ -80,13 +81,29 @@ export class DropdownsComponent {
   c1courses=[];
   c2courses=[];
   c3courses=[];
-  d1courses =[];
+  d1courses=[];
   d2courses=[];
   d3courses=[];
   d4courses=[];
   ecourses=[];
 
   completedGEs: any;
+  completedA1: any;
+  completedA2: any;
+  completedA3: any;
+  completedB1: any;
+  completedB2: any;
+  completedB3: any;
+  completedB4: any;
+  completedB5: any;
+  completedC1: any;
+  completedC2: any;
+  completedC3: any;
+  completedD1: any;
+  completedD2: any;
+  completedD3: any;
+  completedD4: any;
+  completedE: any;
 
   form0: FormGroup;
   form1: FormGroup;
@@ -102,29 +119,29 @@ export class DropdownsComponent {
   constructor(private fb: FormBuilder, private courseService: CourseService) {
     this.form0 = this.fb.group({
       checkArray0: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form1 = this.fb.group({
       checkArray1: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form2 = this.fb.group({
       checkArray2: this.fb.array([], [Validators.required])
-    })
+    });
 
     this.form3 = this.fb.group({
       checkArray3: this.fb.array([], [Validators.required])
-    })
-
+    });
+    
     this.form4 = this.fb.group({
       checkArray4: this.fb.array([], [Validators.required])
-    })
+    });
     
     this.parentAreaAForm = this.fb.group({
       areaA1: '',
       areaA2: '',
       areaA3: ''
-    })
+    });
 
     this.parentAreaBForm = this.fb.group({
       areaB1: '',
@@ -132,24 +149,24 @@ export class DropdownsComponent {
       areaB3: '',
       areaB4: '',
       areaB5: ''
-    })
-
+    });
+    
     this.parentAreaCForm = this.fb.group({
       areaC1: '',
       areaC2: '',
       areaC3: ''
-    })
+    });
 
     this.parentAreaDForm = this.fb.group({
       areaD1: '',
       areaD2: '',
       areaD3: '',
       areaD4: ''
-    })
+    });
 
     this.parentAreaEForm = this.fb.group({
       areaE: ''
-    })
+    });
 
   }
 
@@ -265,19 +282,81 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaACourses(): void{
-    this.courseService.getGEAreaA1All()
+    this.courseService.getGEAreaA1Completed()
       .subscribe(
         data=>{
-          this.a1courses=data;
+          this.completedA1=data;
+          if(this.completedA1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA1));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA1"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
         },
-        error =>{
+        error=>{
           console.log(error);
-        });
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaA2Completed()
+      .subscribe(
+        data=>{
+          this.completedA2=data;
+          if(this.completedA2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA2));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA2"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaA3Completed()
+      .subscribe(
+        data=>{
+          this.completedA3=data;
+          if(this.completedA3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA3));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA3"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaA1All()
+    .subscribe(
+      response=>{
+        response.forEach(element => {
+          this.a1courses.push(JSON.stringify(element));
+        })
+      },
+      err=>{
+        console.log(err);
+      }
+    )
 
     this.courseService.getGEAreaA2All()
       .subscribe(
         data=>{
-          this.a2courses=data;
+           data.forEach(element => {
+             this.a2courses.push(JSON.stringify(element));
+           })
       },          
         error =>{
           console.log(error);
@@ -286,7 +365,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaA3All()
       .subscribe(
         data=>{
-          this.a3courses=data;
+          data.forEach(element => {
+            this.a3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -294,11 +375,107 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaBCourses(): void{
+    this.courseService.getGEAreaB1Completed()
+      .subscribe(
+        data=>{
+          this.completedB1=data;
+          if(this.completedB1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB1));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB1"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaB2Completed()
+      .subscribe(
+        data=>{
+          this.completedB2=data;
+          if(this.completedB2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB2));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB2"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaB3Completed()
+      .subscribe(
+        data=>{
+          this.completedB3=data;
+          if(this.completedB3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB3));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB3"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaB4Completed()
+      .subscribe(
+        data=>{
+          this.completedB4=data;
+          if(this.completedB4 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB4));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB4"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+    
+    this.courseService.getGEAreaB5Completed()
+      .subscribe(
+        data=>{
+          this.completedB5=data;
+          if(this.completedB5 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB5));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB5"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
     this.courseService.getGEAreaB1All()
       .subscribe(
         data=>{
-          this.b1courses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.b1courses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
@@ -307,7 +484,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaB2All()
         .subscribe(
         data=>{
-          this.b2courses=data;
+          data.forEach(element => {
+            this.b2courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -316,7 +495,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaB3All()
         .subscribe(
         data=>{
-          this.b3courses=data;
+          data.forEach(element => {
+            this.b3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -325,7 +506,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaB4All()
       .subscribe(
        data=>{
-         this.b4courses=data;
+        data.forEach(element => {
+          this.b4courses.push(JSON.stringify(element));
+        })
        },          
        error =>{
          console.log(error);
@@ -334,8 +517,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaB5All()
        .subscribe(
         data=>{
-          this.b5courses=data;
-          console.log(data);
+          data.forEach(element => {
+            this.b5courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -343,10 +527,69 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaCCourses(): void{
+    this.courseService.getGEAreaC1Completed()
+      .subscribe(
+        data=>{
+          this.completedC1=data;
+          if(this.completedC1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC1));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC1"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+    
+    this.courseService.getGEAreaC2Completed()
+      .subscribe(
+        data=>{
+          this.completedC2=data;
+          if(this.completedC2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC2));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC2"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaC3Completed()
+      .subscribe(
+        data=>{
+          this.completedC3=data;
+          if(this.completedC3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC3));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC3"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
     this.courseService.getGEAreaC1All()
       .subscribe(
         data=>{
-          this.c1courses=data;
+          data.forEach(element => {
+            this.c1courses.push(JSON.stringify(element))
+          })
         },
         error =>{
           console.log(error);
@@ -355,7 +598,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaC2All()
       .subscribe(
         data=>{
-          this.c2courses=data;
+          data.forEach(element => {
+            this.c2courses.push(JSON.stringify(element))
+          })
       },          
         error =>{
           console.log(error);
@@ -364,7 +609,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaC3All()
       .subscribe(
         data=>{
-          this.c3courses=data;
+          data.forEach(element => {
+            this.c3courses.push(JSON.stringify(element))
+          })
         },          
         error =>{
           console.log(error);
@@ -372,11 +619,88 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaDCourses(): void{
+    this.courseService.getGEAreaD1Completed()
+      .subscribe(
+        data=>{
+          this.completedD1=data;
+          if(this.completedD1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD1));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD1"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+      
+    this.courseService.getGEAreaD2Completed()
+      .subscribe(
+        data=>{
+          this.completedD2=data;
+          if(this.completedD2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD2));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD2"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaD3Completed()
+      .subscribe(
+        data=>{
+          this.completedD3=data;
+          if(this.completedD3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD3));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD3"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
+    this.courseService.getGEAreaD4Completed()
+      .subscribe(
+        data=>{
+          this.completedD4=data;
+          if(this.completedD4 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD4));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD4"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+    
     this.courseService.getGEAreaD1All()
       .subscribe(
         data=>{
-          this.d1courses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.d1courses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
@@ -385,7 +709,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaD2All()
         .subscribe(
         data=>{
-          this.d2courses=data;
+          data.forEach(element => {
+            this.d2courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -394,7 +720,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaD3All()
         .subscribe(
         data=>{
-          this.d3courses=data;
+          data.forEach(element => {
+            this.d3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -403,7 +731,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaD4All()
       .subscribe(
        data=>{
-         this.d4courses=data;
+        data.forEach(element => {
+          this.d4courses.push(JSON.stringify(element));
+        })
        },          
        error =>{
          console.log(error);
@@ -412,11 +742,31 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaECourses(): void{
+    this.courseService.getGEAreaECompleted()
+      .subscribe(
+        data=>{
+          this.completedE=data;
+          if(this.completedE != null) {
+            var c = JSON.parse(JSON.stringify(this.completedE));
+            c.completionStatus = "TO DO";
+            this.parentAreaEForm.controls["areaE"].patchValue(JSON.stringify(c));
+            this.numGEsCompleted++;
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      .add(() => {
+        this.updateGEProgressBar();
+      })
+
     this.courseService.getGEAreaEAll()
       .subscribe(
         data=>{
-          this.ecourses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.ecourses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
@@ -431,7 +781,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray0.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if(loopItem == eventItem) {
           checkArray0.removeAt(i);
@@ -449,7 +799,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray1.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray1.removeAt(i);
@@ -467,7 +817,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray2.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray2.removeAt(i);
@@ -485,7 +835,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray3.removeAt(i);
@@ -611,6 +961,25 @@ export class DropdownsComponent {
     }
   }
 
+  updateGEProgressBar() {
+    var percent = Math.round(this.numGEsCompleted / 16 * 100);
+    this.percentGEs = percent + "%";
+
+    //Change the color of the progress bar based on how many courses completed
+    if (percent < 26) {
+      this.colorGEs = 'Red';
+    } else if (percent < 51) {
+      this.colorGEs = 'DarkOrange';
+    } else if (percent < 76) {
+        this.colorGEs = 'GoldenRod';
+    } else if (percent < 100) {
+      this.colorGEs = 'ForestGreen';
+    } else {
+      this.colorGEs = 'RoyalBlue';
+      this.percentGEs = "100%";
+    }
+  }
+
 /** submitForm methods user course.service.ts to send FormArray as HTTP Put request 
  * to Java Spring backend
  */
@@ -639,21 +1008,159 @@ export class DropdownsComponent {
     console.log(this.form4.value)
   }
 
-  submitFormGE() {
-    console.log('areaA: ' + JSON.stringify(this.parentAreaAForm.value));
-    this.courseService.updateAreaA([this.parentAreaAForm.value.areaA1, this.parentAreaAForm.value.areaA2, this.parentAreaAForm.value.areaA3]);
-    
-    console.log('areaB: ' + JSON.stringify(this.parentAreaBForm.value));
-    this.courseService.updateAreaB([this.parentAreaBForm.value.areaB1, this.parentAreaBForm.value.areaB2, this.parentAreaBForm.value.areaB3, this.parentAreaBForm.value.areaB4, this.parentAreaBForm.value.areaB5]);
-    
-    console.log('areaC: ' + JSON.stringify(this.parentAreaCForm.value));
-    this.courseService.updateAreaC([this.parentAreaCForm.value.areaC1, this.parentAreaCForm.value.areaC2, this.parentAreaCForm.value.areaC3]);
-    
-    console.log('areaD: ' + JSON.stringify(this.parentAreaDForm.value));
-    this.courseService.updateAreaD([this.parentAreaDForm.value.areaD1, this.parentAreaDForm.value.areaD2, this.parentAreaDForm.value.areaD3, this.parentAreaDForm.value.areaD4 ]);
-    
-    console.log('areaE: ' + JSON.stringify(this.parentAreaEForm.value));
-    this.courseService.updateAreaE([this.parentAreaEForm.value.areaE]);
+  submitFormGeA() {
+    var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
+    Object.keys(this.parentAreaAForm.controls).forEach(key => {
+      if(this.parentAreaAForm.controls[key].value!="") {
+        var temp = this.parentAreaAForm.controls[key].value;
+        tempA.push(temp);
+        if(this.completedA1==null && key=="areaA1" || this.completedA2==null && key=="areaA2" || this.completedA3==null && key=="areaA3") {
+          if(key=="areaA1")
+            this.completedA1=this.parentAreaAForm.controls[key].value;
+          else if(key=="areaA2")
+            this.completedA2=this.parentAreaAForm.controls[key].value;
+          else
+            this.completedA3=this.parentAreaAForm.controls[key].value;
+          this.numGEsCompleted++;
+          this.updateGEProgressBar();
+        } 
+      }
+      else {
+        if(this.completedA1!=null && key=="areaA1" || this.completedA2!=null && key=="areaA2" || this.completedA3!=null && key=="areaA3") {
+          if(key=="areaA1")
+            this.completedA1=null;
+          else if(key=="areaA2")
+            this.completedA2=null;
+          else
+            this.completedA3=null;
+          this.numGEsCompleted--;
+          this.updateGEProgressBar();
+        }
+      }
+    });
+    this.courseService.updateAreaA(tempA);
+  }
+
+  submitFormGeB() {
+    var temp=[];
+    Object.keys(this.parentAreaBForm.controls).forEach(key => {
+      if(this.parentAreaBForm.controls[key].value!="") {
+        temp.push(this.parentAreaBForm.controls[key].value);
+        if(this.completedB1==null && key=="areaB1" || this.completedB2==null && key=="areaB2" || this.completedB3==null && key=="areaB3" || this.completedB4==null && key=="areaB4" || this.completedB5==null && key=="areaB5") {
+          if(key=="areaB1")
+            this.completedB1=this.parentAreaBForm.controls[key].value;
+          else if(key=="areaB2")
+            this.completedB2=this.parentAreaBForm.controls[key].value;
+          else if(key=="areaB3")
+            this.completedB3=this.parentAreaBForm.controls[key].value;
+          else if(key=="areaB4")
+            this.completedB4=this.parentAreaBForm.controls[key].value;
+          else
+            this.completedB5=this.parentAreaBForm.controls[key].value;
+          this.numGEsCompleted++;
+          this.updateGEProgressBar();
+        }
+      }
+      else {
+        if(this.completedB1!=null && key=="areaB1" || this.completedB2!=null && key=="areaB2" || this.completedB3!=null && key=="areaB3" || this.completedB4!=null && key=="areaB4" || this.completedB5!=null && key=="areaB5") {
+          if(key=="areaB1")
+            this.completedB1=null;
+          else if(key=="areaB2")
+            this.completedB2=null;
+          else if(key=="areaB3")
+            this.completedB3=null;
+          else if(key=="areaB4")
+            this.completedB4=null;
+          else
+            this.completedB5=null;
+          this.numGEsCompleted--;
+          this.updateGEProgressBar();
+        }
+      }
+    });
+    this.courseService.updateAreaB(temp);
+  }
+
+  submitFormGeC() {
+    var temp=[];
+    Object.keys(this.parentAreaCForm.controls).forEach(key => {
+      if(this.parentAreaCForm.controls[key].value!="") {
+        temp.push(this.parentAreaCForm.controls[key].value);
+        if(this.completedC1==null && key=="areaC1" || this.completedC2==null && key=="areaC2" || this.completedC3==null && key=="areaC3") {
+          if(key=="areaC1")
+            this.completedC1=this.parentAreaCForm.controls[key].value;
+          else if(key=="areaC2")
+            this.completedC2=this.parentAreaCForm.controls[key].value;
+          else
+            this.completedC3=this.parentAreaCForm.controls[key].value;
+          this.numGEsCompleted++;
+          this.updateGEProgressBar();
+        }
+      }
+      else {
+        if(this.completedC1!=null && key=="areaC1" || this.completedC2!=null && key=="areaC2" || this.completedC3!=null && key=="areaC3") {
+          if(key=="areaC1")
+            this.completedC1=null;
+          else if(key=="areaC2")
+            this.completedC2=null;
+          else
+            this.completedC3=null;
+          this.numGEsCompleted--;
+          this.updateGEProgressBar();
+        }
+      }
+    });
+    this.courseService.updateAreaC(temp);
+  }
+
+  submitFormGeD() {
+    var temp=[];
+    Object.keys(this.parentAreaDForm.controls).forEach(key => {
+      if(this.parentAreaDForm.controls[key].value!="") {
+        temp.push(this.parentAreaDForm.controls[key].value);
+        if(this.completedD1==null && key=="areaD1" || this.completedD2==null && key=="areaD2" || this.completedD3==null && key=="areaD3" || this.completedD4==null && key=="areaD4") {
+          if(key=="areaD1")
+            this.completedD1=this.parentAreaDForm.controls[key].value;
+          else if(key=="areaD2")
+            this.completedD2=this.parentAreaDForm.controls[key].value;
+          else if(key=="areaD3")
+            this.completedD3=this.parentAreaDForm.controls[key].value;
+          else
+            this.completedD4=this.parentAreaDForm.controls[key].value;
+          this.numGEsCompleted++;
+          this.updateGEProgressBar();
+        }
+      }
+      else {
+        if(this.completedD1!=null && key=="areaD1" || this.completedD2!=null && key=="areaD2" || this.completedD3!=null && key=="areaD3" || this.completedD4!=null && key=="areaD4") {
+          if(key=="areaD1")
+            this.completedD1=null;
+          else if(key=="areaD2")
+            this.completedD2=null;
+          else if(key=="areaD3")
+            this.completedD3=null;
+          else
+            this.completedD4=null;
+          this.numGEsCompleted--;
+          this.updateGEProgressBar();
+        }
+      }
+    });
+    this.courseService.updateAreaD(temp);
+  }
+  
+  submitFormGeE() {
+    if(this.completedE==null && this.parentAreaEForm.controls["areaE"].value!="") {
+      this.completedE=this.parentAreaEForm.controls["areaE"].value;
+      this.numGEsCompleted++;
+      this.updateGEProgressBar();
+    }
+    else if(this.completedE!=null && this.parentAreaEForm.controls["areaE"].value=="") {
+      this.completedE=null;
+      this.numGEsCompleted--;
+      this.updateGEProgressBar();
+    }
+    this.courseService.updateAreaE([this.parentAreaEForm.controls["areaE"].value]);
   }
 	
 	populateCore(arg:Array<boolean>):Array<boolean> {

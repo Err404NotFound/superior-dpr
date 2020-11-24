@@ -140,29 +140,244 @@ public class LoginController {
 		return new ResponseEntity<List<CSElectives3Course>>(user.getCompletedElectives3(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value="/updateCoreList")
-	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
-		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
-		try {
-			for (String s: jsonObjArr) {
-				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-				CSCoreCourse course = objectMapper.readValue(s, CSCoreCourse.class);
-				checkedCoreCourse.add(course);
-			}
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-		ModelAndView modelAndView = new ModelAndView();
+	@GetMapping(value="/getCompletedGEAreaA1")
+	public ResponseEntity<GEAreaACourse> getGEAreaA1Completed() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
-		modelAndView.addObject("currentUser", user);
-		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
-		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
-		modelAndView.addObject("userMessage", "Content should be visible to all users");
-		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
-		userService.updateUserCoreList(user, checkedCoreCourse);
-		return modelAndView;
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse course = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaA2")
+	public ResponseEntity<GEAreaACourse> getGEAreaA2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse course = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaA3")
+	public ResponseEntity<GEAreaACourse> getGEAreaA3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse course = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB1")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB2")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB3")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB4")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB4Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B4")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB5")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB5Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B5")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC1")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC2")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC3")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD1")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD2")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD3")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD4")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD4Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D4")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaE")
+	public ResponseEntity<GEAreaECourse> getGEAreaECompleted() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaECourse> areaE = user.getCompletedAreaE();
+		GEAreaECourse course = null;
+		for(GEAreaECourse c : areaE) {
+			if(c.getGeArea().contains("E")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaECourse>(course, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateAreaAList")
@@ -236,6 +451,7 @@ public class LoginController {
 		userService.updateUserAreaCList(user, checkedCoreCourse);
 		return modelAndView;
 	}
+	
 	@PutMapping("/updateAreaDList")
 	public ModelAndView updateAreaDList(@RequestBody String[] jsonObjArr) {
 		List<GEAreaDCourse> checkedCoreCourse = new ArrayList<GEAreaDCourse>();
@@ -281,6 +497,31 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserAreaEList(user, checkedCoreCourse);
+		return modelAndView;
+	}
+	
+	@PutMapping(value="/updateCoreList")
+	public ModelAndView updateCoreList(@RequestBody String[] jsonObjArr) {
+		List<CSCoreCourse> checkedCoreCourse = new ArrayList<CSCoreCourse>();
+		try {
+			for (String s: jsonObjArr) {
+				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+				CSCoreCourse course = objectMapper.readValue(s, CSCoreCourse.class);
+				checkedCoreCourse.add(course);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		modelAndView.addObject("currentUser", user);
+		modelAndView.addObject("completedCoreCourses", user.getCompletedCore());
+		modelAndView.addObject("fullName", "Welcome " + user.getFullName());
+		modelAndView.addObject("userMessage", "Content should be visible to all users");
+		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
+		userService.updateUserCoreList(user, checkedCoreCourse);
 		return modelAndView;
 	}
   
@@ -330,7 +571,6 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserElectives2List(user, checkedElectives2Course);
-
 		return modelAndView;
 	}
 	
@@ -355,7 +595,6 @@ public class LoginController {
 		modelAndView.addObject("userMessage", "Content should be visible to all users");
 		modelAndView.setViewName("dpr"); //TODO stays on the DPR page for now
 		userService.updateUserElectives3List(user, checkedElectives3Course);
-
 		return modelAndView;
 	}
 

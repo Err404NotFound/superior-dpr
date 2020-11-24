@@ -1,34 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
-import { KeyValuePipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
-const baseUrl = '/api/cscore';
+const apiBase='/api';
+const baseUrl = `${apiBase}/cscore`;
 const elective1Url = '/elective1/list';
 const elective2Url = '/elective2/list';
 const elective3Url = '/elective3/list';
 
-const updateCoreUrl = '/api/updateCoreList';
-const updateElectives1Url = '/api/updateElectives1List';
-const updateElectives2Url = '/api/updateElectives2List';
-const updateElectives3Url = '/api/updateElectives3List';
-const updateAreaAUrl = '/api/updateAreaAList';
-const updateAreaBUrl = '/api/updateAreaBList';
-const updateAreaCUrl = '/api/updateAreaCList';
-const updateAreaDUrl = '/api/updateAreaDList';
-const updateAreaEUrl = '/api/updateAreaEList';
+const updateCoreUrl = `${apiBase}/updateCoreList`;
+const updateElectives1Url = `${apiBase}/updateElectives1List`;
+const updateElectives2Url = `${apiBase}/updateElectives2List`;
+const updateElectives3Url = `${apiBase}/updateElectives3List`;
+const updateAreaAUrl = `${apiBase}/updateAreaAList`;
+const updateAreaBUrl = `${apiBase}/updateAreaBList`;
+const updateAreaCUrl = `${apiBase}/updateAreaCList`;
+const updateAreaDUrl = `${apiBase}updateAreaDList`;
+const updateAreaEUrl = `${apiBase}/updateAreaEList`;
 
-const geBaseUrl = '/api/ge';
+const geBaseUrl = `${apiBase}/ge`;
 const geAreaAUrl = '/areaA';
 const geAreaBUrl = '/areaB';
 const geAreaCUrl = '/areaC';
 const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
-const getCoreUrl = '/api/getCompletedCoreList';
-const getElectives1Url ='/api/getCompletedElectives1List';
-const getElectives2Url ='/api/getCompletedElectives2List';
-const getElectives3Url ='/api/getCompletedElectives3List';
+const getCompletedGEAreaA = `${apiBase}/getCompletedGEAreaA`;
+const getCompletedGEAreaB = `${apiBase}/getCompletedGEAreaB`;
+const getCompletedGEAreaC = `${apiBase}/getCompletedGEAreaC`;
+const getCompletedGEAreaD = `${apiBase}/getCompletedGEAreaD`;
+const getCompletedGEAreaE = `${apiBase}/getCompletedGEAreaE`;
+
+const getCoreUrl = `${apiBase}/getCompletedCoreList`;
+const getElectives1Url =`${apiBase}/getCompletedElectives1List`;
+const getElectives2Url =`${apiBase}/getCompletedElectives2List`;
+const getElectives3Url =`${apiBase}/getCompletedElectives3List`;
 
 @Injectable({
   providedIn: 'root'
@@ -126,6 +132,70 @@ export class CourseService {
     return this.http.get(`${baseUrl}?title=${title}`);
   }    
 
+  getGEAreaA1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}1`);
+  }
+
+  getGEAreaA2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}2`);
+  }
+
+  getGEAreaA3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}3`);
+  }
+
+  getGEAreaB1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}1`);
+  }
+
+  getGEAreaB2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}2`);
+  }
+
+  getGEAreaB3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}3`);
+  }
+
+  getGEAreaB4Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}4`);
+  }
+
+  getGEAreaB5Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}5`);
+  }
+
+  getGEAreaC1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}1`);
+  }
+
+  getGEAreaC2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}2`);
+  }
+
+  getGEAreaC3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}3`);
+  }
+
+  getGEAreaD1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}1`);
+  }
+
+  getGEAreaD2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}2`);
+  }
+
+  getGEAreaD3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}3`);
+  }
+
+  getGEAreaD4Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}4`);
+  }
+
+  getGEAreaECompleted(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaE}`);
+  }
+
   getGEAreaA1All(): Observable<any>{
     return this.http.get(`${geBaseUrl}${geAreaAUrl}1`);
   }
@@ -193,7 +263,6 @@ export class CourseService {
   }
 
   updateAreaB(data): Promise<any>{
-    console.log(data);
     return this.http.put(`${updateAreaBUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -201,7 +270,6 @@ export class CourseService {
   }
 
   updateAreaC(data): Promise<any>{
-    console.log(data);
     return this.http.put(`${updateAreaCUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -209,7 +277,6 @@ export class CourseService {
   }
 
   updateAreaD(data): Promise<any>{
-    console.log(data);
     return this.http.put(`${updateAreaDUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
@@ -217,7 +284,6 @@ export class CourseService {
   }
 
   updateAreaE(data): Promise<any>{
-    console.log(data);
     return this.http.put(`${updateAreaEUrl}`, data)
     .toPromise()
     .then(res=>console.log(res))
