@@ -39,13 +39,11 @@ export class CourseListComponent implements OnInit {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
     const inputFocus$ = this.focus$;
-    
+
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term => (term === '' ? this.coursesNotJson
-        : this.coursesNotJson.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10)),
-
+        : this.coursesNotJson.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
-
   }
 
 
