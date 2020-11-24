@@ -26,6 +26,10 @@ const geAreaDUrl = '/areaD';
 const geAreaEUrl = '/areaE';
 
 const getCompletedGEAreaA = `${apiBase}/getCompletedGEAreaA`;
+const getCompletedGEAreaB = `${apiBase}/getCompletedGEAreaB`;
+const getCompletedGEAreaC = `${apiBase}/getCompletedGEAreaC`;
+const getCompletedGEAreaD = `${apiBase}/getCompletedGEAreaD`;
+const getCompletedGEAreaE = `${apiBase}/getCompletedGEAreaE`;
 
 const getCoreUrl = `${apiBase}/getCompletedCoreList`;
 const getElectives1Url =`${apiBase}/getCompletedElectives1List`;
@@ -130,6 +134,66 @@ export class CourseService {
 
   getGEAreaA1Completed(): Observable<any>{
     return this.http.get(`${getCompletedGEAreaA}1`);
+  }
+
+  getGEAreaA2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}2`);
+  }
+
+  getGEAreaA3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaA}3`);
+  }
+
+  getGEAreaB1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}1`);
+  }
+
+  getGEAreaB2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}2`);
+  }
+
+  getGEAreaB3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}3`);
+  }
+
+  getGEAreaB4Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}4`);
+  }
+
+  getGEAreaB5Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaB}5`);
+  }
+
+  getGEAreaC1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}1`);
+  }
+
+  getGEAreaC2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}2`);
+  }
+
+  getGEAreaC3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaC}3`);
+  }
+
+  getGEAreaD1Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}1`);
+  }
+
+  getGEAreaD2Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}2`);
+  }
+
+  getGEAreaD3Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}3`);
+  }
+
+  getGEAreaD4Completed(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaD}4`);
+  }
+
+  getGEAreaECompleted(): Observable<any>{
+    return this.http.get(`${getCompletedGEAreaE}`);
   }
 
   getGEAreaA1All(): Observable<any>{

@@ -88,6 +88,21 @@ export class DropdownsComponent {
 
   completedGEs: any;
   completedA1: any;
+  completedA2: any;
+  completedA3: any;
+  completedB1: any;
+  completedB2: any;
+  completedB3: any;
+  completedB4: any;
+  completedB5: any;
+  completedC1: any;
+  completedC2: any;
+  completedC3: any;
+  completedD1: any;
+  completedD2: any;
+  completedD3: any;
+  completedD4: any;
+  completedE: any;
 
   form0: FormGroup;
   form1: FormGroup;
@@ -280,6 +295,36 @@ export class DropdownsComponent {
         }
       )
 
+    this.courseService.getGEAreaA2Completed()
+      .subscribe(
+        data=>{
+          this.completedA2=data;
+          if(this.completedA2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA2));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA2"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaA3Completed()
+      .subscribe(
+        data=>{
+          this.completedA3=data;
+          if(this.completedA3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedA3));
+            c.completionStatus = "TO DO";
+            this.parentAreaAForm.controls["areaA3"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
     this.courseService.getGEAreaA1All()
     .subscribe(
       response=>{
@@ -295,7 +340,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaA2All()
       .subscribe(
         data=>{
-          this.a2courses=data;
+           data.forEach(element => {
+             this.a2courses.push(JSON.stringify(element));
+           })
       },          
         error =>{
           console.log(error);
@@ -304,7 +351,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaA3All()
       .subscribe(
         data=>{
-          this.a3courses=data;
+          data.forEach(element => {
+            this.a3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -312,11 +361,87 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaBCourses(): void{
+    this.courseService.getGEAreaB1Completed()
+      .subscribe(
+        data=>{
+          this.completedB1=data;
+          if(this.completedB1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB1));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB1"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaB2Completed()
+      .subscribe(
+        data=>{
+          this.completedB2=data;
+          if(this.completedB2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB2));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB2"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaB3Completed()
+      .subscribe(
+        data=>{
+          this.completedB3=data;
+          if(this.completedB3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB3));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB3"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaB4Completed()
+      .subscribe(
+        data=>{
+          this.completedB4=data;
+          if(this.completedB4 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB4));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB4"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+    
+    this.courseService.getGEAreaB5Completed()
+      .subscribe(
+        data=>{
+          this.completedB5=data;
+          if(this.completedB5 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedB5));
+            c.completionStatus = "TO DO";
+            this.parentAreaBForm.controls["areaB5"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
     this.courseService.getGEAreaB1All()
       .subscribe(
         data=>{
-          this.b1courses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.b1courses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
@@ -325,7 +450,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaB2All()
         .subscribe(
         data=>{
-          this.b2courses=data;
+          data.forEach(element => {
+            this.b2courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -334,7 +461,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaB3All()
         .subscribe(
         data=>{
-          this.b3courses=data;
+          data.forEach(element => {
+            this.b3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -343,7 +472,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaB4All()
       .subscribe(
        data=>{
-         this.b4courses=data;
+        data.forEach(element => {
+          this.b4courses.push(JSON.stringify(element));
+        })
        },          
        error =>{
          console.log(error);
@@ -352,8 +483,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaB5All()
        .subscribe(
         data=>{
-          this.b5courses=data;
-          console.log(data);
+          data.forEach(element => {
+            this.b5courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -361,10 +493,57 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaCCourses(): void{
+    this.courseService.getGEAreaC1Completed()
+      .subscribe(
+        data=>{
+          this.completedC1=data;
+          if(this.completedC1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC1));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC1"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+    
+    this.courseService.getGEAreaC2Completed()
+      .subscribe(
+        data=>{
+          this.completedC2=data;
+          if(this.completedC2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC2));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC2"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaC3Completed()
+      .subscribe(
+        data=>{
+          this.completedC3=data;
+          if(this.completedC3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedC3));
+            c.completionStatus = "TO DO";
+            this.parentAreaCForm.controls["areaC3"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
     this.courseService.getGEAreaC1All()
       .subscribe(
         data=>{
-          this.c1courses=data;
+          data.forEach(element => {
+            this.c1courses.push(JSON.stringify(element))
+          })
         },
         error =>{
           console.log(error);
@@ -373,7 +552,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaC2All()
       .subscribe(
         data=>{
-          this.c2courses=data;
+          data.forEach(element => {
+            this.c2courses.push(JSON.stringify(element))
+          })
       },          
         error =>{
           console.log(error);
@@ -382,7 +563,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaC3All()
       .subscribe(
         data=>{
-          this.c3courses=data;
+          data.forEach(element => {
+            this.c3courses.push(JSON.stringify(element))
+          })
         },          
         error =>{
           console.log(error);
@@ -390,11 +573,72 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaDCourses(): void{
+    this.courseService.getGEAreaD1Completed()
+      .subscribe(
+        data=>{
+          this.completedD1=data;
+          if(this.completedD1 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD1));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD1"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+      
+    this.courseService.getGEAreaD2Completed()
+      .subscribe(
+        data=>{
+          this.completedD2=data;
+          if(this.completedD2 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD2));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD2"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaD3Completed()
+      .subscribe(
+        data=>{
+          this.completedD3=data;
+          if(this.completedD3 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD3));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD3"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
+    this.courseService.getGEAreaD4Completed()
+      .subscribe(
+        data=>{
+          this.completedD4=data;
+          if(this.completedD4 != null) {
+            var c = JSON.parse(JSON.stringify(this.completedD4));
+            c.completionStatus = "TO DO";
+            this.parentAreaDForm.controls["areaD4"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+    
     this.courseService.getGEAreaD1All()
       .subscribe(
         data=>{
-          this.d1courses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.d1courses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
@@ -403,7 +647,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaD2All()
         .subscribe(
         data=>{
-          this.d2courses=data;
+          data.forEach(element => {
+            this.d2courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -412,7 +658,9 @@ export class DropdownsComponent {
       this.courseService.getGEAreaD3All()
         .subscribe(
         data=>{
-          this.d3courses=data;
+          data.forEach(element => {
+            this.d3courses.push(JSON.stringify(element));
+          })
         },          
         error =>{
           console.log(error);
@@ -421,7 +669,9 @@ export class DropdownsComponent {
     this.courseService.getGEAreaD4All()
       .subscribe(
        data=>{
-         this.d4courses=data;
+        data.forEach(element => {
+          this.d4courses.push(JSON.stringify(element));
+        })
        },          
        error =>{
          console.log(error);
@@ -430,11 +680,27 @@ export class DropdownsComponent {
   }
 
   retrieveGEAreaECourses(): void{
+    this.courseService.getGEAreaECompleted()
+      .subscribe(
+        data=>{
+          this.completedE=data;
+          if(this.completedE != null) {
+            var c = JSON.parse(JSON.stringify(this.completedE));
+            c.completionStatus = "TO DO";
+            this.parentAreaEForm.controls["areaE"].patchValue(JSON.stringify(c));
+          }
+        },
+        error=>{
+          console.log(error);
+        }
+      )
+
     this.courseService.getGEAreaEAll()
       .subscribe(
         data=>{
-          this.ecourses=data;
-          console.log(data)
+          data.forEach(element => {
+            this.ecourses.push(JSON.stringify(element));
+          })
         },
         error =>{
           console.log(error);
