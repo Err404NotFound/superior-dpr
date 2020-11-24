@@ -90,7 +90,9 @@
     <hr>
 
     <h2>General Education Requirements: 48 units</h2>
-
+    <div class="progress mb-2">
+    	<div class="progress-bar" style="width:{{percentGEs}}; background-color:{{colorGEs}};"role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="48">{{percentGEs}}</div>
+    </div>
   
 
   <form [formGroup]='parentAreaAForm'>
