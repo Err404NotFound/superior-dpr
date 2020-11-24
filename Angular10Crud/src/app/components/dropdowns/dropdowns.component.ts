@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { Component, OnInit } from '@angular/core';
 import {CourseService} from '../../services/course.service';
 import { PrepopulateService } from '../../services/prepopulate.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -275,7 +276,7 @@ export class DropdownsComponent {
     //     });
     
     await this.courseService.getGEAreaA1All();
-    this.a1courses=this.courseService.a1courses;
+    this.a1courses= this.courseService.a1courses;
     await this.prepopulateService.getAreaACompleted();
     this.completedAreaACourses= this.prepopulateService.completedAreaA;
     
@@ -284,15 +285,16 @@ export class DropdownsComponent {
       this.a1courses.forEach(a1course=>{
         if(JSON.parse(JSON.stringify(a1course)).courseNumber==JSON.parse(JSON.stringify(completedCourse)).courseNumber)
           //this.parentAreaAForm.value.areaA1=JSON.parse(JSON.stringify((a1course)));
-          this.parentAreaAForm.controls["areaA1"].setValue(JSON.stringify(a1course));
-          //this.parentAreaAForm.value.areaA1.Element.value=JSON.parse(JSON.stringify((a1course)));
-          console.log('va'+this.parentAreaAForm.value);
-          console.log('matches' + a1course);
+          //this.parentAreaAForm.value.areaA1=a1course;
+          this.parentAreaAForm.controls["areaA1"].setValue(JSON.parse(JSON.stringify(a1course).replace("\"/\\n/g","")));
+          //this.parentAreaAForm.controls["areaA1"].patchValue(JSON.stringify(a1course).replace(/\r|\\n|\s/gm, ""));
+          console.log('val'+JSON.stringify(this.parentAreaAForm.value));
+          console.log('matches' + JSON.stringify(a1course));
       })
       index++;
     })
-    console.log('A1: ' + JSON.stringify(this.a1courses));
-    console.log('CompletedAreaA: ' + JSON.stringify(this.completedAreaACourses));
+    //console.log('A1: ' + JSON.stringify(this.a1courses));
+    //console.log('CompletedAreaA: ' + JSON.stringify(this.completedAreaACourses));
 
     // this.courseService.getGEAreaA1All()
     //   .subscribe(
@@ -671,7 +673,7 @@ export class DropdownsComponent {
     var tempA=[];//don't want to add "" as as objects so checking controls for those values before sending http request
     Object.keys(this.parentAreaAForm.controls).forEach(key => {
       if(this.parentAreaAForm.controls[key].value!="")
-        tempA.push(this.parentAreaAForm.controls[key].value);
+      tempA.push(this.parentAreaAForm.controls[key].value);
     });
     this.courseService.updateAreaA(tempA);
   }

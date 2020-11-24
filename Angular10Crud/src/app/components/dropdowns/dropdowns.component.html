@@ -91,7 +91,6 @@
 
     <h2>General Education Requirements: 48 units</h2>
 
-  
 
   <form [formGroup]='parentAreaAForm'>
     <h3>Area A. 9 units, at least 3 units for each sub-area</h3>
@@ -99,7 +98,7 @@
         <select class="custom-select" formControlName="areaA1" >
           <option value="">Choose Course</option>
           <option *ngFor="let course of a1courses" [value]="course|json">
-            {{course.courseNumber|json}} {{course.courseName|json}}
+            {{course.courseNumber}} {{course.courseName}}
           </option>
         </select> 
 
