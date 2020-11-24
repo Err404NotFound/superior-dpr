@@ -106,16 +106,16 @@
       <h4>A2. Written Communication</h4>
         <select class="custom-select" formControlName="areaA2" >
           <option value="">Choose Course</option>
-          <option *ngFor="let course of a2courses" [value]="course|json">
-            {{course.courseNumber}} {{course.courseName}}
+          <option *ngFor="let course of a2courses" [value]="course">
+            {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
           </option>
         </select>  
       
       <h4>A3. Critical Thinking</h4>
       <select class="custom-select" formControlName="areaA3" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of a3courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of a3courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
       <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeA()'>Save</button>
@@ -125,46 +125,46 @@
 
   <form [formGroup]='parentAreaBForm' >
     <h3>Area B. Scientific Inquiry and Quantitative Reasoning: 12 units, at least 3 units from each sub-area</h3>
-      <h4>Physical Sciences</h4>
+      <h4>B1. Physical Sciences</h4>
       <select class="custom-select" formControlName="areaB1" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of b1courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of b1courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
-      <h4>Life Sciences</h4>
+      <h4>B2. Life Sciences</h4>
       <select class="custom-select" formControlName="areaB2" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of b2courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of b2courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
      
-      <h4>Laboratory Activity</h4>
+      <h4>B3. Laboratory Activity</h4>
         <p>Laboratory courses are marked with an "L" following the course number. 
         At least one laboratory course from GE Sub-areas B1 or B2 must be taken to fulfill the GE Sub-area B3 requirement. 
         Activity courses, which are marked with an "A" following the course number, do not fulfill the GE Sub-area B3 requirement.
         </p>
         <select class="custom-select" formControlName="areaB3" >
           <option value="">Choose Course</option>
-          <option *ngFor="let course of b3courses" [value]="course|json">
-            {{course.courseNumber}} {{course.courseName}}
+          <option *ngFor="let course of b3courses" [value]="course">
+            {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
           </option>
         </select>
-      <h4>Mathematics/Quantitative Reasoning</h4>
-      
+
+      <h4>B4. Mathematics/Quantitative Reasoning</h4>
       <select class="custom-select" formControlName="areaB4" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of b4courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of b4courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
      
-      <h4>Science and Technology Synthesis</h4>
+      <h4>B5. Science and Technology Synthesis</h4>
       <select class="custom-select" formControlName="areaB5" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of b5courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of b5courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
       <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeB()'>Save</button>
@@ -172,72 +172,72 @@
   
   <h3>Area C. Arts and Humanities: 12 units, at least 3 units from each sub-area and 3 addition units from sub-areas 1 and/or 2</h3>
   <form [formGroup]='parentAreaCForm'> 
-    <h4>Visual and Performing Arts</h4>
+    <h4>C1. Visual and Performing Arts</h4>
       <select class="custom-select" formControlName="areaC1" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of c1courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of c1courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
 
-      <h4>Literature, Modern Languages, Philosophy and Civilization</h4>
+      <h4>C2. Literature, Modern Languages, Philosophy and Civilization</h4>
       <select class="custom-select" formControlName="areaC2" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of c2courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of c2courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
       
-      <h4>Arts and Humanities Synthesis</h4>
+      <h4>C3. Arts and Humanities Synthesis</h4>
       <select class="custom-select" formControlName="areaC3" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of c3courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of c3courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
     
-        <pre>
+        <p>
           Students must complete all GE lower-division requirements in Areas A and C before they take any GE C3 Synthesis course. Select one course from the following list:
 
           *These interdisciplinary courses fulfill units in only one of the three required GE Synthesis areas. All students are required to complete three different Synthesis courses that cover the three required GE Synthesis areas.
 
           **Course fulfills American Ideals requirement part A (U.S. History and American Ideals).
-        </pre>
+        </p>
       <hr>
       <button type="submit" class="btn btn-success mt-3" (click)='submitFormGeC()'>Save</button>
     </form>
 
   <form [formGroup]='parentAreaDForm'>
     <h3>Area D. Social Sciences: 12 units, at least 3 units from each sub-area</h3>
-      <h4>U.S. History and American Ideals</h4>
+      <h4>D1. U.S. History and American Ideals</h4>
       <select class="custom-select" formControlName="areaD1" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of d1courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of d1courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
 
-      <h4>U.S. Constitution and California Government</h4>
+      <h4>D2. U.S. Constitution and California Government</h4>
       <select class="custom-select" formControlName="areaD2" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of d2courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of d2courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
         
-      <h4>Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
+      <h4>D3. Social Science: Principles, Methodologies, Value Systems, and Ethics</h4>
       <select class="custom-select" formControlName="areaD3" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of d3courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of d3courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
         
-      <h4>Social Science Synthesis</h4>
+      <h4>D4. Social Science Synthesis</h4>
       <select class="custom-select" formControlName="areaD4" >
         <option value="">Choose Course</option>
-        <option *ngFor="let course of d4courses" [value]="course|json">
-          {{course.courseNumber}} {{course.courseName}}
+        <option *ngFor="let course of d4courses" [value]="course">
+          {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
         </option>
       </select>
         <pre>
@@ -255,8 +255,8 @@
     <h3>Area E. Lifelong Learning and Self-Development: 3 units</h3>
     <select class="custom-select" formControlName="areaE" >
       <option value="">Choose Course</option>
-      <option *ngFor="let course of ecourses" [value]="course|json">
-        {{course.courseNumber}} {{course.courseName}}
+      <option *ngFor="let course of ecourses" [value]="course">
+        {{course.substring(course.indexOf("courseNumber\":\"")+15, course.indexOf("\",\"courseName"))}} {{course.substring(course.indexOf("courseName\":\"")+13, course.indexOf("\",\"completionStatus"))}} ({{course.substring(course.indexOf("units\":")+7, course.indexOf("}"))}})
       </option>
     </select>
 

@@ -145,14 +145,239 @@ public class LoginController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUsername(auth.getName());
 		List<GEAreaACourse> areaA = user.getCompletedAreaA();
-		GEAreaACourse a1 = null;
+		GEAreaACourse course = null;
 		for(GEAreaACourse c : areaA) {
 			if(c.getGeArea().contains("A1")) {
-				a1 = c;
-				break; //If for some reason there are multiple A1's completed, just take the first one
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
 			}
 		}
-		return new ResponseEntity<GEAreaACourse>(a1, HttpStatus.OK);
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaA2")
+	public ResponseEntity<GEAreaACourse> getGEAreaA2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse course = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaA3")
+	public ResponseEntity<GEAreaACourse> getGEAreaA3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaACourse> areaA = user.getCompletedAreaA();
+		GEAreaACourse course = null;
+		for(GEAreaACourse c : areaA) {
+			if(c.getGeArea().contains("A3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaACourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB1")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB2")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB3")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB4")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB4Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B4")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaB5")
+	public ResponseEntity<GEAreaBCourse> getGEAreaB5Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaBCourse> areaB = user.getCompletedAreaB();
+		GEAreaBCourse course = null;
+		for(GEAreaBCourse c : areaB) {
+			if(c.getGeArea().contains("B5")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaBCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC1")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC2")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaC3")
+	public ResponseEntity<GEAreaCCourse> getGEAreaC3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaCCourse> areaC = user.getCompletedAreaC();
+		GEAreaCCourse course = null;
+		for(GEAreaCCourse c : areaC) {
+			if(c.getGeArea().contains("C3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaCCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD1")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD1Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D1")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD2")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD2Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D2")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD3")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD3Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D3")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaD4")
+	public ResponseEntity<GEAreaDCourse> getGEAreaD4Completed() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaDCourse> areaD = user.getCompletedAreaD();
+		GEAreaDCourse course = null;
+		for(GEAreaDCourse c : areaD) {
+			if(c.getGeArea().contains("D4")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaDCourse>(course, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCompletedGEAreaE")
+	public ResponseEntity<GEAreaECourse> getGEAreaECompleted() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUsername(auth.getName());
+		List<GEAreaECourse> areaE = user.getCompletedAreaE();
+		GEAreaECourse course = null;
+		for(GEAreaECourse c : areaE) {
+			if(c.getGeArea().contains("E")) {
+				course = c;
+				break; //If for some reason there are multiple courses completed, just take the first one
+			}
+		}
+		return new ResponseEntity<GEAreaECourse>(course, HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateAreaAList")
@@ -184,7 +409,6 @@ public class LoginController {
 		List<GEAreaBCourse> checkedCoreCourse = new ArrayList<GEAreaBCourse>();
 		try {
 			for (String s: jsonObjArr) {
-				System.out.println("String b: " + s);
 				objectMapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 				GEAreaBCourse course = objectMapper.readValue(s, GEAreaBCourse.class);
 				checkedCoreCourse.add(course);
