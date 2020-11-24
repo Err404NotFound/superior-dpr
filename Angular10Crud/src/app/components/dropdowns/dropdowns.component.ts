@@ -781,7 +781,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray0.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if(loopItem == eventItem) {
           checkArray0.removeAt(i);
@@ -799,7 +799,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray1.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray1.removeAt(i);
@@ -817,7 +817,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray2.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray2.removeAt(i);
@@ -835,7 +835,7 @@ export class DropdownsComponent {
     } else {
       let i: number = 0;
       checkArray3.controls.forEach((item: FormControl) => {
-        var loopItem = JSON.stringify(item.value).replace(/\s/gm, "");
+        var loopItem = JSON.stringify(item.value).replace(/\\n|\s/gm, "");
         var eventItem = JSON.stringify(e.target.value).replace(/\r|\\n|\s/gm, "");
         if (loopItem == eventItem) {
           checkArray3.removeAt(i);
