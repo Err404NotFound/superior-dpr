@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'app/services/course.service';
 
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-course-list',
@@ -14,11 +18,30 @@ export class CourseListComponent implements OnInit {
   currentIndex=1;
   courseName='';
 
+  title = 'angular-material-autocomplete';
+  myControl = new FormControl();
+  options: string[] = ['Biology', 'Computer Science', 'Gardening'];
+  filteredOptions: Observable<string[]>;
+
   constructor(private courseService: CourseService) { }
 
   ngOnInit(): void {
     this.retrieveCourses();
-  }
+
+    // filters autocomplete as the user types inputs
+    this.filteredOptions = this.myControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filter(value))
+          );
+          }
+
+  // this method filters the string input from the search bar
+  private _filter(value: string): string[] {
+      const filterValue = value.toLowerCase();
+
+      return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    }
 
   retrieveCourses(): void{
     this.courseService.getAll()
